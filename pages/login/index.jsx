@@ -2,13 +2,47 @@ import Telegram from "@/component/icons/Telegram";
 import Phone from "@/component/icons/Phone";
 import Mail from "@/component/icons/Mail";
 import {useState} from "react";
+import {redirect} from "next/navigation";
+import {BrowserRouter as Router, Routes, Route, useNavigate} from 'react-router-dom';
+
+
 
 const Login = () => {
-    const [formValue, setFormValue] = useState({userName: "", password: ""})
 
+    const [formValue, setFormValue] = useState({userName: "", password: ""});
+    let [login , setLogin]=useState(false);
     const formSubmitHandler = async (e) =>{
         e.preventDefault();
+        const navigate = useNavigate();
         console.log(formValue)
+        try {
+            const response = await fetch("http://localhost:8090/unipoll/v1/login", {
+                method: "GET",
+                headers: {
+                    'Authorization': `Basic ${ btoa(`${formValue.userName}:${formValue.password}`)}`,
+                    "Content-Type": "application/json"
+                },
+            });
+            console.log(response.headers.get('Authorization'));
+             localStorage.setItem('jwtToken',response.headers.get('Authorization'));
+             const jwtToken=localStorage.getItem('jwtToken');
+             console.log(jwtToken);
+
+            if (response.ok) {
+                setLogin(false);
+               console.log("OK")
+                navigate("/home");
+
+                //redirect('http://localhost:3000/home');
+
+            } else {
+                setLogin(true);
+                console.log("not ok")
+            }
+
+        }catch (e) {
+            console.error("we are GETTING ERROR", e)
+        }
     }
 
     return(
@@ -51,9 +85,18 @@ const Login = () => {
                         type={"submit"}>
                     ورود
                 </button>
+                {login && <p className={'text-red-700 text-[0.75rem] mt-2'}>
+                    .رمز ورود یا نام کاربری اشتباه است
+                </p>}
 
             </form>
-            <p className={"text-sm text-gray-500"}>. ورود به سایت به منزله رعایت تمام مقررات ذکر شده است</p>
+            <p className={"text-xs text-gray-500"}>
+                . ورود به سایت به منزله رعایت تمام
+                <span className='text-black'>
+                    <a  href={'/rules'} > مقررات </a>
+                </span>
+                ذکر شده است
+            </p>
             <div className={"flex flex-row gap-6"}>
                 <Telegram/>
                 <Phone/>
