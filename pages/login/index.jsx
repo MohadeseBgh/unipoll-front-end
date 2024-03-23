@@ -2,18 +2,18 @@ import Telegram from "@/component/icons/Telegram";
 import Phone from "@/component/icons/Phone";
 import Mail from "@/component/icons/Mail";
 import {useState} from "react";
-import {redirect} from "next/navigation";
-import {BrowserRouter as Router, Routes, Route, useNavigate} from 'react-router-dom';
+import  {useRouter}  from 'next/router';
+import Logo from "@/component/icons/Logo";
 
 
 
 const Login = () => {
+    const router = useRouter();
 
     const [formValue, setFormValue] = useState({userName: "", password: ""});
     let [login , setLogin]=useState(false);
     const formSubmitHandler = async (e) =>{
         e.preventDefault();
-        const navigate = useNavigate();
         console.log(formValue)
         try {
             const response = await fetch("http://localhost:8090/unipoll/v1/login", {
@@ -23,17 +23,19 @@ const Login = () => {
                     "Content-Type": "application/json"
                 },
             });
-            console.log(response.headers.get('Authorization'));
+            //console.log(response.headers.get('Authorization'));
              localStorage.setItem('jwtToken',response.headers.get('Authorization'));
              const jwtToken=localStorage.getItem('jwtToken');
              console.log(jwtToken);
 
             if (response.ok) {
                 setLogin(false);
-               console.log("OK")
-                navigate("/home");
+                console.log("OK");
+                await router.push('/home');
+                //navigate("/home");
+                //redirect('/home');
 
-                //redirect('http://localhost:3000/home');
+
 
             } else {
                 setLogin(true);
@@ -53,8 +55,8 @@ const Login = () => {
             {/*className={'w-full h-full backdrop-opacity-10 backdrop-invert'}*/}
             {/* alt={"uni"}/>*/}
         </div>
-        <div className={"flex flex-col items-center basis-7/12 bg-white justify-between mt-16 mb-4 px-5"}>
-            <h1 className={"text-6xl"}> UNIPOLL </h1>
+        <div className={"flex flex-col items-center basis-7/12 bg-white justify-between mt-14 mb-4 px-5"}>
+            <img src='/images/logo.png' />
             <p className={"text-base "}>با نام کاربری و رمز ورود گلستان خود وارد شوید</p>
             <form style={{display: "flex", alignItems: "center", justifyContent: "center"} }
                   onSubmit={formSubmitHandler}
