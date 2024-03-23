@@ -4,6 +4,7 @@ import Mail from "@/component/icons/Mail";
 import {useState} from "react";
 import  {useRouter}  from 'next/router';
 import Logo from "@/component/icons/Logo";
+import Arrow from "@/component/icons/Arrow";
 
 
 
@@ -23,14 +24,14 @@ const Login = () => {
                     "Content-Type": "application/json"
                 },
             });
-            //console.log(response.headers.get('Authorization'));
-             localStorage.setItem('jwtToken',response.headers.get('Authorization'));
-             const jwtToken=localStorage.getItem('jwtToken');
-             console.log(jwtToken);
+
 
             if (response.ok) {
                 setLogin(false);
                 console.log("OK");
+                localStorage.setItem('jwtToken',response.headers.get('Authorization'));
+                const jwtToken=localStorage.getItem('jwtToken');
+                console.log(jwtToken);
                 await router.push('/home');
                 //navigate("/home");
                 //redirect('/home');
@@ -50,13 +51,18 @@ const Login = () => {
     return(
     <div className={"h-screen w-screen flex flex-row bg-white"}>
 
-        <div className={"flex basis-4/12 bg-[url('/images/uni2.png')] bg-no-repeat bg-cover"} >
+        <div className={"flex basis-4/12 bg-[url('/images/uni3.png')] bg-no-repeat bg-cover"} >
             {/*<img src={"/images/uni.png"}*/}
             {/*className={'w-full h-full backdrop-opacity-10 backdrop-invert'}*/}
             {/* alt={"uni"}/>*/}
         </div>
-        <div className={"flex flex-col items-center basis-7/12 bg-white justify-between mt-14 mb-4 px-5"}>
-            <img src='/images/logo.png' />
+        <div className={"flex flex-col items-center basis-8/12 bg-white justify-between mt-9 mb-4 px-5"}>
+            <div className={'flex flex-row self-start'}>
+                <Arrow/>
+                <a  href={'/home'} className='text-start text-darkBlue text-sm'>خانه</a>
+            </div>
+
+            <img src='/images/logo.png' alt={'logo'}/>
             <p className={"text-base "}>با نام کاربری و رمز ورود گلستان خود وارد شوید</p>
             <form style={{display: "flex", alignItems: "center", justifyContent: "center"} }
                   onSubmit={formSubmitHandler}

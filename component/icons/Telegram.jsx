@@ -1,5 +1,6 @@
 const Telegram = () => {
-    return(<svg width="24" height="24" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+    return(
+        <svg width="24" height="24" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M15 30C23.2843 30 30 23.2843 30 15C30 6.71573 23.2843 0 15 0C6.71573 0 0 6.71573 0 15C0 23.2843 6.71573 30 15 30Z" fill="url(#paint0_linear_26_421)"/>
         <path d="M12.25 21.875C11.7641 21.875 11.8466 21.6915 11.679 21.2288L10.25 16.5257L21.25 10" fill="#C8DAEA"/>
         <path d="M12.25 21.875C12.625 21.875 12.7907 21.7035 13 21.5L15 19.5553L12.5053 18.0509" fill="#A9C9DD"/>
