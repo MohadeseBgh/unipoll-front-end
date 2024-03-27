@@ -6,8 +6,6 @@ import  {useRouter}  from 'next/router';
 import Logo from "@/component/icons/Logo";
 import Arrow from "@/component/icons/Arrow";
 
-
-
 const Login = () => {
     const router = useRouter();
 
@@ -17,6 +15,7 @@ const Login = () => {
         e.preventDefault();
         console.log(formValue)
         try {
+
             const response = await fetch("http://localhost:8090/unipoll/v1/login", {
                 method: "GET",
                 headers: {
@@ -51,7 +50,7 @@ const Login = () => {
     return(
     <div className={"h-screen w-screen flex flex-row bg-white"}>
 
-        <div className={"flex basis-4/12 bg-[url('/images/uni3.png')] bg-no-repeat bg-cover"} >
+        <div className={" flex basis-4/12 bg-[url('/images/uni3.png')] bg-no-repeat bg-cover"} >
             {/*<img src={"/images/uni.png"}*/}
             {/*className={'w-full h-full backdrop-opacity-10 backdrop-invert'}*/}
             {/* alt={"uni"}/>*/}
@@ -66,7 +65,7 @@ const Login = () => {
             <p className={"text-base "}>با نام کاربری و رمز ورود گلستان خود وارد شوید</p>
             <form style={{display: "flex", alignItems: "center", justifyContent: "center"} }
                   onSubmit={formSubmitHandler}
-            className={"border-gray-700 flex flex-col align-items-center justify-between"}>
+            className={"border-gray-700 flex flex-col align-items-center justify-between "}>
                 <div className={'flex flex-col w-80 mb-12'}>
                     <p className={'text-xl pb-2 text-end pr-5'}> نام کاربری</p>
                     <input
