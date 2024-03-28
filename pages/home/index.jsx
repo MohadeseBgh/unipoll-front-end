@@ -1,6 +1,5 @@
-import EducationalGroupsHome from "../../component/educationalGroupsHome";
-import Arrow from "@/component/icons/Arrow";
-import Search from "@/component/icons/Search";
+import EducationalGroupsHome from "../../components/educationalGroupsHome";
+import Search from "@/components/icons/Search";
 const Home = () => {
   return(
       <div className='h-full w-screen flex flex-col bg-white space-y-16 '>
