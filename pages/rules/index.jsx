@@ -1,5 +1,5 @@
-import Header from "@/component/header";
-import User from "@/component/icons/User";
+import Header from "@/components/header";
+import User from "@/components/icons/User";
 
 const Rules = () => {
   return(

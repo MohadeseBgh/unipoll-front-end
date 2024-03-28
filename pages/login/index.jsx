@@ -1,10 +1,10 @@
-import Telegram from "@/component/icons/Telegram";
-import Phone from "@/component/icons/Phone";
-import Mail from "@/component/icons/Mail";
+import Telegram from "@/components/icons/Telegram";
+import Phone from "@/components/icons/Phone";
+import Mail from "@/components/icons/Mail";
 import {useState} from "react";
 import  {useRouter}  from 'next/router';
-import Logo from "@/component/icons/Logo";
-import Arrow from "@/component/icons/Arrow";
+import Logo from "@/components/icons/Logo";
+import Arrow from "@/components/icons/Arrow";
 
 const Login = () => {
     const router = useRouter();
