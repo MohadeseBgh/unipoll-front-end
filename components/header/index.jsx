@@ -4,32 +4,38 @@ import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 
 const Header = () => {
     const [chosen, setChosen] = useState({home: false, educational_groups: false, forums: false, aboutUs: false ,contactUs: false});
-    const [user , setUser]=useState({logIO:false})
+    const [userSetting , setUserSetting]=useState({logIO:false})
+    const [user , setUser]=useState({userName:'محدثه باغبانی'})
   return(
       <div className={'flex flex-row h-full w-full '}>
           <div className={'flex flex-col h-full w-1/12 justify-center items-center gap-2'}
           onClick={()=>{
-              setUser({logIO: !user.logIO})
+              setUserSetting({logIO: !userSetting.logIO})
           }}
           >
               <User/>
-              <p className='text-xs'>نام کاربری</p>
-              { user.logIO && <div id="dropdownNavbar"
-                                   className="z-10 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-20
+              <p className='text-xs'>{user.userName}</p>
+              { userSetting.logIO && <div
+                                   className="z-10 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-20
                             absolute translate-y-20">
                   <ul className=" text-sm text-gray-700 dark:text-gray-400"
                       aria-labelledby="dropdownLargeButton inline">
                       <li>
-                          <a href="#"
+                          <a href="/login"
                              className="block px-2 py-2 hover:bg-blue1 ">
                                Log In
                           </a>
                       </li>
                       <li>
-                          <a href="#"
-                             className="block px-2 py-2 hover:bg-blue1 rounded-b-lg">
+                          <div
+                             className="block px-2 py-2 hover:bg-blue1 rounded-b-lg"
+                            onClick={()=>{
+                            setUser({userName: ''})
+                            }
+                            }
+                          >
                               Log Out
-                          </a>
+                          </div>
                       </li>
                   </ul>
 
@@ -79,7 +85,10 @@ const Header = () => {
                       </button>
                       { chosen.educational_groups && <div id="dropdownNavbar"
                            className="z-10 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44
-                            absolute translate-y-24">
+                            absolute translate-y-24"
+                            onClick={()=>{
+                                   setChosen({ educational_groups: !chosen.educational_groups});
+                             }}>
                           <ul className="py-2 text-sm text-gray-700 dark:text-gray-400"
                               aria-labelledby="dropdownLargeButton inline">
                               <li>
