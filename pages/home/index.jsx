@@ -1,9 +1,26 @@
 import EducationalGroupsHome from "../../components/educationalGroupsHome";
 import Search from "@/components/icons/Search";
 import CarouselBooklet from "@/components/carouselBooklet";
+import TopBooklet from "@/components/topBooklet";
+import {useState} from  'react';
 const Home = () => {
+    const [topBooklet, setTopBooklet] = useState([{courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:20},
+        {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:420},
+        {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:320},
+        {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:320},
+        {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:320},
+        {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:320},
+        {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:320},
+        {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:320},
+        {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:320},
+        {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:320},
+        {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:320},
+        {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:320},
+        {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:320},
+        {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:320},
+        {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:320}]);
   return(
-      <div className='h-full w-screen flex flex-col bg-white space-y-16 '>
+      <div className='h-full w-screen flex flex-col bg-white gap-y-16 '>
           <div id="searchBar " className="flex flex-col items-center justify-items-center " dir="rtl">
               <div
                   className={"min-h-[35rem]  w-screen bg-[url('/images/searchbar.png')] bg-no-repeat bg-cover justify-items-center "}>
@@ -82,13 +99,15 @@ const Home = () => {
           </div>
           <div id="topBooklet" className="flex flex-col " dir="rtl">
               <div
-                  className={"min-h-[29rem]  w-screen bg-[#E2F4FC] justify-items-center "}>
+                  className={"min-h-[29rem]  w-screen bg-[#E2F4FC] justify-items-center gap-y-16 "}>
                   <div className="flex flex-row items-center justify-between" dir="rtl">
                       <hr className="my-12 w-4/12 h-1.5 border-t-0 bg-darkBlue "/>
                       <h3 className='text-5xl  font-bold text-black '>جزوه های برتر</h3>
                       <hr className="my-12 w-4/12 h-1.5 border-t-0 bg-darkBlue "/>
                   </div>
-                  <CarouselBooklet course="مبانی برنامه نویسی"professor="رضا رمضانی"semester="پاییز 1400"like={320}/>
+                  <TopBooklet booklets={topBooklet}/>
+
+
               </div>
           </div>
 
