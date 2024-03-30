@@ -1,12 +1,16 @@
 import User from "@/components/icons/User";
 import {forwardRef, useState} from "react";
+import  {useRouter}  from 'next/router';
 
 const Header = () => {
     const [chosen, setChosen] = useState({home: false, educational_groups: false, forums: false, aboutUs: false ,contactUs: false});
     const [userSetting , setUserSetting]=useState({logIO:false})
     const [user , setUser]=useState({userName:'محدثه باغبانی'})
-  return(
-      <div className={'flex flex-row h-full w-full '}>
+    const router = useRouter();
+
+
+    return(
+      <div className={'flex flex-row h-24 w-full '}>
           <div className={'flex flex-col h-full w-1/12 justify-center items-center gap-2'}
           onClick={()=>{
               setUserSetting({logIO: !userSetting.logIO})
@@ -47,7 +51,7 @@ const Header = () => {
               </button>
           </div>
           <div className={'h-full w-8/12 flex justify-center items-center '}>
-              <div className=' flex flex-row h-3/6 w-full bg-blue1 rounded-full grid grid-cols-5 ' dir={'rtl'}>
+              <div className=' flex flex-row h-4/6 w-full bg-blue1 rounded-full grid grid-cols-5 shadow-lg ' dir={'rtl'}>
                   <div className='flex justify-center items-center block'>
                       <button className={`text-black text-sm font-bold hover:text- hover:text-blue2 transition 
                       ease-in-out hover:-translate-y hover:scale-110 duration-100
@@ -55,6 +59,7 @@ const Header = () => {
                       `}
                       onClick={()=>{
                           setChosen({home: true, educational_groups: false, Forums: false, aboutUs: false ,contactUs: false});
+                          router.push('/home').then(r => {});
                       }}
                       >
                           خانه
@@ -124,6 +129,7 @@ const Header = () => {
                       `}
                               onClick={()=>{
                                   setChosen({home: false, educational_groups: false, forums: true, aboutUs: false ,contactUs: false});
+                                  // router.push('/contactUs').then(r => {});
                               }}
                       >
                           انجمن ها
@@ -136,6 +142,7 @@ const Header = () => {
                       `}
                               onClick={()=>{
                                   setChosen({home: false, educational_groups: false, forums: false, aboutUs: true ,contactUs: false});
+                                  router.push('/aboutUs').then(r => {});
                               }}
                       >
                           درباره ما
@@ -148,6 +155,7 @@ const Header = () => {
                       `}
                               onClick={()=>{
                                   setChosen({home: false, educational_groups: false, forums: false, aboutUs: false ,contactUs: true});
+                                  // router.push('/contactUs').then(r => {});
                               }}
                       >
                           ارتباط با ما
