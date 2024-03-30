@@ -3,7 +3,7 @@ import User from "@/components/icons/User";
 
 const Rules = () => {
   return(
-      <div className='h-screen w-screen'>
+      <div className='h-screen w-screen bg-white'>
           <div className={'h-28 w-full '}>
               {/*//header*/}
               <Header/>

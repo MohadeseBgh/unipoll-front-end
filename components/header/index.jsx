@@ -1,6 +1,5 @@
 import User from "@/components/icons/User";
 import {forwardRef, useState} from "react";
-import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 
 const Header = () => {
     const [chosen, setChosen] = useState({home: false, educational_groups: false, forums: false, aboutUs: false ,contactUs: false});
@@ -30,9 +29,7 @@ const Header = () => {
                           <div
                              className="block px-2 py-2 hover:bg-blue1 rounded-b-lg"
                             onClick={()=>{
-                            setUser({userName: ''})
-                            }
-                            }
+                            setUser({userName: ''})}}
                           >
                               Log Out
                           </div>

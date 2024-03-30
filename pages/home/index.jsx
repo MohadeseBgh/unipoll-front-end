@@ -20,7 +20,7 @@ const Home = () => {
         {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:320},
         {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:320}]);
   return(
-      <div className='h-full w-screen flex flex-col bg-white gap-y-16 '>
+      <div className='h-screen w-screen flex flex-col bg-white gap-y-16 overflow-x-hidden'>
           <div id="searchBar " className="flex flex-col items-center justify-items-center " dir="rtl">
               <div
                   className={"min-h-[35rem]  w-screen bg-[url('/images/searchbar.png')] bg-no-repeat bg-cover justify-items-center "}>

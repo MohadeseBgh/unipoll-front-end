@@ -1,6 +1,6 @@
 const AboutUs = () => {
   return(
-      <div className={'h-full w-full flex flex-col items-end py-10 pr-5 gap-3'} dir='rtl'>
+      <div className={'h-full w-full flex flex-col items-end py-10 pr-5 gap-3 bg-white'} dir='rtl'>
           <div className={'flex flex-row w-full mb-6 gap-12'}>
               <h1 className='font-bold text-2xl text-darkBlue w-1/12 '>دربـــاره مــــــا </h1>
               <div className={'h-1 w-11/12 bg-darkBlue mt-5'}></div>
