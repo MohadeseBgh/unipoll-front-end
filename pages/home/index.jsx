@@ -149,7 +149,7 @@ const Home = () => {
 
 
               </div>
-            <LessonsSearch />
+            <LessonsSearch rate={3}/>
           </div>
 
       </div>
