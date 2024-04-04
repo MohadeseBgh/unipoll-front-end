@@ -1,4 +1,6 @@
 import Header from "@/components/header";
+import BlueTelegram from "@/components/icons/BlueTelegram";
+import BluePhone from "@/components/icons/BluePhone";
 
 const ContactUs = () => {
   return (
@@ -37,9 +39,22 @@ const ContactUs = () => {
               </div>
             </div>
             <div className=' flex flex-col  basis-1/2 items-center' dir='rtl'>
-              <p className='text-xl  text-black text-center font-bold mb-8 mx-32'>جهت ارتباط با ما شامل ارسال
+              <p className='text-xl  text-black text-center font-medium mb-8 mx-32'>جهت ارتباط با ما شامل ارسال
                 نظر،انتقاد،سوال و درخواست پشتیبانی میتوانید از یکی از راه های زیر استفاده کنید با از طریق فرم
                 با ما در ارتباط باشید.</p>
+              <div className='flex flex-row gap-x-24'>
+                <div className='flex flex-col items-center'>
+                  <div className='border-2 p-8 border-darkBlue shadow-md rounded-[100%]'><BlueTelegram w="81.56" h="60.33"/></div>
+                  <h3 className='text-xl  text-darkBlue text-center font-bold mt-4  '>telegram</h3>
+                  <a className='text-xl  text-black text-center font-medium ' dir="ltr">@UniPoll</a>
+                </div>
+                <div className='flex flex-col items-center'>
+                  <div className='border-2 p-8 border-darkBlue shadow-md rounded-[100%]'><BluePhone w="75" h="60.33"/></div>
+                  <h3 className='text-xl  text-darkBlue text-center font-bold mt-4 '>phone</h3>
+                  <a className='text-xl  text-black text-center font-medium ' dir="ltr">0313123456</a>
+                </div>
+
+              </div>
             </div>
           </div>
           <hr className="z-0 laptop:w-full table:w-0 h-1.5 border-t-0 bg-darkBlue "/>
