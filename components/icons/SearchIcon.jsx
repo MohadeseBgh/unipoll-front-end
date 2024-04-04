@@ -1,5 +1,5 @@
 
-const Search = () => {
+const SearchIcon = () => {
     return (
         <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="16.0416" cy="16.0417" r="8.75" stroke="#222222"/>
@@ -10,4 +10,4 @@ const Search = () => {
         </svg>
     )
 }
-export default Search;
+export default SearchIcon;
