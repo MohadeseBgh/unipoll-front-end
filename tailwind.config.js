@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+// import url('https://fonts.google.com/specimen/Vazirmatn?preview.size=21&query=vazir');
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,6 +10,7 @@ module.exports = {
     screens: {
       'mobile': '360px',
       'tablet': '640px',
+      'min_laptop':'768px',
       'laptop': '1024px',
       'desktop': '1280px',
 
@@ -20,6 +22,9 @@ module.exports = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      // fontFamily: {
+      //   vazir: 'vazir',
+      // },
       colors: {
         'darkBlue': '#102C51',
         'blue1':'#DFE6EB',
@@ -30,4 +35,5 @@ module.exports = {
   plugins: [
     require('tailwind-scrollbar'),
   ],
+
 };

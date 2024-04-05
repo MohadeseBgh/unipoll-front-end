@@ -59,17 +59,42 @@ const EducationalGroupsHome = (props) => {
                     </div>
                 </div>
                 <div id="managerAndAssistant " className=" w-screen flex flex-col items-center justify-center">
-                    <div className=' grid gap-20  laptop:grid-cols-2  tablet:grid-cols-2 mobile:grid-cols-1 items-center my-24  '>
-                        <ManagerAndAssistantInfo type={managerAndAssistant[0].type}
-                                                 firstName={managerAndAssistant[0].firstName}
-                                                 lastName={managerAndAssistant[0].lastName}
-                                                 academicRank={managerAndAssistant[0].academicRank}
-                                                 profilePhoto={managerAndAssistant[0].profilePhoto}
-                                                 phd={managerAndAssistant[0].phd}
-                                                 email={managerAndAssistant[0].email}
-                                                 phoneNumber={managerAndAssistant[0].phoneNumber}
-                                                 websiteLink={managerAndAssistant[0].websiteLink}
-                        />
+                    {/*<div className={'flex flex-row w-full px-5 '}>*/}
+                    {/*    <div className="flex  w-1/2 flex-row items-center justify-between py-8" dir="rtl">*/}
+                    {/*        <div className="h-1 basis-4/12 bg-darkBlue "/>*/}
+                    {/*        <h2 className='text-2xl font-bold text-darkBlue '>{managerAndAssistant[0].type}</h2>*/}
+                    {/*        <div className="basis-4/12 h-1 bg-darkBlue "/>*/}
+                    {/*    </div>*/}
+                    {/*    <div className="flex  w-1/2 flex-row items-center justify-between py-8" dir="rtl">*/}
+                    {/*        <div className="h-1 basis-4/12 bg-darkBlue "/>*/}
+                    {/*        <h2 className='text-2xl font-bold text-darkBlue '>{managerAndAssistant[1].type}</h2>*/}
+                    {/*        <div className="basis-4/12 h-1 bg-darkBlue "/>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
+                    <div className=' grid gap-20  min_laptop:grid-cols-2 tablet:grid-cols-1 items-center my-24 '>
+                        <div className={'flex flex-col w-full'}>
+                            <div className="flex  w-full flex-row items-center justify-between pb-20" dir="rtl">
+                                <div className="h-1 basis-4/12 bg-darkBlue "/>
+                                <h2 className='text-2xl font-bold text-darkBlue '>{managerAndAssistant[0].type}</h2>
+                                <div className="basis-4/12 h-1 bg-darkBlue "/>
+                            </div>
+                            <ManagerAndAssistantInfo type={managerAndAssistant[0].type}
+                                                     firstName={managerAndAssistant[0].firstName}
+                                                     lastName={managerAndAssistant[0].lastName}
+                                                     academicRank={managerAndAssistant[0].academicRank}
+                                                     profilePhoto={managerAndAssistant[0].profilePhoto}
+                                                     phd={managerAndAssistant[0].phd}
+                                                     email={managerAndAssistant[0].email}
+                                                     phoneNumber={managerAndAssistant[0].phoneNumber}
+                                                     websiteLink={managerAndAssistant[0].websiteLink}
+                            />
+                        </div>
+                        <div className={'flex flex-col w-full'}>
+                            <div className="flex  w-full flex-row items-center justify-between pb-20" dir="rtl">
+                                <div className="h-1 basis-4/12 bg-darkBlue "/>
+                                <h2 className='text-2xl font-bold text-darkBlue '>{managerAndAssistant[1].type}</h2>
+                                <div className="basis-4/12 h-1 bg-darkBlue "/>
+                            </div>
                         <ManagerAndAssistantInfo type={managerAndAssistant[1].type}
                                                  firstName={managerAndAssistant[1].firstName}
                                                  lastName={managerAndAssistant[1].lastName}
@@ -80,7 +105,7 @@ const EducationalGroupsHome = (props) => {
                                                  phoneNumber={managerAndAssistant[1].phoneNumber}
                                                  websiteLink={managerAndAssistant[1].websiteLink}
                         />
-
+                        </div>
                     </div>
                 </div>
                 <div id="professor" className="flex flex-col mb-24 w-screen" dir="rtl">
