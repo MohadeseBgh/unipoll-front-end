@@ -9,7 +9,8 @@ import TopCourse from "@/components/topCourse";
 import LessonsSearch from "@/components/lessonsSearch";
 import Search from "@/components/search";
 const Home = () => {
-    const [topBooklet, setTopBooklet] = useState([{courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:20},
+    const [topBooklet, setTopBooklet] = useState([
+        {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:20},
         {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:420},
         {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:320},
         {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:320},
@@ -71,7 +72,7 @@ const Home = () => {
                                   <input type="radio" value="lessons"
                                          className="form-radio h-5 w-5 text-blue-600 ml-1 "
                                          name="options" required/>
-                                  <span className="ml-2  text-xl text-black">دروس</span>
+                                  <span className="ml-2 text-xl text-black">دروس</span>
                               </label>
 
                               <label className="inline-flex items-center">
@@ -85,7 +86,7 @@ const Home = () => {
                       <div
                           className='laptop:basis-3/4  flex flex-row h-14 w-80 rounded-3xl bg-white text-black  items-center justify-items-center laptop:mr-16 mobile:mr-0 laptop:mt-0 mobile:mt-5'
                           dir="rtl">
-                          <input type="search" id="default-search" className="block h-14 w-11/12 p-4 ps-10  text-black-900 rounded-3xl  text-black text-xl placeholder:text-[#8B8C8D]
+                          <input  id="default-search" className="block h-14 w-11/12 p-4 ps-10  text-black-900 rounded-3xl  text-black text-xl placeholder:text-[#8B8C8D]
                              focus:outline-none  focus:ring-0 "
                                  placeholder=" جستجو را شروع کن ....."/>
                           <button type="submit"
