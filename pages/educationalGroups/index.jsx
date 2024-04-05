@@ -3,6 +3,9 @@ import {useState} from "react";
 import ProfessorsOfGroups from "@/components/professorsOfGroups";
 import Header from "@/components/header";
 import ManagerAndAssistantInfo from "@/components/managerAndAssistantInfo";
+import YellowStar from "@/components/icons/YellowStar";
+import Star from "@/components/icons/Star";
+import managerAndAssistantInfo from "@/components/managerAndAssistantInfo";
 
 
 const EducationalGroupsHome = (props) => {
@@ -13,16 +16,18 @@ const EducationalGroupsHome = (props) => {
         {firstName:"ارش" ,lastName:"شفیعی",academicRank:"استاد یار" ,profilePhoto:"/images/temp.jpg"},
         {firstName:"ارش" ,lastName:"شفیعی",academicRank:"استاد یار" ,profilePhoto:"/images/temp.jpg"},
         {firstName:"ارش" ,lastName:"شفیعی",academicRank:"استاد یار" ,profilePhoto:"/images/temp.jpg"},
-        {firstName:"ارش" ,lastName:"شفیعی",academicRank:"استاد یار" ,profilePhoto:"/images/temp.jpg"}]);
+        {firstName:"ارش" ,lastName:"شفیعی",academicRank:"استاد یار" ,profilePhoto:"https://salamatiancar.com/wp-content/uploads/elementor/thumbs/VX-qez9madm6wxipbvvurwlrc8vy77kmypuxufvkc6c10.png"}]);
+    const [managerAndAssistant, setManagerAndAssistant] = useState([{type:"manager",firstName:"ارش" ,lastName:"شفیعی",academicRank:"استاد یار" ,profilePhoto:"/images/temp.jpg",phd:"مهندسی کامپیوتر" ,phoneNumber:"۳۷۹۳۵۶۲۱",email:"r.ramezani[at]eng.ui.ac.ir",websiteLink:"https://eng.ui.ac.ir/r.ramezani"},
+        {type:"assistant",firstName:"ارش" ,lastName:"شفیعی",academicRank:"استاد یار" ,profilePhoto:"/images/temp.jpg",phd:"مهندسی کامپیوتر" ,phoneNumber:"۳۷۹۳۵۶۲۱",email:"r.ramezani[at]eng.ui.ac.ir",websiteLink:"https://eng.ui.ac.ir/r.ramezani"}]);
+    const [type, setType] = useState(0);
     return (<div className='h-screen w-screen flex flex-col bg-white gap-y-4 overflow-x-hidden'>
         <div className={'w-full h-24'}>
             <Header/>
         </div>
         <div id="managerAndAssistant " className=" w-screen flex flex-col items-center justify-center mb-24 ">
         <div
-            className=' grid gap-12  laptop:grid-cols-2  tablet:grid-cols-2 mobile:grid-cols-1 items-center my-24  '>
-            <ManagerAndAssistantInfo name='نرم افزار'
-                                   text='گروه مهندسی نرم‌افزار دانشگاه اصفهان همواره به عنوان یکی از باسابقه‌ترین گروه‌های کامپیوتری در سطح کشور شناخته می‌شده است ....'/>
+            className=' grid gap-20  laptop:grid-cols-2  tablet:grid-cols-2 mobile:grid-cols-1 items-center my-24  '>
+            <ManagerAndAssistantInfo type={"s"} firstName={managerAndAssistant[type].firstName} lastName={managerAndAssistant[type].lastName} academicRank={managerAndAssistant[type].academicRank} profilePhoto={managerAndAssistant[type].profilePhoto}/>
             <ManagerAndAssistantInfo name='هوش مصنوعی'
                                    text='گروه مهندسی نرم‌افزار دانشگاه اصفهان همواره به عنوان یکی از باسابقه‌ترین گروه‌های کامپیوتری در سطح کشور شناخته می‌شده است....'
                                    mt='laptop:mt-28'/>
