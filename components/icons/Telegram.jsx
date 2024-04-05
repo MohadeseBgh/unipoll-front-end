@@ -17,6 +17,5 @@ const Telegram = () => {
         </defs>
     </svg>);
 
-
 }
 export default Telegram;
