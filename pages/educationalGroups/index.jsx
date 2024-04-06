@@ -6,6 +6,8 @@ import ManagerAndAssistantInfo from "@/components/managerAndAssistantInfo";
 import YellowStar from "@/components/icons/YellowStar";
 import Star from "@/components/icons/Star";
 import managerAndAssistantInfo from "@/components/managerAndAssistantInfo";
+import ProfessorOfGroups from "@/components/professorOfGroups";
+import GroupCourses from "@/components/groupCourses";
 
 
 const EducationalGroupsHome = (props) => {
@@ -123,12 +125,14 @@ const EducationalGroupsHome = (props) => {
                         دروس ارائه شده
                     </div>
                     <div className={'bg-[#E2F4FC] w-8/12 px-10 shadow-xl rounded-2xl py-32'} dir={'rtl'}>
-                        <div className={'border rounded-2xl grid grid-cols-2 justify-center items-center text-center'}>
-                            <div>fghjkl</div>
-                            <div>fghjkl</div>
-                            <div>fghjkl</div>
-                            <div>fghjkl</div>
-                            <div>fghjkl</div>
+                        <div className={'border border-darkBlue border-opacity-15 grid grid-cols-2 justify-center items-center text-center'}>
+                                {courses.map(
+                                    (p , index)=> <GroupCourses key={index} publicId={p.publicId} courseName={p.courseName} index={index}/>
+                                )}
+                            <div className={` ${(courses.length)%2===0 ? 'hidden':''}`}>
+                                <GroupCourses courseName={'.'}/>
+                            </div>
+
                         </div>
                     </div>
                 </div>
