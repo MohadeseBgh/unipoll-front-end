@@ -41,6 +41,7 @@ const Home = () => {
     const [search , setSearch]=useState(false);
     const searchHandler = async (e) => {
         e.preventDefault();
+        console.log(e)
         setSearch(true)
     }
   return(

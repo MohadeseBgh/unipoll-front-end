@@ -1,5 +1,6 @@
 import {useState} from "react";
 import LessonSearch from "@/components/lessonsSearch";
+import ProfessorSearch from "@/components/professorSearch";
 
 const Search = () => {
     const [lesson , setLesson]=useState([ {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی" ,rate:5},
@@ -28,6 +29,7 @@ const Search = () => {
                 <LessonSearch/>
                 <LessonSearch/>
                 <LessonSearch/>
+                <ProfessorSearch/>
             </div>
       </div>
   )

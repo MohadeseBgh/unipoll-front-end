@@ -2,7 +2,7 @@ import Header from "@/components/header";
 
 const AboutUs = () => {
   return(
-      <div className={'h-full w-full flex flex-col bg-white'}>
+      <div className={'h-screen w-screen flex flex-col bg-white'}>
           <div className={'w-full h-24'}>
               <Header/>
           </div>
@@ -15,7 +15,7 @@ const AboutUs = () => {
               <p className='text-darkBlue text-3xl font-bold text-center self-center '>
                   UNIPOLL
               </p>
-              <p className='text-xl text-right px-8'>یونیپول سامانه انلاین جامع نظردهی اساتید
+              <p className='text-black text-xl text-right px-8'>یونیپول سامانه انلاین جامع نظردهی اساتید
                   دانشگاهی و اشتراک گذاری جزوات به صورت متمرکز است و میخواهیم اطلاعات را به اشتراک بگذاریم
                   یونیپول سامانه انلاین جامع نظردهی اساتید دانشگاهی و اشتراک گذاری جزوات به صورت متمرکز است
                   و میخواهیم اطلاعات را به اشتراک بگذاریم یونیپول سامانه انلاین جامع نظردهی اساتید دانشگاهی

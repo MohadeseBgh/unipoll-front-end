@@ -44,7 +44,6 @@ const EducationalGroupsHome = (props) => {
         {publicId:'1',courseName:'مهندسی نرم افزار'},
 
     ])
-    const [type, setType] = useState(0);
 
     return (
         <div className='h-screen w-screen flex flex-col bg-white gap-y-4 overflow-x-hidden'>
@@ -130,7 +129,7 @@ const EducationalGroupsHome = (props) => {
                                     (p , index)=> <GroupCourses key={index} publicId={p.publicId} courseName={p.courseName} index={index}/>
                                 )}
                             <div className={` ${(courses.length)%2===0 ? 'hidden':''}`}>
-                                <GroupCourses courseName={'.'}/>
+                                <GroupCourses courseName={'______'}/>
                             </div>
 
                         </div>
