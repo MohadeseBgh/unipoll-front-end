@@ -7,6 +7,9 @@ import EducationalGroupsHome from "../../components/educationalGroupsHome";
 import Header from "@/components/header";
 import TopCourse from "@/components/topCourse";
 import LessonsSearch from "@/components/lessonsSearch";
+import ProfessorSearch from "@/components/professorSearch";
+import Footer from "@/components/footer";
+
 const Home = () => {
     const [topBooklet, setTopBooklet] = useState([{courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:20},
         {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:420},
@@ -149,7 +152,10 @@ const Home = () => {
 
 
               </div>
-            <LessonsSearch rate={3}/>
+            <LessonsSearch rate={6}/>
+              <ProfessorSearch/>
+              <Footer/>
+
           </div>
 
       </div>
