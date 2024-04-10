@@ -1,8 +1,11 @@
 import Header from "@/components/header";
 import User from "@/components/icons/User";
+import Footer from "@/components/footer";
+import HeaderFooter from "@/layouts/headerFooter";
 
 const Rules = () => {
   return(
+      <HeaderFooter>
       <div className='h-screen w-screen bg-white'>
           <div className={'h-28 w-full '}>
               {/*//header*/}
@@ -25,7 +28,9 @@ const Rules = () => {
                   کاربران نباید اطلاعات اشتباه و گمراه کننده در سایت یونیپول منتشر کنند در صورت مشاهده یونیپول حق برخورد را برای خود محفوظ میدارد
               </p>
           </div>
+          <Footer/>
       </div>
+      </HeaderFooter>
 
   )
 }

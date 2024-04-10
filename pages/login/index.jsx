@@ -5,12 +5,14 @@ import {useState} from "react";
 import  {useRouter}  from 'next/router';
 import Logo from "@/components/icons/Logo";
 import Arrow from "@/components/icons/Arrow";
+import {jwtDecode} from "jwt-decode";
 
 const Login = () => {
     const router = useRouter();
 
     const [formValue, setFormValue] = useState({userName: "", password: ""});
     let [login , setLogin]=useState(false);
+    const [user ,setUser]=useState({userName:""})
     const formSubmitHandler = async (e) =>{
         e.preventDefault();
         console.log(formValue)
@@ -31,6 +33,12 @@ const Login = () => {
                 localStorage.setItem('jwtToken',response.headers.get('Authorization'));
                 const jwtToken=localStorage.getItem('jwtToken');
                 console.log(jwtToken);
+                console.log((JSON.parse(atob(jwtToken.split('.')[1]))).data);
+                // setUser({userName: jwtDecode(jwtToken).data});
+                // console.log('...')
+                // console.log(jwtDecode(jwtToken))
+                // console.log(user.username);
+                // console.log('...')
                 await router.push('/home');
                 //navigate("/home");
                 //redirect('/home');

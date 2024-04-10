@@ -1,23 +1,51 @@
 import User from "@/components/icons/User";
 import {forwardRef, useState} from "react";
 import  {useRouter}  from 'next/router';
+import {data} from "autoprefixer";
 
 const Header = () => {
     const [chosen, setChosen] = useState({home: false, educational_groups: false, forums: false, aboutUs: false ,contactUs: false});
     const [userSetting , setUserSetting]=useState({logIO:false})
     const [user , setUser]=useState({userName:'محدثه باغبانی'})
+    const [educationalGroups , setEducationalGroups]=useState([{publicId:'',name:'',description:''}])
     const router = useRouter();
+    const educationReq =async (e) => {
+        e.preventDefault();
+        setChosen({ educational_groups: !chosen.educational_groups});
 
+        try {
+            const response = await fetch("http://localhost:8090/unipoll/v1/academic-department", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            });
+
+
+            if (response.ok) {
+                console.log("OK");
+                response.json().then(data=>{setEducationalGroups(data.result)})
+                console.log(educationalGroups[0])
+
+            } else {
+                // setLogin(true);
+                console.log("not ok")
+            }
+
+        }catch (e) {
+            console.error("we are GETTING ERROR", e)
+        }
+    }
 
     return(
-      <div className={'flex flex-row h-24 w-full '}>
+      <div className={'flex flex-row h-24 w-full bg-white'}>
           <div className={'flex flex-col h-full w-1/12 justify-center items-center gap-2'}
           onClick={()=>{
               setUserSetting({logIO: !userSetting.logIO})
           }}
           >
               <User/>
-              <p className='text-xs'>{user.userName}</p>
+              <p className='text-xs text-darkBlue'>{user.userName}</p>
               { userSetting.logIO && <div
                                    className="z-10 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-20
                             absolute translate-y-20">
@@ -88,31 +116,29 @@ const Header = () => {
                       { chosen.educational_groups && <div id="dropdownNavbar"
                            className="z-10 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44
                             absolute translate-y-24"
-                            onClick={()=>{
-                                   setChosen({ educational_groups: !chosen.educational_groups});
-                             }}>
+                            onClick={educationReq}>
                           <ul className="py-2 text-sm text-gray-700 dark:text-gray-400"
                               aria-labelledby="dropdownLargeButton inline">
                               <li>
-                                  <a href="#"
+                                  <a href="/educationalGroups"
                                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                       نرم افزار
                                   </a>
                               </li>
                               <li>
-                                  <a href="#"
+                                  <a href="/educationalGroups"
                                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                       شبکه
                                   </a>
                               </li>
                               <li>
-                                  <a href="#"
+                                  <a href="/educationalGroups"
                                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                       هوش مصنوعی
                                   </a>
                               </li>
                               <li>
-                                  <a href="#"
+                                  <a href="/educationalGroups"
                                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                       سخت افزار
                                   </a>
