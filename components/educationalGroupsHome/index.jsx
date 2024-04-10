@@ -1,5 +1,6 @@
 const EducationalGroupsHome = (props) => {
-    return (<div className={`max-h-80 rounded-xl max-w-72 border-4 shadow-md border-darkBlue text-center ${props.mt}`}>
+    return (
+        <div className={`max-h-80 rounded-xl max-w-72 border-4 shadow-md border-darkBlue text-center ${props.mt}`}>
         <div
             className="flex flex-col  min-h-80 rounded-xl min-w-72 border-4 shadow-md border-[#2C83BF] mt-2 ml-4"
             dir="rtl">

@@ -13,7 +13,6 @@ module.exports = {
       'min_laptop':'768px',
       'laptop': '1024px',
       'desktop': '1280px',
-
     },
 
     extend: {
