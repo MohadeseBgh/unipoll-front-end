@@ -22,7 +22,7 @@ const LessonSearch = (props) => {
                     </div>
 
                 </div>
-                 <div className={'flex flex-row pt-11 basis-7/12'}>
+                 <div className={'flex flex-row pt-12 basis-7/12'}>
                     <p className="font-bold    text-3xl  font-bold text-black  ">توضیحات: {props.lessonsName}</p>
                     <p className="  text-2xl  pr-4 ">{props.descriptionn}  توضیحات درس است این جا است  </p>
 
