@@ -11,6 +11,8 @@ import Search from "@/components/search";
 import HeaderFooter from "@/layouts/headerFooter";
 import Footer from "@/components/footer";
 const Home = () => {
+    const [formValue, setFormValue] = useState({text: "", filter: ""});
+    const [resultSearch, setResultSearch] = useState([]);
     const [topBooklet, setTopBooklet] = useState([
         {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:20},
         {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:420},
@@ -43,6 +45,32 @@ const Home = () => {
     const [search , setSearch]=useState(false);
     const searchHandler = async (e) => {
         e.preventDefault();
+        if(formValue.filter==="professor"){
+            try {
+                const params=new URLSearchParams();
+                params.append("searchQuery",formValue.text)
+                console.log(params.toString())
+                console.log(formValue.text)
+                const response = await fetch('http://localhost:8090/unipoll/v1/instructor/filter?'+new URLSearchParams({searchQuery:formValue.text.toString()}).toString() ,{
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                });
+                console.log(response)
+                if (response.ok) {
+                    console.log("OK");
+                } else {
+                    console.log("not ok")
+                }
+
+            }catch (e) {
+                console.error("we are GETTING ERROR", e)
+            }
+        }
+        if(formValue.filter==="lesson"){
+
+        }
         console.log(e)
         setSearch(true)
     }
@@ -68,16 +96,20 @@ const Home = () => {
                           <h5 className='text-xl font-bold text-black px-8 '>جستجو:</h5>
                           <div>
                               <label className="inline-flex items-center">
-                                  <input type="radio" value="lessons"
+                                  <input type="radio" value="lesson"
                                          className="form-radio h-5 w-5 text-blue-600 ml-1 "
-                                         name="options" required/>
+                                         name="options" required onClick={(event) => {
+                                      setFormValue({...formValue, filter: event.target.value})
+                                  }}/>
                                   <span className="ml-2 text-xl text-black">دروس</span>
                               </label>
 
                               <label className="inline-flex items-center">
                                   <input type="radio" value="professor"
                                          className="form-radio h-5 w-5 text-blue-600 checked:bg-yellow-400 ml-1 mr-2"
-                                         name="options" required/>
+                                         name="options" required onClick={(event) => {
+                                      setFormValue({...formValue, filter: event.target.value})
+                                  }}/>
                                   <span className="ml-2 text-xl text-black">اساتید</span>
                               </label>
                           </div>
@@ -87,9 +119,10 @@ const Home = () => {
                           dir="rtl">
                           <input  id="default-search" className="block h-14 w-11/12 p-4 ps-10  text-black-900 rounded-3xl  text-black text-xl placeholder:text-[#8B8C8D]
                              focus:outline-none  focus:ring-0 "
-                                 placeholder=" جستجو را شروع کن ....."/>
-                          <button type="submit"
-                                  className="px-4">
+                                 placeholder=" جستجو را شروع کن ....." onChange={(event) => {
+                              setFormValue({...formValue, text: event.target.value})
+                          }}/>
+                          <button type="submit" className="px-4">
                               <SearchIcon/>
                           </button>
                       </div>
