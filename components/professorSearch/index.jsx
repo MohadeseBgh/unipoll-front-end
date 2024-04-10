@@ -2,7 +2,7 @@
 const ProfessorSearch = (props) => {
 
     return (
-        <div className="w-[85rem] bg-blend-normal shadow-2xl bg-opacity-15 bg-[#1FAAEA] max-h-60 rounded-3xl flex flex-row m-12 drop-shadow-2xl p-5" dir="rtl">
+        <div className="w-80% bg-blend-normal shadow-2xl bg-opacity-15 bg-[#1FAAEA] max-h-60 rounded-3xl flex flex-row m-12 drop-shadow-2xl p-5" dir="rtl">
             <div className="basis-2/12 border-t-0 drop-shadow-xl ">
                 <img className={' h-full w-full rounded-3xl backdrop-contrast-50 scale-105 ' }
                      src='/images/why.jpg' // آدرس گرفتن عکس هم فکر کنم باید از بک گرفته شود
