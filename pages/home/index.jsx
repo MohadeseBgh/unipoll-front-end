@@ -13,6 +13,7 @@ import Footer from "@/components/footer";
 const Home = () => {
     const [formValue, setFormValue] = useState({text: "", filter: ""});
     const [resultSearch, setResultSearch] = useState([]);
+    const [filter, setFilter] = useState(false);
     const [topBooklet, setTopBooklet] = useState([
         {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:20},
         {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:420},
@@ -47,19 +48,21 @@ const Home = () => {
         e.preventDefault();
         if(formValue.filter==="professor"){
             try {
-                const params=new URLSearchParams();
-                params.append("searchQuery",formValue.text)
-                console.log(params.toString())
-                console.log(formValue.text)
                 const response = await fetch('http://localhost:8090/unipoll/v1/instructor/filter?'+new URLSearchParams({searchQuery:formValue.text.toString()}).toString() ,{
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json"
                     },
                 });
-                console.log(response)
                 if (response.ok) {
+                    setFilter(true)
+                    setSearch(true)
                     console.log("OK");
+                    const data=await response.json();
+                    const result=data.result
+                    console.log(result)
+                    setResultSearch(result)
+                    console.log(resultSearch)
                 } else {
                     console.log("not ok")
                 }
@@ -69,10 +72,31 @@ const Home = () => {
             }
         }
         if(formValue.filter==="lesson"){
+            try {
+                const response = await fetch('http://localhost:8090/unipoll/v1/instructor-course/filter?'+new URLSearchParams({searchQuery:formValue.text.toString()}).toString() ,{
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                });
+                if (response.ok) {
+                    setFilter(false)
+                    setSearch(true)
+                    console.log("OK");
+                    const data=await response.json();
+                    const result=data.result
+                    console.log(result)
+                    setResultSearch(result)
+                    console.log(resultSearch)
+                } else {
+                    console.log("not ok")
+                }
 
+            }catch (e) {
+                console.error("we are GETTING ERROR", e)
+            }
         }
         console.log(e)
-        setSearch(true)
     }
   return(
       <HeaderFooter>
@@ -132,7 +156,7 @@ const Home = () => {
 
               </div>
           </div>
-          <div className={`${search===false ? 'hidden':''}`}><Search/></div>
+          <div className={`${search===false ? 'hidden':''}`}><Search result={resultSearch} professor={filter}/></div>
           <div className={`${search===true ? 'hidden':''}`}>
               <div id="whyUniPoll" className=' w-screen text-black laptop:flex-row  mobile: flex flex-col items-center mb-24'>
                   <div className='basis-1/2 flex flex-col laptop:pl-72 mobile:pl-0 ' dir='rtl'>
