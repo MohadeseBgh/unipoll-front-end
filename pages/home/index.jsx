@@ -8,6 +8,8 @@ import Header from "@/components/header";
 import TopCourse from "@/components/topCourse";
 import LessonsSearch from "@/components/lessonsSearch";
 import Search from "@/components/search";
+import HeaderFooter from "@/layouts/headerFooter";
+import Footer from "@/components/footer";
 const Home = () => {
     const [topBooklet, setTopBooklet] = useState([
         {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:20},
@@ -45,12 +47,8 @@ const Home = () => {
         setSearch(true)
     }
   return(
+      <HeaderFooter>
       <div className='h-screen w-screen flex flex-col bg-white gap-y-4 overflow-x-hidden'>
-          <div className={'h-28 w-full '}>
-              {/*//header*/}
-              <Header/>
-              {/*//header*/}
-          </div>
           <div id="searchBar " className={`flex flex-col items-center justify-items-center min-h-[35rem] ${search===false ? 'mb-24':''}  laptop:w-screen mobile:w-auto`}
                dir="rtl">
               <div
@@ -165,8 +163,9 @@ const Home = () => {
               </div>
 
           </div>
-
+          <Footer/>
       </div>
+      </HeaderFooter>
   );
 };
 export default Home;

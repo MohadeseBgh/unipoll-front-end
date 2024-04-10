@@ -8,6 +8,8 @@ import Star from "@/components/icons/Star";
 import managerAndAssistantInfo from "@/components/managerAndAssistantInfo";
 import ProfessorOfGroups from "@/components/professorOfGroups";
 import GroupCourses from "@/components/groupCourses";
+import HeaderFooter from "@/layouts/headerFooter";
+import Footer from "@/components/footer";
 
 
 const EducationalGroupsHome = (props) => {
@@ -46,10 +48,8 @@ const EducationalGroupsHome = (props) => {
     ])
 
     return (
+        <HeaderFooter>
         <div className='h-screen w-screen flex flex-col bg-white gap-y-4 overflow-x-hidden'>
-            <div className={'w-full h-24'}>
-                <Header/>
-            </div>
             <div>
                 <div className='flex flex-col justify-center items-center w-screen '>
                     <div className={'text-center text-4xl text-white bg-darkBlue rounded-2xl w-4/12 py-6 translate-y-10 px-3 font-bold'}>
@@ -136,7 +136,9 @@ const EducationalGroupsHome = (props) => {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </div>
+        </HeaderFooter>
     )
 }
 export default EducationalGroupsHome;

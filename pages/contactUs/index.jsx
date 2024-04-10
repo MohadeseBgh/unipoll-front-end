@@ -2,6 +2,8 @@ import Header from "@/components/header";
 import BlueTelegram from "@/components/icons/BlueTelegram";
 import BluePhone from "@/components/icons/BluePhone";
 import {useState} from "react";
+import HeaderFooter from "@/layouts/headerFooter";
+import Footer from "@/components/footer";
 
 const ContactUs = () => {
   const [formValue, setFormValue] = useState({firstname: "", lastname: "",email:"",text:""});
@@ -23,10 +25,10 @@ const ContactUs = () => {
     }
   }
   return (
+      <HeaderFooter>
+
+
       <div className={"h-screen w-screen flex flex-col bg-white gap-y-4 overflow-x-hidden items-center"}>
-        <div className={'w-full h-24'}>
-          <Header/>
-        </div>
         <h1 className='z-0 text-5xl font-bold text-darkBlue mt-16'>راه های ارتباطی با ما</h1>
         <div className=" flex flex-col  gap-y-4  items-center my-32">
           <hr className=" laptop:w-full table:w-0 h-1.5 border-t-0 bg-darkBlue "/>
@@ -86,7 +88,9 @@ const ContactUs = () => {
           </div>
           <hr className="z-0 laptop:w-full table:w-0 h-1.5 border-t-0 bg-darkBlue "/>
         </div>
+        <Footer/>
       </div>
+      </HeaderFooter>
   )
 }
 export default ContactUs;
