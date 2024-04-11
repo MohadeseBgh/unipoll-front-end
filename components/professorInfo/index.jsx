@@ -25,9 +25,9 @@ const ProfessorSearch = (props) => {
                         <p className="font-bold    text-2xl  font-bold text-black  "> ایمیل: </p>
                         <a href={'#'} className=" pt-1 text-1xl text-black pr-4 ">{props.professorEmail}  </a>
                     </div>
-                     <div className={'flex flex-row pt-8'}>
-                         <p className="font-bold    text-2xl  font-bold text-black  ">صفحه شخصی:</p>
-                        <a    href={'#'} className=" pt-1 text-1xl text-black pr-4 ">{props.professorSite}   </a>
+                    <div className={'flex flex-row pt-8'}>
+                        <p className="font-bold    text-2xl  font-bold text-black  ">صفحه شخصی:</p>
+                        <a    href={'#'} className="d pt-1 text-1xl text-black pr-4 ">{props.professorSite}   </a>
                     </div>
                 </div>
             </div>
