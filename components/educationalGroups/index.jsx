@@ -1,51 +1,21 @@
-import TopCourse from "@/components/topCourse";
-import {useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import ProfessorsOfGroups from "@/components/professorsOfGroups";
-import Header from "@/components/header";
 import ManagerAndAssistantInfo from "@/components/managerAndAssistantInfo";
-import YellowStar from "@/components/icons/YellowStar";
-import Star from "@/components/icons/Star";
-import managerAndAssistantInfo from "@/components/managerAndAssistantInfo";
-import ProfessorOfGroups from "@/components/professorOfGroups";
 import GroupCourses from "@/components/groupCourses";
 import HeaderFooter from "@/layouts/headerFooter";
 import Footer from "@/components/footer";
+import {edGroupDescpContext} from "@/context/edGroupDescpContext";
+import {edGroupCoursesContext} from "@/context/edGroupCoursesContext";
+import {edGroupProfessorsContext} from "@/context/edGroupProfessorsContext";
+import {edGroupMAndAContext} from "@/context/edGroupM&AContext";
 
 
-const EducationalGroupsHome = (props) => {
+const EducationalGroupsHome = () => {
 
-    const [professor, setProfessor] = useState([{firstName:"ارش" ,lastName:"شفیعی",academicRank:"استاد یار" ,profilePhoto:"/images/temp.jpg"},
-        {firstName:"ارش" ,lastName:"شفیعی",academicRank:"استاد یار" ,profilePhoto:"/images/temp.jpg"},
-        {firstName:"ارش" ,lastName:"شفیعی",academicRank:"استاد یار" ,profilePhoto:"/images/temp.jpg"},
-        {firstName:"ارش" ,lastName:"شفیعی",academicRank:"استاد یار" ,profilePhoto:"/images/temp.jpg"},
-        {firstName:"ارش" ,lastName:"شفیعی",academicRank:"استاد یار" ,profilePhoto:"/images/temp.jpg"},
-        {firstName:"ارش" ,lastName:"شفیعی",academicRank:"استاد یار" ,profilePhoto:"/images/temp.jpg"},
-        {firstName:"ارش" ,lastName:"شفیعی",academicRank:"استاد یار" ,profilePhoto:"/images/temp.jpg"},
-        {firstName:"ارش" ,lastName:"شفیعی",academicRank:"استاد یار" ,profilePhoto:"https://salamatiancar.com/wp-content/uploads/elementor/thumbs/VX-qez9madm6wxipbvvurwlrc8vy77kmypuxufvkc6c10.png"}]);
-
-    const [managerAndAssistant, setManagerAndAssistant] = useState([
-        {type:"manager",firstName:"رضا" ,lastName:"رمضانی",academicRank:"استاد یار" ,profilePhoto:"/images/temp.jpg",phd:"دکترای رشته مهندسی کامپیوتر" ,phoneNumber:"۳۷۹۳۵۶۲۱",email:"r.ramezani[at]eng.ui.ac.ir",websiteLink:"https://eng.ui.ac.ir/r.ramezani"},
-        {type:"assistant",firstName:"ارش" ,lastName:"شفیعی",academicRank:"استاد یار" ,profilePhoto:"/images/temp.jpg",phd:"دکترای رشته مهندسی کامپیوتر" ,phoneNumber:"۳۷۹۳۵۶۲۱",email:"r.ramezani[at]eng.ui.ac.ir",websiteLink:"https://eng.ui.ac.ir/r.ramezani"}]);
-
-    const [courses , setCourses]=useState([{publicId:'1',courseName:'مهندسی نرم افزار'},
-        {publicId:'1',courseName:'مهندسی نرم افزار'},
-        {publicId:'1',courseName:'مهندسی نرم افزار'},
-        {publicId:'1',courseName:'مهندسی نرم افزار'},
-        {publicId:'1',courseName:'مهندسی نرم افزار'},
-        {publicId:'1',courseName:'مهندسی نرم افزار'},
-        {publicId:'1',courseName:'مهندسی نرم افزار'},
-        {publicId:'1',courseName:'مهندسی نرم افزار'},
-        {publicId:'1',courseName:'مهندسی نرم افزار'},
-        {publicId:'1',courseName:'مهندسی نرم افزار'},
-        {publicId:'1',courseName:'مهندسی نرم افزار'},
-        {publicId:'1',courseName:'مهندسی نرم افزار'},
-        {publicId:'1',courseName:'مهندسی نرم افزار'},
-        {publicId:'1',courseName:'مهندسی نرم افزار'},
-        {publicId:'1',courseName:'مهندسی نرم افزار'},
-        {publicId:'1',courseName:'مهندسی نرم افزار'},
-        {publicId:'1',courseName:'مهندسی نرم افزار'},
-
-    ])
+    const [professor, setProfessor] = useContext(edGroupProfessorsContext);
+    const [managerAndAssistant, setManagerAndAssistant] = useContext(edGroupMAndAContext)
+    const [courses , setCourses]=useContext(edGroupCoursesContext);
+    const [edGroupdescription, setEdGroupdescription]=useContext(edGroupDescpContext)
 
     return (
         <HeaderFooter>
@@ -53,25 +23,13 @@ const EducationalGroupsHome = (props) => {
             <div>
                 <div className='flex flex-col justify-center items-center w-screen '>
                     <div className={'text-center text-4xl text-white bg-darkBlue rounded-2xl w-4/12 py-6 translate-y-10 px-3 font-bold'}>
-                        گروه مهندسی نرم افزار
+                        {edGroupdescription.name}
                     </div>
                     <div className={'text-center text-2xl/10 text-black bg-[#E2F4FC] w-full px-10 py-20'} dir={'rtl'}>
-                        گروه مهندسی نرم‌افزار دانشگاه اصفهان همواره به عنوان یکی از باسابقه‌ترین گروه‌های کامپیوتری در سطح کشور شناخته می‌شده است. سابقه‌ی این گروه به سال‌های ۱۳۵۰ الی ۱۳۶۴ بازمی‌گردد که کامپیوتر به عنوان یکی از گرایش‌های رشته‌ی ریاضی در دانشگاه اصفهان موجود و از وجود استادان به نام و شناخته ‌شده‌ای بهره می‌برد.
+                        {edGroupdescription.description}
                     </div>
                 </div>
                 <div id="managerAndAssistant " className=" w-screen flex flex-col items-center justify-center">
-                    {/*<div className={'flex flex-row w-full px-5 '}>*/}
-                    {/*    <div className="flex  w-1/2 flex-row items-center justify-between py-8" dir="rtl">*/}
-                    {/*        <div className="h-1 basis-4/12 bg-darkBlue "/>*/}
-                    {/*        <h2 className='text-2xl font-bold text-darkBlue '>{managerAndAssistant[0].type}</h2>*/}
-                    {/*        <div className="basis-4/12 h-1 bg-darkBlue "/>*/}
-                    {/*    </div>*/}
-                    {/*    <div className="flex  w-1/2 flex-row items-center justify-between py-8" dir="rtl">*/}
-                    {/*        <div className="h-1 basis-4/12 bg-darkBlue "/>*/}
-                    {/*        <h2 className='text-2xl font-bold text-darkBlue '>{managerAndAssistant[1].type}</h2>*/}
-                    {/*        <div className="basis-4/12 h-1 bg-darkBlue "/>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
                     <div className=' grid gap-20  min_laptop:grid-cols-2 tablet:grid-cols-1 items-center my-24 '>
                         <div className={'flex flex-col w-full'}>
                             <div className="flex  w-full flex-row items-center justify-between pb-20" dir="rtl">

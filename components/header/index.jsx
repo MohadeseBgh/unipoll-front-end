@@ -1,41 +1,39 @@
 import User from "@/components/icons/User";
-import {forwardRef, useState} from "react";
+import {forwardRef, useContext, useEffect, useState} from "react";
 import  {useRouter}  from 'next/router';
-import {data} from "autoprefixer";
+
 
 const Header = () => {
     const [chosen, setChosen] = useState({home: false, educational_groups: false, forums: false, aboutUs: false ,contactUs: false});
-    const [userSetting , setUserSetting]=useState({logIO:false})
-    const [user , setUser]=useState({userName:'محدثه باغبانی'})
-    const [educationalGroups , setEducationalGroups]=useState([{publicId:'',name:'',description:''}])
+    const [userSetting , setUserSetting]=useState({logIO:false});
+    const [user , setUser]=useState({userName:'محدثه باغبانی'});
+
+
     const router = useRouter();
-    const educationReq =async (e) => {
-        e.preventDefault();
-        setChosen({ educational_groups: !chosen.educational_groups});
-
-        try {
-            const response = await fetch("http://localhost:8090/unipoll/v1/academic-department", {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-            });
-
-
-            if (response.ok) {
-                console.log("OK");
-                response.json().then(data=>{setEducationalGroups(data.result)})
-                console.log(educationalGroups[0])
-
-            } else {
-                // setLogin(true);
-                console.log("not ok")
-            }
-
-        }catch (e) {
-            console.error("we are GETTING ERROR", e)
+    useEffect(()=>{
+        const academicDepartmentHandler = async () => {
+            // try {
+            //     const response = await fetch("http://localhost:8090/unipoll/v1/academic-department", {
+            //         method: "GET",
+            //         headers: {
+            //             "Content-Type": "application/json"
+            //         },
+            //     });
+            //     if (response.ok) {
+            //         console.log("OK");
+            //         response.json().then(
+            //             data=>{setEducationalGroupPId(data.result)}
+            //         )
+            //         console.log(educationalGroupPId);
+            //     } else {
+            //         console.log("not ok")
+            //     }
+            // }catch (e) {
+            //     console.error("we are GETTING ERROR", e)
+            // }
         }
-    }
+        academicDepartmentHandler().then(r => {});
+    },[])
 
     return(
       <div className={'flex flex-row h-24 w-full bg-white'}>
@@ -94,11 +92,7 @@ const Header = () => {
                       </button>
                   </div>
                   <div className='flex justify-center items-center flex-col block overflow-visible'>
-                      {/*<button className={`text-black text-sm font-bold hover:text- hover:text-blue2 transition */}
-                      {/*ease-in-out hover:-translate-y hover:scale-110 duration-100*/}
-                      {/*${chosen.educational_groups === true ? "text-blue2" : ""}*/}
-                      {/*`}*/}
-                      {/*>*/}
+
                       <button className={`flex items-center justify-center w-full text-gray-900 rounded text-black text-sm font-bold hover:text-blue2
                         ${chosen.educational_groups === true ? 'text-blue2' : ""}`}
                               onClick={()=>{
@@ -116,37 +110,43 @@ const Header = () => {
                       { chosen.educational_groups && <div id="dropdownNavbar"
                            className="z-10 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44
                             absolute translate-y-24"
-                            onClick={educationReq}>
+                            onClick={(
+                                )=>{setChosen({ educational_groups: !chosen.educational_groups})
+                            }
+                            }>
                           <ul className="py-2 text-sm text-gray-700 dark:text-gray-400"
                               aria-labelledby="dropdownLargeButton inline">
                               <li>
-                                  <a href="/educationalGroups"
+                                  <a
+                                      href={'/softwareGroup'}
                                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                       نرم افزار
                                   </a>
                               </li>
                               <li>
-                                  <a href="/educationalGroups"
-                                     className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                  <a
+                                      href={'/networkGroup'}
+                                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                       شبکه
                                   </a>
                               </li>
                               <li>
-                                  <a href="/educationalGroups"
-                                     className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                  <a
+                                      href={'/AIGroup'}
+                                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                       هوش مصنوعی
                                   </a>
                               </li>
                               <li>
-                                  <a href="/educationalGroups"
-                                     className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                  <a
+                                      href={'/hardwareGroup'}
+                                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                       سخت افزار
                                   </a>
                               </li>
                           </ul>
 
                       </div>}
-                      {/*</button>*/}
                   </div>
                   <div className='flex justify-center items-center block'>
                       <button className={`text-black text-sm font-bold hover:text- hover:text-blue2 transition 
@@ -181,7 +181,7 @@ const Header = () => {
                       `}
                               onClick={()=>{
                                   setChosen({home: false, educational_groups: false, forums: false, aboutUs: false ,contactUs: true});
-                                  // router.push('/contactUs').then(r => {});
+                                   router.push('/contactUs').then(r => {});
                               }}
                       >
                           ارتباط با ما
