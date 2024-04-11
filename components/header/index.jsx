@@ -79,7 +79,7 @@ const Header = () => {
           <div className={'h-full w-8/12 flex justify-center items-center '}>
               <div className=' flex flex-row h-4/6 w-full bg-blue1 rounded-full grid grid-cols-5 shadow-lg ' dir={'rtl'}>
                   <div className='flex justify-center items-center block'>
-                      <button className={`text-black text-sm font-bold hover:text- hover:text-blue2 transition 
+                      <button className={`text-black text-sm font-bold hover:text-blue2 transition 
                       ease-in-out hover:-translate-y hover:scale-110 duration-100
                       ${chosen.home === true ? "text-blue2" : ""}
                       `}
@@ -108,7 +108,7 @@ const Header = () => {
                           </svg>
                       </button>
                       { chosen.educational_groups && <div id="dropdownNavbar"
-                           className="z-10 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44
+                           className="z-20 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44
                             absolute translate-y-24"
                             onClick={(
                                 )=>{setChosen({ educational_groups: !chosen.educational_groups})

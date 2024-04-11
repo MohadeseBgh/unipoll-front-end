@@ -1,7 +1,7 @@
 import Index from "../../components/educationalGroupsHome";
 import SearchIcon from "@/components/icons/SearchIcon";
 
-import {useState} from  'react';
+import {useEffect, useState} from 'react';
 import TopBooklet from "@/components/topBooklet";
 import EducationalGroupsHome from "../../components/educationalGroupsHome";
 import Header from "@/components/header";
@@ -30,20 +30,25 @@ const Home = () => {
         {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:320},
         {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:320},
         {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:320}]);
-    const [topCourse, setTopCourse] = useState([ {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی" ,rate:5},
-        {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی" ,rate:5},
-        {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی" ,rate:4},
-        {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی" ,rate:3},
-        {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی" ,rate:5},
-        {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی" ,rate:5},
-        {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی" ,rate:5},
-        {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی" ,rate:5},
-        {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی" ,rate:5},
-        {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی" ,rate:5},
-        {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی" ,rate:5},
-        {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی" ,rate:5},
-    ]);
+    const [topCourse, setTopCourse] = useState([ {courseName:"مبانی برنامه نویسی" ,instructorCourseFirstname:"رضا رمضانی" ,instructorCourseLastname:'',rate:5.0}]);
     const [search , setSearch]=useState(false);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch("http://localhost:8090/unipoll/v1/instructor-course");
+                if (response.ok) {
+                    const data = await response.json();
+                    setTopCourse(data.result);
+                } else {
+                    console.log("Network response was not ok");
+                }
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+    }, []);
     const searchHandler = async (e) => {
         e.preventDefault();
         if(formValue.filter==="professor"){
@@ -150,10 +155,7 @@ const Home = () => {
                               <SearchIcon/>
                           </button>
                       </div>
-
-
                   </form>
-
               </div>
           </div>
           <div className={`${search===false ? 'hidden':''}`}><Search result={resultSearch} professor={filter}/></div>
@@ -173,18 +175,13 @@ const Home = () => {
                   </div>
                   <div className='flex basis-1/2'><img src='/images/why.jpg' alt={'why UniPoll ?'}/></div>
               </div>
-              <div id="topCourse" className="flex flex-col mb-24 " dir="rtl">
-                  <div
-                      className={"min-h-[29rem]  w-screen bg-[#F2FBFF] justify-items-center gap-y-16 "}>
-                      <div className="flex flex-row items-center justify-between" dir="rtl">
-                          <hr className="my-12 laptop:w-4/12 table:w-0 h-1.5 border-t-0 bg-darkBlue "/>
-                          <h3 className='text-5xl  font-bold text-black '>دروس پر طرفدار ارائه شده</h3>
-                          <hr className="my-12 laptop:w-4/12 table:w-0 h-1.5 border-t-0 bg-darkBlue "/>
+              <div id="topCourse" className="flex flex-col mb-24 w-screen bg-[#F2FBFF] justify-items-center" dir="rtl">
+                      <div className="flex flex-row items-center justify-between pt-8" >
+                          <hr className="w-4/12 h-1 bg-darkBlue "/>
+                          <h3 className='desktop:text-3xl text-2xl font-bold text-black '>دروس پر طرفدار ارائه شده</h3>
+                          <hr className="w-4/12 h-1 bg-darkBlue "/>
                       </div>
                       <TopCourse courses={topCourse}/>
-
-
-                  </div>
               </div>
               <div id="educationalGroups " className=" w-screen flex flex-col items-center justify-center mb-24 ">
                   <h3 className='laptop:text-5xl tablet:text-[2rem]  font-bold text-black items-center '>گروه های آموزشی
@@ -213,8 +210,6 @@ const Home = () => {
                           <hr className="my-12 laptop:w-4/12 table:w-0 h-1.5 border-t-0 bg-darkBlue "/>
                       </div>
                       <TopBooklet booklets={topBooklet}/>
-
-
                   </div>
                   <LessonsSearch rate={3}/>
               </div>
