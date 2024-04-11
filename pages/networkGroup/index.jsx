@@ -4,7 +4,7 @@ import { edGroupDescpContext } from "@/context/edGroupDescpContext";
 import { edGroupCoursesContext } from "@/context/edGroupCoursesContext";
 import { edGroupProfessorsContext } from "@/context/edGroupProfessorsContext";
 import { edGroupMAndAContext } from "@/context/edGroupM&AContext";
-import EducationalGroups from "@/pages/educationalGroups";
+import EducationalGroups from "@/components/educationalGroups";
 
 const NetworkGroup = () => {
     const [educationalGroupPId , setEducationalGroupPId]=useContext(educationalGroupPIdContext);
