@@ -32,7 +32,7 @@ const Home = () => {
         {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:320}]);
     const [topCourse, setTopCourse] = useState([ {courseName:" " ,instructorCourseFirstname:" " ,instructorCourseLastname:'',rate:5.0}]);
     const [search , setSearch]=useState(false);
-    const [educationalGroups , setEducationalGroups]=useState([{publicId:'',name:'',description:''}])
+    const [educationalGroups , setEducationalGroups]=useState([{publicId:'',name:'',description:''},{publicId:'',name:'',description:''},{publicId:'',name:'',description:''},{publicId:'',name:'',description:''}])
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -47,6 +47,7 @@ const Home = () => {
                 if (response1.ok) {
                     const data = await response1.json();
                     setEducationalGroups(data.result);
+                    console.log(educationalGroups)
                 }else {
                     console.log("Network response was not ok");
                 }
@@ -54,7 +55,6 @@ const Home = () => {
                 console.error("Error fetching data:", error);
             }
         };
-
         fetchData();
     }, []);
     const searchHandler = async (e) => {
