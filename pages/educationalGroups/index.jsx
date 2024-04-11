@@ -4,24 +4,19 @@ import ManagerAndAssistantInfo from "@/components/managerAndAssistantInfo";
 import GroupCourses from "@/components/groupCourses";
 import HeaderFooter from "@/layouts/headerFooter";
 import Footer from "@/components/footer";
-import {educationalGroupPIdContext} from "@/context/educationalGroupPIdContext";
 import {edGroupDescpContext} from "@/context/edGroupDescpContext";
 import {edGroupCoursesContext} from "@/context/edGroupCoursesContext";
 import {edGroupProfessorsContext} from "@/context/edGroupProfessorsContext";
 import {edGroupMAndAContext} from "@/context/edGroupM&AContext";
 
 
-const EducationalGroupsHome = (props) => {
-    const [educationalGroupPId , setEducationalGroupPId]=useContext(educationalGroupPIdContext);
+const EducationalGroupsHome = () => {
 
     const [professor, setProfessor] = useContext(edGroupProfessorsContext);
-
     const [managerAndAssistant, setManagerAndAssistant] = useContext(edGroupMAndAContext)
     const [courses , setCourses]=useContext(edGroupCoursesContext);
     const [edGroupdescription, setEdGroupdescription]=useContext(edGroupDescpContext)
-    useEffect(()=>{
-        console.log(educationalGroupPId);
-    },[]);
+
     return (
         <HeaderFooter>
         <div className='h-screen w-screen flex flex-col bg-white gap-y-4 overflow-x-hidden'>
@@ -35,18 +30,6 @@ const EducationalGroupsHome = (props) => {
                     </div>
                 </div>
                 <div id="managerAndAssistant " className=" w-screen flex flex-col items-center justify-center">
-                    {/*<div className={'flex flex-row w-full px-5 '}>*/}
-                    {/*    <div className="flex  w-1/2 flex-row items-center justify-between py-8" dir="rtl">*/}
-                    {/*        <div className="h-1 basis-4/12 bg-darkBlue "/>*/}
-                    {/*        <h2 className='text-2xl font-bold text-darkBlue '>{managerAndAssistant[0].type}</h2>*/}
-                    {/*        <div className="basis-4/12 h-1 bg-darkBlue "/>*/}
-                    {/*    </div>*/}
-                    {/*    <div className="flex  w-1/2 flex-row items-center justify-between py-8" dir="rtl">*/}
-                    {/*        <div className="h-1 basis-4/12 bg-darkBlue "/>*/}
-                    {/*        <h2 className='text-2xl font-bold text-darkBlue '>{managerAndAssistant[1].type}</h2>*/}
-                    {/*        <div className="basis-4/12 h-1 bg-darkBlue "/>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
                     <div className=' grid gap-20  min_laptop:grid-cols-2 tablet:grid-cols-1 items-center my-24 '>
                         <div className={'flex flex-col w-full'}>
                             <div className="flex  w-full flex-row items-center justify-between pb-20" dir="rtl">

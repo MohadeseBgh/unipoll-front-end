@@ -1,227 +1,39 @@
 import User from "@/components/icons/User";
 import {forwardRef, useContext, useEffect, useState} from "react";
 import  {useRouter}  from 'next/router';
-import {data} from "autoprefixer";
-import { educationalGroupPIdContext } from "@/context/educationalGroupPIdContext";
-import {edGroupDescpContext} from "@/context/edGroupDescpContext";
-import {edGroupCoursesContext} from "@/context/edGroupCoursesContext";
-import {edGroupProfessorsContext} from "@/context/edGroupProfessorsContext";
-import {edGroupMAndAContext} from "@/context/edGroupM&AContext";
+i
 
 const Header = () => {
     const [chosen, setChosen] = useState({home: false, educational_groups: false, forums: false, aboutUs: false ,contactUs: false});
     const [userSetting , setUserSetting]=useState({logIO:false});
     const [user , setUser]=useState({userName:'محدثه باغبانی'});
-    const [educationalGroups , setEducationalGroups]=useState([{publicId:'',name:'',description:''}]);
-    const [educationalGroupPId , setEducationalGroupPId]=useContext(educationalGroupPIdContext);
-    const [edGroupdescription, setEdGroupdescription]=useContext(edGroupDescpContext);
-    const [courses , setCourses]=useContext(edGroupCoursesContext);
-    const [professor, setProfessor] = useContext(edGroupProfessorsContext);
-    const [managerAndAssistant, setManagerAndAssistant] = useContext(edGroupMAndAContext)
+
 
     const router = useRouter();
-
-    const  educationalGroupsHandler= async () => {
-        setChosen({home: false, educational_groups: !chosen.educational_groups, forums: false, aboutUs: false ,contactUs: false});
-        try {
-            const response = await fetch("http://localhost:8090/unipoll/v1/academic-department", {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-            });
-            if (response.ok) {
-                console.log("OK");
-                response.json().then(
-                    data=>{setEducationalGroups(data.result)}
-                )
-                console.log(educationalGroups);
-            } else {
-                console.log("not ok")
-            }
-        }catch (e) {
-            console.error("we are GETTING ERROR", e)
+    useEffect(()=>{
+        const academicDepartmentHandler = async () => {
+            // try {
+            //     const response = await fetch("http://localhost:8090/unipoll/v1/academic-department", {
+            //         method: "GET",
+            //         headers: {
+            //             "Content-Type": "application/json"
+            //         },
+            //     });
+            //     if (response.ok) {
+            //         console.log("OK");
+            //         response.json().then(
+            //             data=>{setEducationalGroupPId(data.result)}
+            //         )
+            //         console.log(educationalGroupPId);
+            //     } else {
+            //         console.log("not ok")
+            //     }
+            // }catch (e) {
+            //     console.error("we are GETTING ERROR", e)
+            // }
         }
-    }
-    // useEffect( () => {
-    //     const effectHandler = async() => {
-    //         try {
-    //             const response = await fetch("http://localhost:8090/unipoll/v1/academic-department", {
-    //                 method: "GET",
-    //                 headers: {
-    //                     "Content-Type": "application/json"
-    //                 },
-    //             });
-    //
-    //
-    //             if (response.ok) {
-    //                 console.log("OK");
-    //                 response.json().then(
-    //                     data=>{setEducationalGroups(data.result)}
-    //                 )
-    //
-    //             } else {
-    //                 console.log("not ok")
-    //             }
-    //
-    //         }catch (e) {
-    //             console.error("we are GETTING ERROR", e)
-    //         }
-    //     }
-    //     effectHandler();
-    //
-    // },[]);
-    // useEffect(() => {
-    //     console.log(educationalGroups);
-    // }, [educationalGroups]);
-    //
-    const edHandler1 = async (e) => {
-        e.preventDefault();
-        setEducationalGroupPId((prevState) => {
-            return educationalGroups[0].publicId
-        });
-        try {
-            const response = await fetch(`http://localhost:8090/unipoll/v1/academic-department/${educationalGroups[0].publicId}`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-            });
-            const response2 = await fetch(`http://localhost:8090/unipoll/v1/academic-department/${educationalGroups[0].publicId}/courses`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-            });
-            const response3 = await fetch(`http://localhost:8090/unipoll/v1/academic-department/${educationalGroups[0].publicId}/instructors`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-            });
-            const response4 = await fetch(`http://localhost:8090/unipoll/v1/academic-department/${educationalGroups[0].publicId}/manger-and-assistant`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-            });
-            if (response.ok) {
-                console.log("OK");
-                response.json().then(
-                    data=>{setEdGroupdescription(data.result)}
-                )
-                console.log(educationalGroups);
-            } else {
-                console.log("not ok")
-            }
-            if (response2.ok) {
-                console.log("OK");
-                response2.json().then(
-                    data=>{setCourses(data.result)}
-                )
-            } else {
-                console.log("not ok")
-            }
-            if (response3.ok) {
-                console.log("OK");
-                response3.json().then(
-                    data=>{setProfessor(data.result)}
-                )
-            } else {
-                console.log("not ok")
-            }
-            if (response4.ok) {
-                console.log("OK");
-                response4.json().then(
-                    data=>{setManagerAndAssistant(data.result)}
-                )
-            } else {
-                console.log("not ok")
-            }
-        }catch (e) {
-            console.error("we are GETTING ERROR", e)
-        }
-
-        await router.push('/educationalGroups');
-    }
-    const edHandler2 = async (e) => {
-        e.preventDefault();
-        setEducationalGroupPId((prevState) => {
-            return educationalGroups[1].publicId
-        });
-        try {
-            const response = await fetch(`http://localhost:8090/unipoll/v1/academic-department/${educationalGroups[1].publicId}`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-            });
-            if (response.ok) {
-                console.log("OK");
-                response.json().then(
-                    data=>{setEdGroupdescription(data.result)}
-                )
-                console.log(educationalGroups);
-            } else {
-                console.log("not ok")
-            }
-        }catch (e) {
-            console.error("we are GETTING ERROR", e)
-        }        await router.push('/educationalGroups');
-
-    }
-    const edHandler3 = async (e) => {
-        e.preventDefault();
-        setEducationalGroupPId((prevState) => {
-            return educationalGroups[2].publicId
-        });
-        try {
-            const response = await fetch(`http://localhost:8090/unipoll/v1/academic-department/${educationalGroups[2].publicId}`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-            });
-            if (response.ok) {
-                console.log("OK");
-                response.json().then(
-                    data=>{setEdGroupdescription(data.result)}
-                )
-                console.log(educationalGroups);
-            } else {
-                console.log("not ok")
-            }
-        }catch (e) {
-            console.error("we are GETTING ERROR", e)
-        }        await router.push('/educationalGroups');
-
-    }
-    const edHandler4 = async (e) => {
-        e.preventDefault();
-        setEducationalGroupPId((prevState) => {
-            return educationalGroups[3].publicId
-        });
-        try {
-            const response = await fetch(`http://localhost:8090/unipoll/v1/academic-department/${educationalGroups[3].publicId}`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-            });
-            if (response.ok) {
-                console.log("OK");
-                response.json().then(
-                    data=>{setEdGroupdescription(data.result)}
-                )
-                console.log(educationalGroups);
-            } else {
-                console.log("not ok")
-            }
-        }catch (e) {
-            console.error("we are GETTING ERROR", e)
-        }        await router.push('/educationalGroups');
-
-    }
+        academicDepartmentHandler().then(r => {});
+    },[])
 
     return(
       <div className={'flex flex-row h-24 w-full bg-white'}>
@@ -280,14 +92,12 @@ const Header = () => {
                       </button>
                   </div>
                   <div className='flex justify-center items-center flex-col block overflow-visible'>
-                      {/*<button className={`text-black text-sm font-bold hover:text- hover:text-blue2 transition */}
-                      {/*ease-in-out hover:-translate-y hover:scale-110 duration-100*/}
-                      {/*${chosen.educational_groups === true ? "text-blue2" : ""}*/}
-                      {/*`}*/}
-                      {/*>*/}
+
                       <button className={`flex items-center justify-center w-full text-gray-900 rounded text-black text-sm font-bold hover:text-blue2
                         ${chosen.educational_groups === true ? 'text-blue2' : ""}`}
-                              onClick={educationalGroupsHandler}
+                              onClick={()=>{
+                                  setChosen({home: false, educational_groups: !chosen.educational_groups, forums: false, aboutUs: false ,contactUs: false});
+                              }}
                       >
                           گروه های آموزشی
                           <svg
@@ -307,37 +117,36 @@ const Header = () => {
                           <ul className="py-2 text-sm text-gray-700 dark:text-gray-400"
                               aria-labelledby="dropdownLargeButton inline">
                               <li>
-                                  <button
-                                     onClick={edHandler1}
+                                  <a
+                                      href={'/softwareGroup'}
                                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                       نرم افزار
-                                  </button>
+                                  </a>
                               </li>
                               <li>
-                                  <button
-                                      onClick={edHandler2}
+                                  <a
+                                      href={'/networkGroup'}
                                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                       شبکه
-                                  </button>
+                                  </a>
                               </li>
                               <li>
-                                  <button
-                                      onClick={edHandler3}
+                                  <a
+                                      href={'/AIGroup'}
                                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                       هوش مصنوعی
-                                  </button>
+                                  </a>
                               </li>
                               <li>
-                                  <button
-                                      onClick={edHandler4}
+                                  <a
+                                      href={'/hardwareGroup'}
                                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                       سخت افزار
-                                  </button>
+                                  </a>
                               </li>
                           </ul>
 
                       </div>}
-                      {/*</button>*/}
                   </div>
                   <div className='flex justify-center items-center block'>
                       <button className={`text-black text-sm font-bold hover:text- hover:text-blue2 transition 
