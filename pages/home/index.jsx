@@ -30,8 +30,9 @@ const Home = () => {
         {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:320},
         {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:320},
         {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:320}]);
-    const [topCourse, setTopCourse] = useState([ {courseName:"مبانی برنامه نویسی" ,instructorCourseFirstname:"رضا رمضانی" ,instructorCourseLastname:'',rate:5.0}]);
+    const [topCourse, setTopCourse] = useState([ {courseName:" " ,instructorCourseFirstname:" " ,instructorCourseLastname:'',rate:5.0}]);
     const [search , setSearch]=useState(false);
+    const [educationalGroups , setEducationalGroups]=useState([{publicId:'',name:'',description:''}])
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -40,6 +41,13 @@ const Home = () => {
                     const data = await response.json();
                     setTopCourse(data.result);
                 } else {
+                    console.log("Network response was not ok");
+                }
+                const response1 = await fetch("http://localhost:8090/unipoll/v1/academic-department");
+                if (response1.ok) {
+                    const data = await response1.json();
+                    setEducationalGroups(data.result);
+                }else {
                     console.log("Network response was not ok");
                 }
             } catch (error) {
@@ -188,17 +196,16 @@ const Home = () => {
                       دانشکده</h3>
                   <div
                       className=' grid gap-12  laptop:grid-cols-4  tablet:grid-cols-2 mobile:grid-cols-1items-center my-24  '>
-                      <EducationalGroupsHome name='نرم افزار'
-                                             text='گروه مهندسی نرم‌افزار دانشگاه اصفهان همواره به عنوان یکی از باسابقه‌ترین گروه‌های کامپیوتری در سطح کشور شناخته می‌شده است ....'/>
-                      <EducationalGroupsHome name='هوش مصنوعی'
-                                             text='گروه مهندسی نرم‌افزار دانشگاه اصفهان همواره به عنوان یکی از باسابقه‌ترین گروه‌های کامپیوتری در سطح کشور شناخته می‌شده است....'
+                      <EducationalGroupsHome name={educationalGroups[0].name}
+                                             text={educationalGroups[0].description}/>
+                      <EducationalGroupsHome name={educationalGroups[1].name}
+                                             text={educationalGroups[1].description}
                                              mt='laptop:mt-28'/>
-                      <EducationalGroupsHome name='سخت افزار'
-                                             text='گروه مهندسی نرم‌افزار دانشگاه اصفهان همواره به عنوان یکی از باسابقه‌ترین گروه‌های کامپیوتری در سطح کشور شناخته می‌شده است....'/>
-                      <EducationalGroupsHome name='شبکه '
-                                             text='گروه مهندسی نرم‌افزار دانشگاه اصفهان همواره به عنوان یکی از باسابقه‌ترین گروه‌های کامپیوتری در سطح کشور شناخته می‌شده است ....'
+                      <EducationalGroupsHome name={educationalGroups[2].name}
+                                             text={educationalGroups[2].description}/>
+                      <EducationalGroupsHome name={educationalGroups[3].name}
+                                             text={educationalGroups[3].description}
                                              mt='laptop:mt-28'/>
-
                   </div>
               </div>
               <div id="topBooklet" className="flex flex-col mb-24 " dir="rtl">
