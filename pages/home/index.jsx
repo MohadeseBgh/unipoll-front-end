@@ -11,6 +11,9 @@ import Search from "@/components/search";
 import HeaderFooter from "@/layouts/headerFooter";
 import Footer from "@/components/footer";
 const Home = () => {
+    const [formValue, setFormValue] = useState({text: "", filter: ""});
+    const [resultSearch, setResultSearch] = useState([]);
+    const [filter, setFilter] = useState(false);
     const [topBooklet, setTopBooklet] = useState([
         {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:20},
         {courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:420},
@@ -43,7 +46,57 @@ const Home = () => {
     const [search , setSearch]=useState(false);
     const searchHandler = async (e) => {
         e.preventDefault();
-        setSearch(true)
+        if(formValue.filter==="professor"){
+            try {
+                const response = await fetch('http://localhost:8090/unipoll/v1/instructor/filter?'+new URLSearchParams({searchQuery:formValue.text.toString()}).toString() ,{
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                });
+                if (response.ok) {
+                    setFilter(true)
+                    setSearch(true)
+                    console.log("OK");
+                    const data=await response.json();
+                    const result=data.result
+                    console.log(result)
+                    setResultSearch(result)
+                    console.log(resultSearch)
+                } else {
+                    console.log("not ok")
+                }
+
+            }catch (e) {
+                console.error("we are GETTING ERROR", e)
+            }
+        }
+        if(formValue.filter==="lesson"){
+            try {
+                const response = await fetch('http://localhost:8090/unipoll/v1/instructor-course/filter?'+new URLSearchParams({searchQuery:formValue.text.toString()}).toString() ,{
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                });
+                if (response.ok) {
+                    setFilter(false)
+                    setSearch(true)
+                    console.log("OK");
+                    const data=await response.json();
+                    const result=data.result
+                    console.log(result)
+                    setResultSearch(result)
+                    console.log(resultSearch)
+                } else {
+                    console.log("not ok")
+                }
+
+            }catch (e) {
+                console.error("we are GETTING ERROR", e)
+            }
+        }
+        console.log(e)
     }
   return(
       <HeaderFooter>
@@ -67,16 +120,20 @@ const Home = () => {
                           <h5 className='text-xl font-bold text-black px-8 '>جستجو:</h5>
                           <div>
                               <label className="inline-flex items-center">
-                                  <input type="radio" value="lessons"
+                                  <input type="radio" value="lesson"
                                          className="form-radio h-5 w-5 text-blue-600 ml-1 "
-                                         name="options" required/>
+                                         name="options" required onClick={(event) => {
+                                      setFormValue({...formValue, filter: event.target.value})
+                                  }}/>
                                   <span className="ml-2 text-xl text-black">دروس</span>
                               </label>
 
                               <label className="inline-flex items-center">
                                   <input type="radio" value="professor"
                                          className="form-radio h-5 w-5 text-blue-600 checked:bg-yellow-400 ml-1 mr-2"
-                                         name="options" required/>
+                                         name="options" required onClick={(event) => {
+                                      setFormValue({...formValue, filter: event.target.value})
+                                  }}/>
                                   <span className="ml-2 text-xl text-black">اساتید</span>
                               </label>
                           </div>
@@ -86,9 +143,10 @@ const Home = () => {
                           dir="rtl">
                           <input  id="default-search" className="block h-14 w-11/12 p-4 ps-10  text-black-900 rounded-3xl  text-black text-xl placeholder:text-[#8B8C8D]
                              focus:outline-none  focus:ring-0 "
-                                 placeholder=" جستجو را شروع کن ....."/>
-                          <button type="submit"
-                                  className="px-4">
+                                 placeholder=" جستجو را شروع کن ....." onChange={(event) => {
+                              setFormValue({...formValue, text: event.target.value})
+                          }}/>
+                          <button type="submit" className="px-4">
                               <SearchIcon/>
                           </button>
                       </div>
@@ -98,7 +156,7 @@ const Home = () => {
 
               </div>
           </div>
-          <div className={`${search===false ? 'hidden':''}`}><Search/></div>
+          <div className={`${search===false ? 'hidden':''}`}><Search result={resultSearch} professor={filter}/></div>
           <div className={`${search===true ? 'hidden':''}`}>
               <div id="whyUniPoll" className=' w-screen text-black laptop:flex-row  mobile: flex flex-col items-center mb-24'>
                   <div className='basis-1/2 flex flex-col laptop:pl-72 mobile:pl-0 ' dir='rtl'>

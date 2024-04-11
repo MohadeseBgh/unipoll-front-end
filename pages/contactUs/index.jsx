@@ -17,7 +17,20 @@ const ContactUs = () => {
       });
       if (response.ok) {
         console.log("OK");
-              } else {
+        document.getElementById('text').value="";
+        document.getElementById('email').value="";
+        document.getElementById('lastName').value="";
+        document.getElementById('firstName').value="";
+        document.getElementById("ok").innerHTML = "پیام شما با موفقیت ارسال شد";
+        setTimeout(function(){
+          document.getElementById("ok").innerHTML = '';
+        }, 3000);
+
+      } else {
+        document.getElementById("ok").innerHTML = "متاسفانه پیام ارسال نشد.دوباره امتحان کنید.";
+        setTimeout(function(){
+          document.getElementById("ok").innerHTML = '';
+        }, 3000);
         console.log("not ok")
       }
     }catch (e) {
@@ -43,27 +56,34 @@ const ContactUs = () => {
                   <div className="space-y-6">
                     <div className=' flex flex-row  items-center gap-x-4'>
                       <input type="text " id="firstName" className="block h-12 w-1/2 p-4 ps-10  text-black-900 rounded-3xl  bg-[#DFE8EF] text-lg placeholder:text-[#8B8C8D]
-                             focus:outline-none  focus:ring-0 shadow-inner" placeholder="نام" required  onChange={(event) => {
-                        setFormValue({...formValue, firstname: event.target.value})
-                      }}/>
+                             focus:outline-none  focus:ring-0 shadow-inner" placeholder="نام" required
+                             onChange={(event) => {
+                               setFormValue({...formValue, firstname: event.target.value})
+                             }}/>
                       <input type="text " id="lastName" className="block h-12 w-1/2 p-4 ps-10  text-black-900 rounded-3xl  bg-[#DFE8EF] text-lg placeholder:text-[#8B8C8D]
-                             focus:outline-none  focus:ring-0 shadow-inner" placeholder="نام خانوادگی" required      onChange={(event) => {
-                        setFormValue({...formValue, lastname: event.target.value})
-                      }}/>
+                             focus:outline-none  focus:ring-0 shadow-inner" placeholder="نام خانوادگی" required
+                             onChange={(event) => {
+                               setFormValue({...formValue, lastname: event.target.value})
+                             }}/>
                     </div>
                     <input type="email" id="email" className="block h-12 w-full p-4 ps-10  text-black-900 rounded-3xl  bg-[#DFE8EF] text-lg placeholder:text-[#8B8C8D]
-                             focus:outline-none  focus:ring-0 shadow-inner" placeholder="ایمیل" required  onChange={(event) => {
-                      setFormValue({...formValue, email: event.target.value})
-                    }}/>
+                             focus:outline-none  focus:ring-0 shadow-inner" placeholder="ایمیل" required
+                           onChange={(event) => {
+                             setFormValue({...formValue, email: event.target.value})
+                           }}/>
                     <textarea id="text" className="block h-36 w-full p-4 ps-10  text-black-900 rounded-3xl  bg-[#DFE8EF] text-lg placeholder:text-[#8B8C8D]
                              focus:outline-none  focus:ring-0 shadow-inner text-start"
                               placeholder="پیام خود را برای ما بنویسید...." required onChange={(event) => {
                       setFormValue({...formValue, text: event.target.value})
                     }}/>
                   </div>
-                  <button type="submit"
-                          className="px-4 bg-darkBlue text-white font-extralight rounded-[1.2rem] w-48 h-12 text-xl  hover:bg-blue-950 ">ارسال
-                  </button>
+                  <div>
+                    <button type="submit"
+                            className="px-4 bg-darkBlue text-white font-extralight rounded-[1.2rem] w-48 h-12 text-xl   hover:drop-shadow-xl hover:shadow-teal-950 ">ارسال
+                    </button>
+                    <h3 id="ok" className='text-sm font-bold  text-darkBlue mt-2'></h3>
+                  </div>
+
                 </form>
               </div>
             </div>
