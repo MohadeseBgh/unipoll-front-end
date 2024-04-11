@@ -34,17 +34,7 @@ const Login = () => {
                 const jwtToken=localStorage.getItem('jwtToken');
                 console.log(jwtToken);
                 console.log((JSON.parse(atob(jwtToken.split('.')[1]))).data);
-                // setUser({userName: jwtDecode(jwtToken).data});
-                // console.log('...')
-                // console.log(jwtDecode(jwtToken))
-                // console.log(user.username);
-                // console.log('...')
                 await router.push('/home');
-                //navigate("/home");
-                //redirect('/home');
-
-
-
             } else {
                 setLogin(true);
                 console.log("not ok")
