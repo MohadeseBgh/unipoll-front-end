@@ -1,7 +1,7 @@
 import User from "@/components/icons/User";
 import {forwardRef, useContext, useEffect, useState} from "react";
 import  {useRouter}  from 'next/router';
-i
+
 
 const Header = () => {
     const [chosen, setChosen] = useState({home: false, educational_groups: false, forums: false, aboutUs: false ,contactUs: false});
