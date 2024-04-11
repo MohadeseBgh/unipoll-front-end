@@ -10,6 +10,7 @@ import LessonsSearch from "@/components/lessonsSearch";
 import Search from "@/components/search";
 import HeaderFooter from "@/layouts/headerFooter";
 import Footer from "@/components/footer";
+import Close from "@/components/icons/Close";
 const Home = () => {
     const [formValue, setFormValue] = useState({text: "", filter: ""});
     const [resultSearch, setResultSearch] = useState([]);
@@ -104,6 +105,10 @@ const Home = () => {
         }
         console.log(e)
     }
+    const closeHandler = async (e) => {
+        e.preventDefault();
+       setSearch(false);
+    }
   return(
       <HeaderFooter>
       <div className='h-screen w-screen flex flex-col bg-white gap-y-4 overflow-x-hidden'>
@@ -147,19 +152,22 @@ const Home = () => {
                       <div
                           className='laptop:basis-3/4  flex flex-row h-14 w-80 rounded-3xl bg-white text-black  items-center justify-items-center laptop:mr-16 mobile:mr-0 laptop:mt-0 mobile:mt-5'
                           dir="rtl">
-                          <input  id="default-search" className="block h-14 w-11/12 p-4 ps-10  text-black-900 rounded-3xl  text-black text-xl placeholder:text-[#8B8C8D]
+                          <input id="default-search" className="block h-14 w-10/12 p-4 ps-10  text-black-900 rounded-3xl  text-black text-xl placeholder:text-[#8B8C8D]
                              focus:outline-none  focus:ring-0 "
                                  placeholder=" جستجو را شروع کن ....." onChange={(event) => {
                               setFormValue({...formValue, text: event.target.value})
                           }}/>
-                          <button type="submit" className="px-4">
+                          <button type="reset" className={`px-10 ${search === false ? 'hidden' :''}`} onClick={closeHandler}>
+                              <Close/>
+                          </button>
+                          <button type="submit" className={` ${search === false ? 'pr-24' :'pr-0'}`}>
                               <SearchIcon/>
                           </button>
                       </div>
                   </form>
               </div>
           </div>
-          <div className={`${search===false ? 'hidden':''}`}><Search result={resultSearch} professor={filter}/></div>
+          <div className={`${search === false ? 'hidden' :''}`}><Search result={resultSearch} professor={filter}/></div>
           <div className={`${search===true ? 'hidden':''}`}>
               <div id="whyUniPoll" className=' w-screen text-black laptop:flex-row  mobile: flex flex-col items-center mb-24'>
                   <div className='basis-1/2 flex flex-col laptop:pl-72 mobile:pl-0 ' dir='rtl'>
