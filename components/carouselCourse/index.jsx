@@ -1,5 +1,5 @@
-import Saved from "@/components/icons/Saved";
-import UnLike from "@/components/icons/UnLike";
+import Bookmark_fill from "@/components/icons/Bookmark_fill";
+import Like from "@/components/icons/Like";
 import YellowStar from "@/components/icons/YellowStar";
 import Star from "@/components/icons/Star";
 

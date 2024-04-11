@@ -14,7 +14,7 @@ const Home = () => {
     const [formValue, setFormValue] = useState({text: "", filter: ""});
     const [resultSearch, setResultSearch] = useState([]);
     const [filter, setFilter] = useState(false);
-    const [topBooklet, setTopBooklet] = useState([{courseName:"مبانی برنامه نویسی" ,professorName:"رضا رمضانی",semesterInfo:"پاییز 1400" ,like:20}]);
+    const [topBooklet, setTopBooklet] = useState([{courseName:"مبانی برنامه نویسی" ,instructorLastname:"رضا رمضانی" ,instructorFirstname:" ",term:"پاییز 1400" ,likeNumber:20}]);
     const [topCourse, setTopCourse] = useState([ {courseName:" " ,instructorCourseFirstname:" " ,instructorCourseLastname:'',rate:5.0}]);
     const [search , setSearch]=useState(false);
     const [educationalGroups , setEducationalGroups]=useState([{publicId:'',name:'',description:''},{publicId:'',name:'',description:''},{publicId:'',name:'',description:''},{publicId:'',name:'',description:''}])
@@ -32,7 +32,15 @@ const Home = () => {
                 if (response1.ok) {
                     const data = await response1.json();
                     setEducationalGroups(data.result);
-                    console.log(educationalGroups)
+                    //console.log(educationalGroups)
+                }else {
+                    console.log("Network response was not ok");
+                }
+                const response2 = await fetch("http://localhost:8090/unipoll/v1/booklet");
+                if (response2.ok) {
+                    const data = await response2.json();
+                    setTopBooklet(data.result);
+                    //console.log(educationalGroups)
                 }else {
                     console.log("Network response was not ok");
                 }

@@ -4,7 +4,8 @@ const TopBooklet = (props) => {
     return (<>
         <div className="flex flex-row overflow-x-auto w-screen overflow-y-hidden gap-x-20 overscroll-auto scrollbar scrollbar-thumb-darkBlue scrollbar-track-[#D9EDFD] p-14 " >
             {props.booklets.map(
-            (p , index)=> <CarouselBooklet key={index} course={p.courseName} professor={p.professorName} semester={p.semesterInfo} like={p.like}/>
+            (p , index)=> <CarouselBooklet key={index} course={p.courseName} instructorLastname={p.instructorLastname} instructorFirstname={p.instructorFirstname}
+                                           term={p.term} like={p.likeNumber}/>
         )}
             </div>
     </>)
