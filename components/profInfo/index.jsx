@@ -1,7 +1,7 @@
 const ProfessorInformation = (props) => {
 
     return (
-<div className={"h-[40rem] w-full bg-blend-normal shadow-2xl bg-opacity-15 bg-[#1FAAEA]  flex flex-row-"} >
+<div className={"h-[40rem] w-full bg-blend-normal shadow-2xl bg-opacity-15 bg-[#1FAAEA]  flex flex-row-"} dir={'rtl'} >
     <div className={'flex basis-2/4 p-4 h-5/6 w-5/6 rounded-3xl pt-24 '}>
         <img src={'images/searchbarPhoto.png'} className={'   rounded-3xl' }  />
     </div>
