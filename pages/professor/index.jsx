@@ -23,7 +23,7 @@ const [course,setCourse] = useState([{image:'images/searchbarPhoto.png',
                  <div>
                      <div className={'flex flex-row w-full mt-20 gap-12 justify-center   items-center '}>
                          <div className={'h-4 w-5/12 bg-darkBlue mt-5'}></div>
-                         <h1 className='font-bold text-3xl text-darkBlue w-2/12 justify-center ml-8'>دروس ارائه شده </h1>
+                         <h1 className='font-bold text-3xl text-darkBlue w-2/12 justify-center mb-2 ml-8'>دروس ارائه شده </h1>
                          <div className={'h-4 w-5/12 bg-darkBlue mt-5'}></div>
                      </div>
                      <div className={'bg-opacity-5 bg-[#1FAAEA] ml-10 mr-10  rounded-3xl'}>
