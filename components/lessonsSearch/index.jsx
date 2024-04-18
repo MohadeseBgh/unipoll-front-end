@@ -13,18 +13,18 @@ const LessonSearch = (props) => {
             <div className="basis-8/12 px-3 flex flex-row gap-12 ">
                 <div className="flex flex-col gap-8 basis-4/12 justify-center items-center">
                     <div className={'flex flex-row'}>
-                        <p className="font-bold  text-2xl  font-bold text-black pl-4 pr-6">نام درس:  </p>
-                        <p className="   text-1xl  text-black  ">{props.lessonName}  </p>
+                        <p className="font-bold  text-lg laptop: text-2xl  font-bold text-black pl-4 pr-6">نام درس:  </p>
+                        <p className="   text-lg laptop: text-1xl  text-black  ">{props.lessonName}  </p>
                     </div>
                     <div className={'flex flex-row'}>
-                        <p className="font-bold text-2xl  font-bold text-black pl-4 ">استاد درس: </p>
-                        <p className="    text-1xl   text-black   ">{props.profssorName}   </p>
+                        <p className="font-bold text-lg laptop: text-2xl  font-bold text-black pl-4 ">استاد درس: </p>
+                        <p className="    text-lg laptop: text-1xl   text-black   ">{props.profssorName}   </p>
                     </div>
 
                 </div>
                  <div className={'flex flex-row pt-12 basis-7/12'}>
-                    <p className="font-bold    text-2xl  font-bold text-black  ">توضیحات:</p>
-                    <p className="  text-1xl text-black pr-4 ">{props.description}  </p>
+                    <p className="font-bold    text-lg laptop: text-2xl  font-bold text-black  ">توضیحات:</p>
+                    <p className="  text-lg laptop: text-1xl text-black pr-4 ">{props.description}  </p>
 
                  </div>
 

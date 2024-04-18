@@ -15,26 +15,26 @@ const Footer = () => {
                   <img src={'/images/logo3.png'}/>
               </div>
           <div className={'p-0 8 text-center'}>
-              <p className={'p-3 mr-2 text-white  '}>یونیپول سامانه انلاین جامع نظردهی اساتید دانشگاهی و اشتراک گذاری جزوات به صورت متمرکز است .
+              <p className={'p-3 mr-2 text-white text-lg laptop: text-xl '}>یونیپول سامانه انلاین جامع نظردهی اساتید دانشگاهی و اشتراک گذاری جزوات به صورت متمرکز است .
                   هدف از ساخت این سامانه  کمک به دانشجویان
                   و اساتید در روند های اموزشی است  </p>
 
           </div>
           </div>
         <div className={' text-2xl  text-white basis-4/12  flex flex-col pt-8 pr-16'}>
-          <p className={'font-bold text-2xl text-white'} >پیوند های مهم</p>
+          <p className={'font-bold text-lg laptop: text-2xl text-white'} >پیوند های مهم</p>
               <div className={'mt-6 mr-3'}>
                   <div className={'flex flex-row'}>
                       <div className={'pl-2 pt-2'}>
                           <Polygon/>
                       </div>
-                      <a href={'#'} className={'pd-3 text-white block'}>خانه</a>
+                      <a href={'#'} className={'pd-3 text-white block text-lg laptop: text-xl'}>خانه</a>
                   </div>
                   <div className={'flex flex-row pt-6'}>
                       <div className={'pl-2 pt-2'}>
                           <Polygon/>
                       </div>
-                      <a href={'#'} className={' block text-white '}>گروه آموزشی</a>
+                      <a href={'#'} className={' block text-white text-lg laptop: text-xl'}>گروه آموزشی</a>
                   </div>
                   <div className={'flex flex-row pt-6 items-center '}>
                       <div className={'pl-2 pt-2'}>
@@ -42,13 +42,13 @@ const Footer = () => {
                       </div>
 
 
-                      <a href={'#'} className={' block text-white  '}>جزوه های من</a>
+                      <a href={'#'} className={' block text-white text-lg laptop: text-xl  '}>جزوه های من</a>
                   </div>
                   <div className={'flex flex-row pt-6'}>
                       <div className={'pl-2 pt-2'}>
                           <Polygon/>
                       </div>
-                      <a href={'#'} className={'text-white  block'}>انجمن ها</a>
+                      <a href={'#'} className={'text-white  block text-lg laptop: text-xl'}>انجمن ها</a>
                   </div>
 
                 <a  className={'p-3 block '}></a>
@@ -58,25 +58,25 @@ const Footer = () => {
 
         </div>
         <div className={' text-2xl  text-white basis-4/12  flex flex-col pt-8'}>
-          <p className={'font-bold text-2xl text-white'} >ارتباط با ما </p>
+          <p className={'font-bold text-2xl text-white text-lg laptop: text-xl'} >ارتباط با ما </p>
           <div className={'pt-8'}>
               <div className={'flex flex-row pt-6'}>
                   <div className={'justify-center pt-1 pl-3'}>
                       <BluePhone h={'25'} w={'25'}  />
                   </div>
-                  <a href={'#'} className={'text-white block'}>تلفن: 091300000</a>
+                  <a href={'#'} className={'text-white block text-lg laptop: text-xl'}>تلفن: 091300000</a>
               </div>
               <div className={'flex flex-row pt-6'}>
                   <div className={'justify-center pt-1 pl-3'}>
                       <BlueTelegram h={'25'} w={'25'}  />
                   </div>
-                  <a href={'#'} className={'text-white block'}> تلگرام:@unipoll</a>
+                  <a href={'#'} className={'text-white block text-lg laptop: text-xl'}> تلگرام:@unipoll</a>
               </div>
               <div className={'flex flex-row pt-6'}>
                   <div className={'justify-center pt-2 pl-2'}>
                       <Mail2/>
                   </div>
-                  <a href={'#'} className={'text-white block'}>ایمیل: unipoll@gmail.com</a>
+                  <a href={'#'} className={'text-white block text-lg laptop: text-xl'}>ایمیل: unipoll@gmail.com</a>
               </div>
           </div>
 

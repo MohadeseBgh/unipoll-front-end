@@ -11,23 +11,23 @@ const ProfessorSearch = (props) => {
             <div className="basis-10/12 px-3 flex flex-row gap-12 ">
                 <div className="flex flex-col gap-8 justify-center items-center">
                     <div className={'flex flex-row'}>
-                        <p className="font-bold  text-2xl  font-bold text-black pl-4 pr-4">نام استاد:  </p>
-                        <p className="   text-1xl text-black   ">{ props.name} </p>
+                        <p className="font-bold  text-lg laptop: text-2xl  font-bold text-black pl-4 pr-4">نام استاد:  </p>
+                        <p className="   text-lg laptop: text-1xl text-black   ">{ props.name} </p>
                     </div>
                     <div className={'flex flex-row'}>
-                        <p className="font-bold text-2xl  font-bold text-black pl-4 pr-8">مرتبه علمی: </p>
-                        <p className="    text-1xl  text-black    ">{props.degree}   </p>
+                        <p className="font-bold text-lg laptop: text-2xl  font-bold text-black pl-4 pr-8">مرتبه علمی: </p>
+                        <p className="    text-lg laptop: text-1xl  text-black    ">{props.degree}   </p>
                     </div>
 
                 </div>
                 <div className={"flex flex-col"}>
                     <div className={'flex flex-row pt-11'}>
-                        <p className="font-bold    text-2xl  font-bold text-black  "> ایمیل: </p>
-                        <a href={'#'} className=" pt-1 text-1xl text-black pr-4 ">{props.email}  </a>
+                        <p className="font-bold    text-lg laptop: text-2xl  font-bold text-black  "> ایمیل: </p>
+                        <a href={'#'} className=" pt-1 text-lg laptop: text-1xl text-black pr-4 ">{props.email}  </a>
                     </div>
                      <div className={'flex flex-row pt-8'}>
-                         <p className="font-bold    text-2xl  font-bold text-black  ">صفحه شخصی:</p>
-                        <a    href={'#'} className=" pt-1 text-1xl text-black pr-4 ">{props.site}   </a>
+                         <p className="font-bold    text-lg laptop: text-2xl  font-bold text-black  ">صفحه شخصی:</p>
+                        <a    href={'#'} className=" pt-1 text-lg laptop: text-1xl text-black pr-4 ">{props.site}   </a>
                     </div>
                 </div>
             </div>
