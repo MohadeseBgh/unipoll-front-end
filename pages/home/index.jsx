@@ -10,6 +10,7 @@ import LessonsSearch from "@/components/lessonsSearch";
 import Search from "@/components/search";
 import Layout from "@/layouts/layout";
 import Footer from "@/components/footer";
+import Close from "@/components/icons/Close";
 const Home = () => {
     const [formValue, setFormValue] = useState({text: "", filter: ""});
     const [resultSearch, setResultSearch] = useState([]);
@@ -50,6 +51,10 @@ const Home = () => {
         };
         fetchData();
     }, []);
+    const closeHandler = async (e) => {
+        e.preventDefault();
+        setSearch(false);
+    }
     const searchHandler = async (e) => {
         e.preventDefault();
         if(formValue.filter==="professor"){
@@ -118,7 +123,7 @@ const Home = () => {
                   </div>
                   <form
                       className='laptop:px-24 mobile:px-3 laptop:flex-row mobile:flex flex-col items-center justify-items-center'
-                  onSubmit={searchHandler}
+                      onSubmit={searchHandler}
                   >
                       <div
                           className='basis-1/4  flex flex-row h-14 w-80 rounded-3xl bg-white text-black  items-center justify-items-center '
@@ -147,27 +152,33 @@ const Home = () => {
                       <div
                           className='laptop:basis-3/4  flex flex-row h-14 w-80 rounded-3xl bg-white text-black  items-center justify-items-center laptop:mr-16 mobile:mr-0 laptop:mt-0 mobile:mt-5'
                           dir="rtl">
-                          <input  id="default-search" className="block h-14 w-11/12 p-4 ps-10  text-black-900 rounded-3xl  text-black text-xl placeholder:text-[#8B8C8D]
+                          <input id="default-search" className="block h-14 w-10/12 p-4 ps-10  text-black-900 rounded-3xl  text-black text-xl placeholder:text-[#8B8C8D]
                              focus:outline-none  focus:ring-0 "
                                  placeholder=" جستجو را شروع کن ....." onChange={(event) => {
                               setFormValue({...formValue, text: event.target.value})
                           }}/>
-                          <button type="submit" className="px-4">
+                          <button type="reset" className={`px-10 ${search === false ? 'hidden' : ''}`}
+                                  onClick={closeHandler}>
+                              <Close/>
+                          </button>
+                          <button type="submit" className={` ${search === false ? 'pr-24' : 'pr-0'}`}>
                               <SearchIcon/>
                           </button>
                       </div>
                   </form>
               </div>
           </div>
-          <div className={`${search===false ? 'hidden':''}`}>
+          <div className={`${search === false ? 'hidden' : ''}`}>
               <Search result={resultSearch} professor={filter}/>
           </div>
-          <div className={`${search===true ? 'hidden':''}`}>
-              <div id="whyUniPoll" className=' w-screen text-black laptop:flex-row  mobile: flex flex-col items-center mb-24'>
+          <div className={`${search === true ? 'hidden' : ''}`}>
+              <div id="whyUniPoll"
+                   className=' w-screen text-black laptop:flex-row  mobile: flex flex-col items-center mb-24'>
                   <div className='basis-1/2 flex flex-col laptop:pl-72 mobile:pl-0 ' dir='rtl'>
                       <h3 className='text-5xl font-bold text-darkBlue  mb-12'>چرا UniPoll ؟</h3>
                       <h3 className='text-3xl font-bold text-black '> امکان نظر دهی به اساتید</h3>
-                      <p className='text-[1.75rem]  text-black items-center mb-8'>با امتیاز دهی و ارسال نظر ،به اساتید در
+                      <p className='text-[1.75rem]  text-black items-center mb-8'>با امتیاز دهی و ارسال نظر ،به اساتید
+                          در
                           بهبود عملکردشان کمک کنید.</p>
                       <h3 className='text-3xl font-bold text-black '> تسهیل گزینش اساتید</h3>
                       <p className='text-[1.75rem]  text-black  mb-8'>سامانه به گونه ای طراحی شده است که
@@ -179,12 +190,12 @@ const Home = () => {
                   <div className='flex basis-1/2'><img src='/images/why.jpg' alt={'why UniPoll ?'}/></div>
               </div>
               <div id="topCourse" className="flex flex-col mb-24 w-screen bg-[#F2FBFF] justify-items-center" dir="rtl">
-                      <div className="flex flex-row items-center justify-between pt-8" >
-                          <hr className="w-4/12 h-1 bg-darkBlue "/>
-                          <h3 className='desktop:text-3xl text-2xl font-bold text-black '>دروس پر طرفدار ارائه شده</h3>
-                          <hr className="w-4/12 h-1 bg-darkBlue "/>
-                      </div>
-                      <TopCourse courses={topCourse}/>
+                  <div className="flex flex-row items-center justify-between pt-8">
+                      <hr className="w-4/12 h-1 bg-darkBlue "/>
+                      <h3 className='desktop:text-3xl text-2xl font-bold text-black '>دروس پر طرفدار ارائه شده</h3>
+                      <hr className="w-4/12 h-1 bg-darkBlue "/>
+                  </div>
+                  <TopCourse courses={topCourse}/>
               </div>
               <div id="educationalGroups " className=" w-screen flex flex-col items-center justify-center mb-24 ">
                   <h3 className='laptop:text-5xl tablet:text-[2rem]  font-bold text-black items-center '>گروه های آموزشی
