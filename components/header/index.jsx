@@ -49,7 +49,7 @@ const Header = () => {
           }}
           >
               <User/>
-              <p className='text-xs text-darkBlue'>{[user.firstname ,user.lastname]}</p>
+              <p className='text-xs text-darkBlue'>{[user.firstname+' '+user.lastname]}</p>
               { userSetting.logIO && <div
                                    className="z-10 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-20
                             absolute translate-y-20">

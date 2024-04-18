@@ -1,6 +1,6 @@
 import ProfInfo from "@/components/profInfo";
 import Header from "@/components/header";
-import HeaderFooter from "@/layouts/headerFooter";
+import Layout from "@/layouts/layout";
 import Footer from "@/components/footer";
 import {useState} from "react";
 import ProfessorSearch from "@/components/professorInfo";
@@ -17,7 +17,7 @@ const [course,setCourse] = useState([{image:'images/searchbarPhoto.png',
 
     return(
 
-         <HeaderFooter>
+         <Layout>
              <div className={'h-screen w-screen bg-white'}>
                 <ProfInfo/>
                  <div>
@@ -40,7 +40,7 @@ const [course,setCourse] = useState([{image:'images/searchbarPhoto.png',
                  </div>
                  <Footer/>
              </div>
-         </HeaderFooter>
+         </Layout>
 
 
 

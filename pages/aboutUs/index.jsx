@@ -1,5 +1,5 @@
 import Header from "@/components/header";
-import HeaderFooter from "@/layouts/headerFooter";
+import Layout from "@/layouts/layout";
 import Footer from "@/components/footer";
 
 function Logo() {
@@ -8,7 +8,7 @@ function Logo() {
 
 const AboutUs = () => {
   return(
-          <HeaderFooter>
+          <Layout>
               <div className={'h-screen w-screen flex flex-col items-end pt-16 mb-32 pr-5 gap-4 bg-white'} dir='rtl'>
                   <div className={'flex flex-row w-full mb-6 gap-12'}>
                       <div className={'h-1 w-5/12 bg-darkBlue mt-5'}></div>
@@ -62,7 +62,7 @@ const AboutUs = () => {
 
               </div>
               <Footer/>
-          </HeaderFooter>
+          </Layout>
 
   )
 }

@@ -8,7 +8,7 @@ import Header from "@/components/header";
 import TopCourse from "@/components/topCourse";
 import LessonsSearch from "@/components/lessonsSearch";
 import Search from "@/components/search";
-import HeaderFooter from "@/layouts/headerFooter";
+import Layout from "@/layouts/layout";
 import Footer from "@/components/footer";
 const Home = () => {
     const [formValue, setFormValue] = useState({text: "", filter: ""});
@@ -105,7 +105,7 @@ const Home = () => {
         console.log(e)
     }
   return(
-      <HeaderFooter>
+      <Layout>
       <div className='h-screen w-screen flex flex-col bg-white gap-y-4 overflow-x-hidden'>
           <div id="searchBar " className={`flex flex-col items-center justify-items-center min-h-[35rem] ${search===false ? 'mb-24':''}  laptop:w-screen mobile:w-auto`}
                dir="rtl">
@@ -218,7 +218,7 @@ const Home = () => {
           </div>
           <Footer/>
       </div>
-      </HeaderFooter>
+      </Layout>
   );
 };
 export default Home;
