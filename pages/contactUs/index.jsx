@@ -2,7 +2,7 @@ import Header from "@/components/header";
 import BlueTelegram from "@/components/icons/BlueTelegram";
 import BluePhone from "@/components/icons/BluePhone";
 import {useState} from "react";
-import HeaderFooter from "@/layouts/headerFooter";
+import Layout from "@/layouts/layout";
 import Footer from "@/components/footer";
 
 const ContactUs = () => {
@@ -38,7 +38,7 @@ const ContactUs = () => {
     }
   }
   return (
-      <HeaderFooter>
+      <Layout>
 
 
       <div className={"h-screen w-screen flex flex-col bg-white gap-y-4 overflow-x-hidden items-center"}>
@@ -110,7 +110,7 @@ const ContactUs = () => {
         </div>
         <Footer/>
       </div>
-      </HeaderFooter>
+      </Layout>
   )
 }
 export default ContactUs;

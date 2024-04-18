@@ -6,31 +6,37 @@ import  {useRouter}  from 'next/router';
 const Header = () => {
     const [chosen, setChosen] = useState({home: false, educational_groups: false, forums: false, aboutUs: false ,contactUs: false});
     const [userSetting , setUserSetting]=useState({logIO:false});
-    const [user , setUser]=useState({userName:'محدثه باغبانی'});
-
+    const [user , setUser]=useState({
+        firstname: "",
+        lastname: "",
+        publicId: '',
+        username: "",
+        role: ""
+    });
 
     const router = useRouter();
     useEffect(()=>{
         const academicDepartmentHandler = async () => {
-            // try {
-            //     const response = await fetch("http://localhost:8090/unipoll/v1/academic-department", {
-            //         method: "GET",
-            //         headers: {
-            //             "Content-Type": "application/json"
-            //         },
-            //     });
-            //     if (response.ok) {
-            //         console.log("OK");
-            //         response.json().then(
-            //             data=>{setEducationalGroupPId(data.result)}
-            //         )
-            //         console.log(educationalGroupPId);
-            //     } else {
-            //         console.log("not ok")
-            //     }
-            // }catch (e) {
-            //     console.error("we are GETTING ERROR", e)
-            // }
+            const jwtToken=localStorage.getItem('jwtToken');
+            try {
+                const response = await fetch("http://localhost:8090/unipoll/v1/user/one", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        'Authorization':`${jwtToken}`
+                    },
+                });
+                if (response.ok) {
+                    console.log("OK");
+                    const data = await response.json();
+                    setUser(data.result);
+                    console.log(data.result)
+                } else {
+                    console.log("not ok")
+                }
+            }catch (e) {
+                console.error("we are GETTING ERROR", e)
+            }
         }
         academicDepartmentHandler().then(r => {});
     },[])
@@ -43,7 +49,7 @@ const Header = () => {
           }}
           >
               <User/>
-              <p className='text-xs text-darkBlue'>{user.userName}</p>
+              <p className='text-xs text-darkBlue'>{[user.firstname+' '+user.lastname]}</p>
               { userSetting.logIO && <div
                                    className="z-10 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-20
                             absolute translate-y-20">
@@ -59,7 +65,7 @@ const Header = () => {
                           <div
                              className="block px-2 py-2 hover:bg-blue1 rounded-b-lg"
                             onClick={()=>{
-                            setUser({userName: ''})}}
+                                localStorage.setItem('jwtToken','');}}
                           >
                               Log Out
                           </div>

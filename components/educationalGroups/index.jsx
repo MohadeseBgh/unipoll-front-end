@@ -2,7 +2,7 @@ import {useContext, useEffect, useState} from "react";
 import ProfessorsOfGroups from "@/components/professorsOfGroups";
 import ManagerAndAssistantInfo from "@/components/managerAndAssistantInfo";
 import GroupCourses from "@/components/groupCourses";
-import HeaderFooter from "@/layouts/headerFooter";
+import Layout from "@/layouts/layout";
 import Footer from "@/components/footer";
 import {edGroupDescpContext} from "@/context/edGroupDescpContext";
 import {edGroupCoursesContext} from "@/context/edGroupCoursesContext";
@@ -18,7 +18,7 @@ const EducationalGroupsHome = () => {
     const [edGroupdescription, setEdGroupdescription]=useContext(edGroupDescpContext)
 
     return (
-        <HeaderFooter>
+        <Layout>
         <div className='h-screen w-screen flex flex-col bg-white gap-y-4 overflow-x-hidden'>
             <div>
                 <div className='flex flex-col justify-center items-center w-screen '>
@@ -96,7 +96,7 @@ const EducationalGroupsHome = () => {
             </div>
             <Footer/>
         </div>
-        </HeaderFooter>
+        </Layout>
     )
 }
 export default EducationalGroupsHome;

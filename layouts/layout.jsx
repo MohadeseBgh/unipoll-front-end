@@ -1,6 +1,6 @@
 import Header from "@/components/header";
 
-const HeaderFooter = (props ) => {
+const Layout = (props ) => {
   return(
       <div className={' w-screen h-screen flex flex-col bg-white '}>
           <div className={'  w-full h-24'}>
@@ -10,4 +10,4 @@ const HeaderFooter = (props ) => {
       </div>
   )
 }
-export default HeaderFooter;
+export default Layout;

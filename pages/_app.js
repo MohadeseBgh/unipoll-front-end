@@ -4,6 +4,7 @@ import EdGroupDescpContext from "@/context/edGroupDescpContext";
 import EdGroupCoursesContext from "@/context/edGroupCoursesContext";
 import EdGroupProfessorsContext from "@/context/edGroupProfessorsContext";
 import EdGroupMAContext from "@/context/edGroupM&AContext";
+import GetProfessorPIDContext from "@/context/getProfessorPIDContext";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -13,7 +14,9 @@ export default function App({ Component, pageProps }) {
                 <EdGroupCoursesContext>
                     <EdGroupProfessorsContext>
                         <EdGroupMAContext>
-                            <Component {...pageProps} />
+                            <GetProfessorPIDContext>
+                                <Component {...pageProps} />
+                            </GetProfessorPIDContext>
                         </EdGroupMAContext>
                     </EdGroupProfessorsContext>
                 </EdGroupCoursesContext>
