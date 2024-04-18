@@ -1,11 +1,11 @@
 import Header from "@/components/header";
 import User from "@/components/icons/User";
 import Footer from "@/components/footer";
-import HeaderFooter from "@/layouts/headerFooter";
+import Layout from "@/layouts/layout";
 
 const Rules = () => {
   return(
-      <HeaderFooter>
+      <Layout>
       <div className='h-screen w-screen bg-white'>
           <div className={'h-28 w-full '}>
               {/*//header*/}
@@ -30,7 +30,7 @@ const Rules = () => {
           </div>
           <Footer/>
       </div>
-      </HeaderFooter>
+      </Layout>
 
   )
 }

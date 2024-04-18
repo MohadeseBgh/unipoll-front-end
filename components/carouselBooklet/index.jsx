@@ -1,24 +1,42 @@
-import Saved from "@/components/icons/Saved";
-import UnLike from "@/components/icons/UnLike";
+import Bookmark_fill from "@/components/icons/Bookmark_fill";
+import Like from "@/components/icons/Like";
+import {useState} from "react";
+import Bookmark from "@/components/icons/Bookmark";
+import Like_fill from "@/components/icons/Like_fill";
 
 const CarouselBooklet = (props) => {
-    // eslint-disable-next-line @next/next/no-html-link-for-pages
-    return (<a href='/home'
-        className={`flex flex-col h-72 rounded-[2.4rem] min-w-48  shadow-lg bg-[#D9D9D9] text-center`}>
-        <div className='flex basis-1/4 item '><img src='/images/booklet.png' alt={'why UniPoll ?'}/></div>
-        <div className='flex flex-col basis-2/4 space-y-0'>
-        <h3 className='m-2 text-lg font-bold text-darkBlue'>{props.course}</h3>
-        <h4 className='m-2 text-base font-bold text-black'>{["دکتر ",props.professor]}</h4>
-        <h4 className='m-2 text-base font-medium text-[#5D6369]'>{["ترم ",props.semester]}</h4>
+        const [save , setSave]=useState(false);
+        const [like , setLike]=useState(false);
+    return (
+        <div className={`flex flex-col h-72 rounded-[2.4rem] min-w-48 shadow-lg bg-[#D9D9D9]`}>
+            <img src='/images/booklet.png' className='flex h-2/4 w-full'/>
+        <div className='flex flex-col gap-1 text-center pt-2 h-1/4'>
+            <h3 className='text-lg font-bold text-darkBlue'>{props.course}</h3>
+            <h4 className='text-base font-bold text-black'>{["دکتر ",props.instructorFirstname , props.instructorLastname]}</h4>
+            <h4 className='text-base font-medium text-[#5D6369]'>{["ترم ",props.term]}</h4>
         </div>
-        <div className='flex flex-row basis-1/4  justify-end gap-3 mt-5 ml-6'>
-            <div className='flex flex-row justify-end gap-1 '>
+        <div className='flex flex-row justify-end gap-2 h-1/4 p-5 pb-2'>
+            <div className='flex flex-row gap-1 justify-center items-center'>
                 <p className="text-sm text-black ">{props.like}</p>
-                <UnLike/>
+                <button
+                    className='flex flex-row justify-center items-center'
+                        onClick={()=>{
+                            setLike(!like)
+                        }}>
+                    {!like && <Like/>}
+                    {like && <Like_fill/>}
+                </button>
             </div>
-            <Saved/>
+            <button className='flex flex-row justify-center items-center'
+                onClick={()=>{
+                setSave(!save)
+            }}>
+                {save && <Bookmark_fill/>}
+                {!save && <Bookmark/>}
+            </button>
+
         </div>
-    </a>);
+    </div>);
 
 }
 

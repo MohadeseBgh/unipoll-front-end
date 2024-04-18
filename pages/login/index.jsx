@@ -26,7 +26,6 @@ const Login = () => {
                 },
             });
 
-
             if (response.ok) {
                 setLogin(false);
                 console.log("OK");
@@ -34,17 +33,7 @@ const Login = () => {
                 const jwtToken=localStorage.getItem('jwtToken');
                 console.log(jwtToken);
                 console.log((JSON.parse(atob(jwtToken.split('.')[1]))).data);
-                // setUser({userName: jwtDecode(jwtToken).data});
-                // console.log('...')
-                // console.log(jwtDecode(jwtToken))
-                // console.log(user.username);
-                // console.log('...')
                 await router.push('/home');
-                //navigate("/home");
-                //redirect('/home');
-
-
-
             } else {
                 setLogin(true);
                 console.log("not ok")
@@ -56,7 +45,7 @@ const Login = () => {
     }
 
     return(
-    <div className={"h-screen w-screen flex flex-row bg-white"} >
+    <div className={"h-screen w-screen flex flex-row bg-white text-black"} >
 
         <div className={" flex basis-4/12 bg-[url('/images/uni3.png')] bg-no-repeat bg-cover"} >
             {/*<img src={"/images/uni.png"}*/}
