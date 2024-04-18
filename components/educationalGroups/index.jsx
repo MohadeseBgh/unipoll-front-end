@@ -10,7 +10,7 @@ import {edGroupProfessorsContext} from "@/context/edGroupProfessorsContext";
 import {edGroupMAndAContext} from "@/context/edGroupM&AContext";
 
 
-const EducationalGroupsHome = () => {
+const EducationalGroupsHome = (props) => {
 
     const [professor, setProfessor] = useContext(edGroupProfessorsContext);
     const [managerAndAssistant, setManagerAndAssistant] = useContext(edGroupMAndAContext)
@@ -26,7 +26,7 @@ const EducationalGroupsHome = () => {
                         {edGroupdescription.name}
                     </div>
                     <div className={'text-center text-2xl/10 text-black bg-[#E2F4FC] w-full px-10 py-20'} dir={'rtl'}>
-                        {edGroupdescription.description}
+                        {edGroupdescription.description },{props.des}
                     </div>
                 </div>
                 <div id="managerAndAssistant " className=" w-screen flex flex-col items-center justify-center">
@@ -38,8 +38,8 @@ const EducationalGroupsHome = () => {
                                 <div className="basis-4/12 h-1 bg-darkBlue "/>
                             </div>
                             <ManagerAndAssistantInfo type={managerAndAssistant[0].type}
-                                                     firstName={managerAndAssistant[0].firstName}
-                                                     lastName={managerAndAssistant[0].lastName}
+                                                     firstName={managerAndAssistant[0].firstname}
+                                                     lastName={managerAndAssistant[0].lastname}
                                                      academicRank={managerAndAssistant[0].academicRank}
                                                      profilePhoto={managerAndAssistant[0].profilePhoto}
                                                      phd={managerAndAssistant[0].phd}
@@ -55,8 +55,8 @@ const EducationalGroupsHome = () => {
                                 <div className="basis-4/12 h-1 bg-darkBlue "/>
                             </div>
                         <ManagerAndAssistantInfo type={managerAndAssistant[1].type}
-                                                 firstName={managerAndAssistant[1].firstName}
-                                                 lastName={managerAndAssistant[1].lastName}
+                                                 firstName={managerAndAssistant[1].firstname}
+                                                 lastName={managerAndAssistant[1].lastname}
                                                  academicRank={managerAndAssistant[1].academicRank}
                                                  profilePhoto={managerAndAssistant[1].profilePhoto}
                                                  phd={managerAndAssistant[1].phd}
