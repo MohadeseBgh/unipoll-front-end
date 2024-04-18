@@ -7,8 +7,8 @@ const ProfessorInformation = (props) => {
                 <div className={'h-0.5 w-8/12 bg-darkBlue mt-5 mr-1'}></div>
             </div>
             <div className={'flex flex-row'}>
-                <div className={'flex p-4  w-2/6 rounded-3xl justify-center items-center'}>
-                    <img src={props.image} className={'rounded-3xl' }  />
+                <div className={'flex p-4  w-2/6 rounded-3xl justify-center items-start'}>
+                    <img src={props.image} className={'rounded-3xl h-full w-full' }  />
                 </div>
                 <div className={'flex flex-col h-full w-4/6'} >
 

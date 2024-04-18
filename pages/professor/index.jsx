@@ -58,8 +58,7 @@ const Professor = () => {
                          <div className={'h-4 w-5/12 bg-darkBlue mt-5'}></div>
                      </div>
                      <div className={'bg-opacity-5 bg-[#1FAAEA] ml-10 mr-10  rounded-3xl'}>
-                     <div className="flex flex-col overflow-y-auto overflow-x-hidden gap-x-20
-                         overscroll-auto  scrollbar scrollbar-thumb-darkBlue scrollbar-track-[#D9EDFD] px-16 h-[36rem] py-4" >
+                     <div className="flex flex-col overflow-y-auto overflow-x-hidden gap-x-20 w-screen overscroll-auto  scrollbar scrollbar-thumb-darkBlue scrollbar-track-[#D9EDFD] px-16 h-[36rem] py-4" >
 
                          {course.map((k,index) =>
                              <LessonSearch key={index} image={k.image} lessonName={k.courseName}  professorName={k.instructorCourseFirstname+''+k.instructorCourseLastname}

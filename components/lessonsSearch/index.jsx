@@ -24,7 +24,7 @@ const LessonSearch = (props) => {
                 </div>
                  <div className={'flex flex-row h-full w-8/12 gap-2'}>
                     <p className="font-bold text-lg laptop: text-2xl  font-bold text-black ">توضیحات:</p>
-                    <p className="text-lg laptop:text-xl text-black break-all">{props.description} erftgyhujikjhgfdrfgbhnjmkhgfdxcfvgbhnjhgfvcdxscfvgbhnjmkrftgyhujiklkjhugvfccvgbhnjmk  </p>
+                    <p className="text-lg laptop:text-xl text-black break-all">{props.description}</p>
                  </div>
             </div>
 
