@@ -1,12 +1,16 @@
 import  {useRouter}  from 'next/router';
+import {useContext} from "react";
+import {getProfessorPIDContext} from "@/context/getProfessorPIDContext";
 
 const ProfessorOfGroups = (props) => {
     const router = useRouter();
 
+    const [professorPId , setProfessorPId]=useContext(getProfessorPIDContext)
     const handleClick = async (e) => {
-            e.preventDefault();
-            await router.push('/professor');
-        }
+        e.preventDefault();
+        setProfessorPId(props.publicId)
+        await router.push('/professor');
+    }
     return (
         <div className={`flex flex-col rounded-[1.25rem] w-54 h-5/6 shadow-lg bg-[#D9D9D9] `} onClick={handleClick}>
             <img  className=" h-2/3 w-full rounded-t-[1.25rem]" src={props.profilePhoto} alt={'profile img'}/>

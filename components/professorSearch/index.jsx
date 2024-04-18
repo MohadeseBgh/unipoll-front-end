@@ -1,10 +1,13 @@
 import {useRouter} from "next/router";
+import {useContext, useState} from "react";
+import {getProfessorPIDContext} from "@/context/getProfessorPIDContext";
 
 const ProfessorSearch = (props) => {
     const router = useRouter();
-
+    const [professorPId , setProfessorPId]=useContext(getProfessorPIDContext)
     const handleClick = async (e) => {
         e.preventDefault();
+        setProfessorPId(props.publicId)
         await router.push('/professor');
     }
     return (
