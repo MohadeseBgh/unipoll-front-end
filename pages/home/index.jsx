@@ -159,7 +159,9 @@ const Home = () => {
                   </form>
               </div>
           </div>
-          <div className={`${search===false ? 'hidden':''}`}><Search result={resultSearch} professor={filter}/></div>
+          <div className={`${search===false ? 'hidden':''}`}>
+              <Search result={resultSearch} professor={filter}/>
+          </div>
           <div className={`${search===true ? 'hidden':''}`}>
               <div id="whyUniPoll" className=' w-screen text-black laptop:flex-row  mobile: flex flex-col items-center mb-24'>
                   <div className='basis-1/2 flex flex-col laptop:pl-72 mobile:pl-0 ' dir='rtl'>
@@ -211,7 +213,6 @@ const Home = () => {
                       </div>
                       <TopBooklet booklets={topBooklet}/>
                   </div>
-                  <LessonsSearch rate={3}/>
               </div>
 
           </div>
