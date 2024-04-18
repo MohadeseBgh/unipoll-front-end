@@ -24,8 +24,10 @@ const Search = (props) => {
               <div className={'h-1 w-10/12 bg-darkBlue mt-5'}></div>
           </div>
             <div>
-                {props.professor===true? props.result.map( (p , index)=> <ProfessorSearch key={index} professorNamee={p.firstname+" "+p.lastname} profssorDegree={p.academicRank} professorEmail={p.email} professorSite={p.websiteLink}/>):
-                    props.result.map( (p , index)=> <LessonSearch key={index} lessonsName={p.courseName} profssorName={[p.instructorCourseFirstname," ",p.instructorCourseLastname]} descriptionn={p.description} rate={p.rate}/>)}
+                {props.professor===true? props.result.map( (p , index)=>
+                        <ProfessorSearch key={index} name={p.firstname+" "+p.lastname} degree={p.academicRank} email={p.email} site={p.websiteLink} image={p.profilePhoto}/>):
+                    props.result.map( (p , index)=>
+                        <LessonSearch key={index} lessonName={p.courseName} professorName={[p.instructorCourseFirstname," ",p.instructorCourseLastname]} description={p.description} rate={p.rate}/>)}
             </div>
       </div>
   )
