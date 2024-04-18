@@ -47,7 +47,7 @@ const AboutUs = () => {
                               <a href={'#'}> Linkdin </a>
                           </div>
                           <div className={' basis-2/12 mb-12  shadow-xl m-1 px-4 rounded-3xl text-center'}>
-                              <img src={'images/image (18).png'} className={'rounded-full size-32 mx-auto'} />
+                              <img src={'images/hos.jpg'} className={'rounded-full size-32 mx-auto'} />
                               <p className={'font-bold text-black mt-4 text-xl'}>Hossein Aghaii</p>
                               <a href={'#'}> Linkdin </a>
                           </div>
