@@ -15,7 +15,14 @@ const Home = () => {
     const [formValue, setFormValue] = useState({text: "", filter: ""});
     const [resultSearch, setResultSearch] = useState([]);
     const [filter, setFilter] = useState(false);
-    const [topBooklet, setTopBooklet] = useState([{courseName:"مبانی برنامه نویسی" ,instructorLastname:"رضا رمضانی" ,instructorFirstname:" ",term:"پاییز 1400" ,likeNumber:20}]);
+    const [topBooklet, setTopBooklet] = useState([{courseName:"مبانی برنامه نویسی" ,instructorLastname:"رمضانی" ,instructorFirstname:"رضا",term:"پاییز 1400" ,likeNumber:120},
+        {courseName:"مبانی برنامه نویسی" ,instructorLastname:"فاطمی" ,instructorFirstname:"افسانه",term:"پاییز 1401" ,likeNumber:120},
+        {courseName:"مبانی برنامه نویسی" ,instructorLastname:"ماهوش" ,instructorFirstname:"حسین",term:"پاییز 1399" ,likeNumber:50},
+        {courseName:"مبانی برنامه نویسی" ,instructorLastname:"زجاجی" ,instructorFirstname:"زهرا",term:"پاییز 1400" ,likeNumber:20},
+        {courseName:"مبانی برنامه نویسی" ,instructorLastname:"رمضانی" ,instructorFirstname:"رضا",term:"پاییز 1400" ,likeNumber:20},
+        {courseName:"مبانی برنامه نویسی" ,instructorLastname:"ادیبی" ,instructorFirstname:"پیمان",term:"پاییز 1398" ,likeNumber:20},
+        {courseName:"مبانی برنامه نویسی" ,instructorLastname:"رمضانی" ,instructorFirstname:"رضا",term:"پاییز 1400" ,likeNumber:20},
+        {courseName:"مبانی برنامه نویسی" ,instructorLastname:"رمضانی" ,instructorFirstname:"رضا",term:"پاییز 1400" ,likeNumber:20},]);
     const [topCourse, setTopCourse] = useState([ {courseName:" " ,instructorCourseFirstname:" " ,instructorCourseLastname:'',rate:5.0}]);
     const [search , setSearch]=useState(false);
     const [educationalGroups , setEducationalGroups]=useState([{publicId:'',name:'',description:''},{publicId:'',name:'',description:''},{publicId:'',name:'',description:''},{publicId:'',name:'',description:''}])
@@ -40,7 +47,7 @@ const Home = () => {
                 const response2 = await fetch("http://localhost:8090/unipoll/v1/booklet");
                 if (response2.ok) {
                     const data = await response2.json();
-                    setTopBooklet(data.result);
+                    //setTopBooklet(data.result);
                     //console.log(educationalGroups)
                 }else {
                     console.log("Network response was not ok");
@@ -203,14 +210,14 @@ const Home = () => {
                   <div
                       className=' grid gap-12  laptop:grid-cols-4  tablet:grid-cols-2 mobile:grid-cols-1items-center my-24  '>
                       <EducationalGroupsHome name={educationalGroups[0].name}
-                                             text={educationalGroups[0].description}/>
-                      <EducationalGroupsHome name={educationalGroups[1].name}
-                                             text={educationalGroups[1].description}
+                                             text={"گروه مهندسی نرم‌افزار دانشگاه اصفهان همواره به عنوان یکی از باسابقه‌ترین گروه‌های کامپیوتری در سطح کشور شناخته می‌شده است. سابقه‌ی این گروه به سال‌های ۱۳۵۰ الی ۱۳۶۴ بازمی‌گردد که کامپیوتر به عنوان یکی از گرایش‌های رشته‌ی ریاضی در دانشگاه اصفهان موجود و از وجود استادان به نام و شناخته ‌شده‌ای بهره می‌برد. در سال ۱۳۶۴ برای اولین بار رشته‌ی کامپیوتر به طور مستقل از طریق کنکور سراسری دانشجو پذیرفت و در سال ۱۳۶۷ دو رشته‌ی مهندسی کامپیوتر با گرایش‌های نرم افزار و سخت‌افزار در این دانشگاه راه‌اندازی گردید. در سال ۱۳۹۱، گروه مهندسی نرم‌افزار به عنوان یک گروه مستقل در دانشکده‌ی مهندسی کامپیوتر در دانشگاه اصفهان شکل گرفت."}/>
+                          <EducationalGroupsHome name={educationalGroups[1].name}
+                                             text={"هوش مصنوعی شاخه‌­ای از علوم و مهندسی کامپیوتر بوده که هدف آن طراحی و ساخت ماشین‌ها و برنامه‌­های هوشمند است. می­‌توان هوش را قابلیت یک عامل در دستیابی به اهداف در جهان پیرامون پس از ادراک محیط دانست. گستره کاربرد این دانش و اهمیت آن در فعالیت­‌های متنوع بشری از زندگی روزمره گرفته تا پژوهش­‌ها و کاوش­‌های عمیق و چالش برانگیز علمی روز به روز در حال افزایش است. با هدف تربیت نیروی انسانی متخصص در زمینه هوش مصنوعی و احاطه هرچه جامع­تر بر شاخه‌­ها و زمینه­‌های مختلف مطرح در این علم، دوره کارشناسی ­ارشد هوش مصنوعی در سال ۱۳۸۳ در دو شیوه‌ی «آموزشی/پژوهشی»‌ و «آموزش محور» در دو گرایش تخصصی «سیستم­‌های هوشمند» و «مهندسی دانش» تشکیل شد. این گروه اولین بار در سال ۱۳۸۳ اقدام به پذیرش دانشجوی دوره کارشناسی ارشد در رشته مهندسی کامپیوتر گرایش هوش مصنوعی نمود. همچنین این گروه در سال ۱۳۸۷ اقدام به پذیرش اولین دوره دانشجو در مقطع دکتری مهندسی کامپیوتر در گرایش هوش مصنوعی نمود."}
                                              mt='laptop:mt-28'/>
                       <EducationalGroupsHome name={educationalGroups[2].name}
-                                             text={educationalGroups[2].description}/>
+                                             text={"گروه مهندسی فنآوری اطلاعات (IT) در سال ۱۳۸۳ با هدف تربیت نیروی انسانی متخصص در زمینه فناوری اطلاعات تشکیل شد و با پذیرش ۳۵ نفر دانشجوی دوره کارشناسی، آغاز به کار نمود. این گروه در سال ۱۳۹۰ اقدام به پذیرش اولین دوره دانشجویان در مقطع کارشناسی ارشد گرایش شبکه های کامپیوتری نمود و از سال تحصیلی ۹۲-۹۱ نیز مقطع کارشناسی ارشد را در گرایش­های امنیت اطلاعات و تجارت الکترونیکی دائر کرده است. همچنین گروه مهندسی فناوری اطلاعات از بهمن ماه سال ۱۳۹۲ اقدام به پذیرش دانشجوی دکترا در گرایش امنیت اطلاعات نمود."}/>
                       <EducationalGroupsHome name={educationalGroups[3].name}
-                                             text={educationalGroups[3].description}
+                                             text={"فعالیت گروه معماری کامپیوتر دانشگاه اصفهان در سال ۱۳۶۷ با هدف تربیت نیروی انسانی متخصص در زمینه سخت افزار شروع شد و با پذیرش ۳۵ نفر دانشجوی دوره کارشناسی، آغاز به کار نمود. این گروه در سال ۱۳۷۶ اقدام به پذیرش اولین دوره دانشجویان در مقطع کارشناسی ارشد و در سال ۱۳۸۳ اقدام به پذیرش دانشجوی دکترا نمود. در سال ۱۳۹۱ گروه مهندسی معماری کامپیوتر به عنوان یک گروه مستقل تشکیل شد. این گروه هم اکنون دارای ۱۰۰ دانشجو در مقطع کارشناسی، ۳۰ دانشجو در مقطع کارشناسی ارشد و ۴۲ دانشجو در مقطع دکترا می‌باشد و تا کنون بیش از ۸۶۰ دانشجوی کارشناسی، ۲۲۰ کارشناسی ارشد و ۳۰ دکترا فارغ التحصیل داشته است. اساتید گروه مهندسی معماری کامپیوتر در مقطع تحصیلات تکمیلی روی مباحث عمیق معماری کامپیوتر، سیستمهای رایانشی-فیزیکی و اینترنت اشیاء، فناوری نانو، کامپیوترهای زیستی و امنیت سخت افزاری پژوهش‌های بنیادی و توسعه‌ای ارزشمندی انجام داده‌اند که نتایج آنها در مجلات و کنفرانس‌های معتبر علمی به چاپ رسیده است. در حال حاضر گروه مهندسی معماری کامپیوتر گروهی پویا بوده و با ترکیب اساتیدی با تجربه و جوان دارای ۷ عضو هیات علمی شامل چهار دانشیار و سه استادیار می‌باشد."}
                                              mt='laptop:mt-28'/>
                   </div>
               </div>
