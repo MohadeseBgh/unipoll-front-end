@@ -26,7 +26,6 @@ const Login = () => {
                 },
             });
 
-
             if (response.ok) {
                 setLogin(false);
                 console.log("OK");
@@ -46,7 +45,7 @@ const Login = () => {
     }
 
     return(
-    <div className={"h-screen w-screen flex flex-row bg-white"} >
+    <div className={"h-screen w-screen flex flex-row bg-white text-black"} >
 
         <div className={" flex basis-4/12 bg-[url('/images/uni3.png')] bg-no-repeat bg-cover"} >
             {/*<img src={"/images/uni.png"}*/}
