@@ -1,5 +1,6 @@
 import Footer from "@/components/footer";
 import Layout from "@/layouts/layout";
+import CommentForm from "@/components/commentForm";
 
 const Course = () => {
 
@@ -16,8 +17,13 @@ const Course = () => {
                   <div id={'send booklet'} className={'bg-pink-200'}>
                       send booklet
                   </div>
-                  <div id={'comments'}>
-
+                  <div id={'comments'} className='w-screen'>
+                      <div className="flex flex-row items-center justify-between">
+                          <hr className="w-4/12 h-1 bg-darkBlue "/>
+                          <h3 className='desktop:text-3xl text-2xl font-bold text-black'>نظرات</h3>
+                          <hr className="w-4/12 h-1 bg-darkBlue "/>
+                      </div>
+                      <CommentForm/>
                   </div>
                   <Footer/>
               </div>

@@ -1,0 +1,48 @@
+const CommentForm = (props) => {
+    return (
+        <div className="w-[60%] m-auto" >
+            <form className="flex flex-col text-black" dir='rtl'>
+                <div className='flex flex-row my-8'>
+                    <div className='basis-3/4'>
+                        <h3 className='text-xl  mr-2'>با ارسال دیدگاه خود در مورد این درس به بهبود عملکرد
+                            ارائه ی دروس کمک کنید.</h3>
+                    </div>
+                    <div className='basis-1/4'>
+                        <select
+                            data-twe-select-placeholder="ترم خود را انتخاب کنید"
+                            className='appearance-none  w-60 h-12 pr-4 bg-[#DFE8EF]  focus:border-0 shadow-inner rounded-lg focus:outline-0 placeholder:text-yellow-300  peer-active:text-yellow-600'
+                            required>
+                            <option  value="" hidden selected className="checked:text-[#8B8C8D] peer-checked:text-yellow-300 text-2xl">یک مورد را انتخاب کنید...</option>
+                            <option className='bg-white focus:bg-darkBlue hover:text-white'>همه</option>
+                            <option className='bg-white' >نیمسال اول 1400</option>
+                            <option className='bg-white'>نیمسال دوم 1400</option>
+                            <option className='bg-white'>نیمسال اول 1401</option>
+                            <option className='bg-white'>نیمسال دوم 1401</option>
+                        </select>
+                    </div>
+
+                </div>
+                <textarea id="text" maxLength='500' className="block h-56 w-full p-4 ps-10  text-black-900 rounded-3xl  bg-[#DFE8EF] text-lg placeholder:text-[#8B8C8D]
+                             focus:outline-none  focus:ring-0 shadow-inner text-start"
+                          placeholder="دیدگاه خود را برای این درس بنویسید...." required/>
+
+                <div className='flex flex-row my-8'>
+                    <div className='basis-3/4 flex items-center mb-4'>
+                        <input id="link-checkbox" type="checkbox" value=""
+                               className="w-4 h-4 text-blue-600 bg-gray-700 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                        <label htmlFor="link-checkbox"
+                               className="ms-2 text-lg font-medium text-darkBlue">ارسال دیگاه به صورت ناشناس</label>
+                    </div>
+                    <div className='basis-1/4'>
+                        <button type="submit"
+                                className="px-4 bg-darkBlue text-white font-extralight rounded-[1.2rem] w-48 h-12 text-xl   hover:drop-shadow-xl hover:shadow-teal-950 ">ارسال
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    );
+
+}
+export default CommentForm;
