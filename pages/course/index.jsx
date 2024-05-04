@@ -1,6 +1,5 @@
 import Footer from "@/components/footer";
 import Layout from "@/layouts/layout";
-import CourseInfo from "@/components/courseInfo";
 
 const Course = () => {
 
@@ -8,8 +7,8 @@ const Course = () => {
       <div>
           <Layout>
               <div className={'h-screen w-screen bg-white overflow-x-hidden pt-10 flex flex-col items-center'}>
-                  <div id={'course information'} className={'w-full  pb-10'}>
-                        <CourseInfo/>
+                  <div id={'course information'} className={'w-full h-80 bg-blue2 opacity-50'}>
+
                   </div>
                   <div id={'booklets'} className={'w-full bg-darkBlue'}>
                         booklet
