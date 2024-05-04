@@ -1,5 +1,6 @@
 import Footer from "@/components/footer";
 import Layout from "@/layouts/layout";
+import UploadBooklet from "@/components/uploadBooklet";
 
 const Course = () => {
 
@@ -13,8 +14,11 @@ const Course = () => {
                   <div id={'booklets'} className={'w-full bg-darkBlue'}>
                         booklet
                   </div>
-                  <div id={'send booklet'} className={'bg-pink-200'}>
-                      send booklet
+                  <div id={'send booklet'} className={'my-10 flex flex-col justify-center items-center gap-4'}>
+                      <p className={'text-darkBlue text-2xl '}>
+                          (; جزوه خودتون رو بفرستید برامون
+                      </p>
+                      <UploadBooklet/>
                   </div>
                   <div id={'comments'}>
 
