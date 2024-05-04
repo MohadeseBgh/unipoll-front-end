@@ -9,9 +9,9 @@ const CourseInfo = () => {
     const [courseInfo , setCourseInfo]=useState({courseName:'cfvghjk' , courseProfessor:'bmdfghjk' , vahed:'3' , info:'توضیحات :هدف این درس آشنا نمودن دانشجویان با مفاهیم و اصول روشهای تحلیل هوشمند داده ها و روش های هوشمند حل مسایل مهندسی با استفاده از رویکرد های فازی ، تکاملی و شبکه های عصبی میباشد. درتحقق این هدف دانشجویان با ابزارهای نرمافزاری لازم برای استفاده از این روش ها اشنا میشوند.'})
   return(
       <div className={'w-full h-full bg-[#E2F4FC] shadow-[0_0_60px_-15px_rgba(0,0,0,0.3)] flex flex-col p-5 gap-5'}>
-          <div className={'w-full h-[28rem] flex flex-row gap-10'}>
-              <img src={'images/CE1.png'} className={'h-auto w-auto'} alt={'course'}/>
-              <div className={'flex flex-col w-full gap-2 h-full items-start justify-evenly'}>
+          <div className={'w-full h-[24rem] flex flex-row gap-10'}>
+              <img src={'images/CE1.png'} className={'h-auto w-auto rounded-2xl'} alt={'course'}/>
+              <div className={'flex flex-col w-full gap-2 h-full items-start justify-evenly '}>
                   <div id={'show_rate'} className={'w-full flex flex-row-reverse justify-start'}>
                       {rate >= 1 ? <YellowStar/> : <Star/>}
                       {rate >= 2 ? <YellowStar/> : <Star/>}
