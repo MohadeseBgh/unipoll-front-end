@@ -1,10 +1,20 @@
 import YellowStar from "@/components/icons/YellowStar";
 import Star from "@/components/icons/Star";
+import {useContext, useState} from "react";
+import {coursePIDContext} from "@/context/coursePIDContext";
+import {useRouter} from "next/router";
 
 const LessonSearch = (props) => {
-
+    const [selectedCourse , setSelectedCourse]=useContext(coursePIDContext);
+    const router = useRouter();
+    const handleSelectedCourse = () => {
+      setSelectedCourse({publicId: props.publicId});
+        router.push('/course').then(r => {});
+    }
     return (
-        <div className="w-75% h-44 shadow-2xl bg-opacity-15 bg-[#1FAAEA] max-h-60 rounded-3xl flex flex-row m-12 drop-shadow-2xl p-5 " dir="rtl">
+        <div className="w-75% h-44 shadow-2xl bg-opacity-15 bg-[#1FAAEA] max-h-60 rounded-3xl flex flex-row m-12 drop-shadow-2xl p-5 " dir="rtl"
+        onClick={handleSelectedCourse}
+        >
             <div className="w-2/12 border-t-0 drop-shadow-xl ">
                 <img className={' h-full rounded-3xl ' }
                      src={'./images/CE11.png'}
