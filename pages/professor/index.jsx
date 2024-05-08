@@ -62,7 +62,7 @@ const Professor = () => {
 
                          {course.map((k,index) =>
                              <LessonSearch key={index} image={k.image} lessonName={k.courseName}  professorName={k.instructorCourseFirstname+" "+k.instructorCourseLastname}
-                                           description={k.description} rate={k.rate} />
+                                           description={k.description} rate={k.rate} publicId={k.publicId}/>
                          )}
                      </div>
                      </div>
