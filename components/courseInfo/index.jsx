@@ -14,10 +14,12 @@ const CourseInfo = () => {
             console.log('publicId:')
             console.log(selectedCourse)
             try {
-                const response = await fetch(`http://localhost:8090/unipoll/v1/instructor-course/${selectedCourse}`);
+                const response = await fetch(`http://localhost:8090/unipoll/v1/instructor-course/${selectedCourse.publicId}`);
+
                 if (response.ok) {
                     const data = await response.json();
-                    //setEducationalGroupPId(data.result);
+                    setCourseInfo(data.result);
+                    setRate(courseInfo.rate)
 
                 } else {
                     console.log("Network response was not ok");
@@ -47,7 +49,7 @@ const CourseInfo = () => {
                       <p className={'text-center text-darkBlue text-2xl whitespace-pre font-bold'}>مشخصات درس</p>
                       <div className={'h-0.5 w-full bg-darkBlue'}></div>
                   </div>
-                  <ShowCourseInfo courseName={courseInfo.courseName} courseProfessor={courseInfo.courseProfessor} vahed={courseInfo.vahed} info={courseInfo.info}/>
+                  <ShowCourseInfo courseName={courseInfo.courseName} rate={courseInfo.rate} courseProfessor={courseInfo.instructorCourseFirstname +' '+ courseInfo.instructorCourseLastname} vahed={courseInfo.unit} info={courseInfo.description}/>
                   <div className={'h-0.5 w-full bg-darkBlue '}></div>
                   <div id={'rating'}>
                         <p className={'text-lg text-black'}>امتیاز خودرا به این درس بدهید</p>
@@ -55,7 +57,7 @@ const CourseInfo = () => {
               </div>
           </div>
           <div id={'edit'} className={'flex flex-row justify-between items-center'}>
-              <p className={'text-xs text-gray-600'}> last edit 2month ago</p>
+              <p className={'text-xs text-gray-600'}> Last Update: {courseInfo.lastUpdate}</p>
               <button>
                   <Edit/>
               </button>
