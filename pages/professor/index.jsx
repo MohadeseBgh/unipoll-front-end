@@ -49,7 +49,7 @@ const Professor = () => {
 
          <Layout>
              <div className={'h-screen w-screen bg-white overflow-x-hidden pt-10 flex flex-col items-center'}>
-                <ProfInfo academicRank={professorInfo.academicRank} email={professorInfo.email} name={[professorInfo.firstname,professorInfo.lastname]} phd={professorInfo.phd}
+                <ProfInfo academicRank={professorInfo.academicRank} email={professorInfo.email} name={professorInfo.firstname+" "+professorInfo.lastname} phd={professorInfo.phd}
                           phoneNumber={professorInfo.phoneNumber} profilePhoto={professorInfo.profilePhoto} websiteLink={professorInfo.websiteLink} image={professorInfo.profilePhoto}/>
                  <div>
                      <div className={'flex flex-row w-full mt-20 gap-12 justify-center items-center '}>
@@ -61,7 +61,7 @@ const Professor = () => {
                      <div className="flex flex-col overflow-y-auto overflow-x-hidden gap-x-20 w-screen overscroll-auto  scrollbar scrollbar-thumb-darkBlue scrollbar-track-[#D9EDFD] px-16 h-[36rem] py-4" >
 
                          {course.map((k,index) =>
-                             <LessonSearch key={index} image={k.image} lessonName={k.courseName}  professorName={k.instructorCourseFirstname+''+k.instructorCourseLastname}
+                             <LessonSearch key={index} image={k.image} lessonName={k.courseName}  professorName={k.instructorCourseFirstname+" "+k.instructorCourseLastname}
                                            description={k.description} rate={k.rate} />
                          )}
                      </div>

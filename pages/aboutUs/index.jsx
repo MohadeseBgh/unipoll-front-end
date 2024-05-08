@@ -9,13 +9,13 @@ function Logo() {
 const AboutUs = () => {
   return(
           <Layout>
-              <div className={'h-screen w-screen flex flex-col items-end pt-16 mb-32 pr-5 gap-4 bg-white text-black'} dir='rtl'>
+              <div className={'h-screen w-screen flex flex-col pt-16 gap-4 bg-white text-black overflow-x-hidden'} >
                   <div className={'flex flex-row w-full mb-6 gap-12'}>
                       <div className={'h-1 w-5/12 bg-darkBlue mt-5'}></div>
                       <img src={'/images/logo2.png'}/>
                       <div className={'h-1 w-5/12 bg-darkBlue mt-5'}></div>
                   </div>
-                  <div className={' bg-opacity-15 bg-[#1FAAEA] shadow-2xl  rounded-3xl mx-8   '}>
+                  <div className={' bg-opacity-15 bg-[#1FAAEA] shadow-2xl rounded-3xl mx-8 my-20'} dir={'rtl'}>
                       <h1 className='font-bold mb-8 mt-4 text-xl laptop:text-2xl text-center self-center text-darkBlue w-12/12 '>دربـــاره مــــــا </h1>
 
                       <p className='text-black mb-12 text-lg laptop:text-xl text-right px-8'>یونیپول سامانه انلاین جامع نظردهی اساتید
@@ -43,11 +43,11 @@ const AboutUs = () => {
                           </div>
                           <div className={' basis-2/12 mb-12 shadow-xl m-1 px-4 rounded-3xl text-center'}>
                               <img src={'images/mo.png'} className={'rounded-full size-32 mx-auto'} />
-                              <p className={'font-bold text-black mt-4 text-xl'}>Mohadese Baghbani</p>
+                              <p className={'font-bold text-black mt-4 text-xl'}>Mohadeseh Baghbani</p>
                               <a href={'#'}> Linkdin </a>
                           </div>
                           <div className={' basis-2/12 mb-12  shadow-xl m-1 px-4 rounded-3xl text-center'}>
-                              <img src={'images/image (18).png'} className={'rounded-full size-32 mx-auto'} />
+                              <img src={'images/hos.jpg'} className={'rounded-full size-32 mx-auto'} />
                               <p className={'font-bold text-black mt-4 text-xl'}>Hossein Aghaii</p>
                               <a href={'#'}> Linkdin </a>
                           </div>
@@ -58,10 +58,9 @@ const AboutUs = () => {
                           </div>
                       </div>
                   </div>
-
-
+                  <Footer/>
               </div>
-              <Footer/>
+
           </Layout>
 
   )
