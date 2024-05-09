@@ -1,4 +1,30 @@
+import {useContext, useEffect, useState} from "react";
+import {coursePIDContext} from "@/context/coursePIDContext";
+import CarouselCourse from "@/components/carouselCourse";
+
 const CommentForm = (props) => {
+    const [selectedCourse , setSelectedCourse]=useContext(coursePIDContext);
+    const [filter, setFilter] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch("http://localhost:8090/unipoll/v1/term");
+
+                if (response.ok) {
+                    const data = await response.json();
+                    setFilter(data.result);
+                    console.log("term ok")
+
+                } else {
+                    console.log("Network response was not ok");
+                }
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+    }, []);
     return (
         <div className="w-[60%] m-auto" >
             <form className="flex flex-col text-black justify-between " dir='rtl'>
@@ -12,12 +38,10 @@ const CommentForm = (props) => {
                             data-twe-select-placeholder="ترم خود را انتخاب کنید"
                             className='appearance-none  w-60 h-12 pr-4 bg-[#DFE8EF]  focus:border-0 shadow-inner rounded-lg focus:outline-0 placeholder:text-yellow-300  peer-active:text-yellow-600'
                             required>
-                            <option  value="" hidden selected className="checked:text-[#8B8C8D] peer-checked:text-yellow-300 text-2xl">یک مورد را انتخاب کنید...</option>
-                            <option className='bg-white focus:bg-darkBlue hover:text-white'>همه</option>
-                            <option className='bg-white' >نیمسال اول 1400</option>
-                            <option className='bg-white'>نیمسال دوم 1400</option>
-                            <option className='bg-white'>نیمسال اول 1401</option>
-                            <option className='bg-white'>نیمسال دوم 1401</option>
+                            <option  value="" hidden selected className="checked:text-[#8B8C8D] peer-checked:text-yellow-300 text-2xl">ترم خود را انتخاب کنید...</option>
+                            {filter.map(
+                                (p , index)=> <option key={index} className="bg-white" >{p.name}</option>
+                            )}
                         </select>
                     </div>
 
