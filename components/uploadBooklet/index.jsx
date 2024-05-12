@@ -25,7 +25,8 @@ const UploadBooklet = () => {
             const response = await fetch('http://localhost:8090/unipoll/v1/booklet/file', {
                 method: 'POST',
                 headers: {
-                    'Authorization': "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJVbmlQb2xsIiwic3ViIjoiandUb2tlbiIsInVzZXJuYW1lIjoiTS1CYWdoYmFuaSIsImF1dGhvcml0aWVzIjoiUk9MRV9TVFVERU5UIiwiaWF0IjoxNzE1Mjg2MjkyLCJleHAiOjE3MTUzMTYyOTJ9.Rtj4Crz-hJNitQNsLgPxFvZnl0QdRoNZ6cUg43igORH8OUwiVUljqt63yeTOXwseBga0ixUlolnokSsSFuLDXw"
+                    "Content-Type": "multipart/form-data",
+                    'Authorization': jwtToken
                 },
                 body: formData,
             });
