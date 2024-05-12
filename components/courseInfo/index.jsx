@@ -6,6 +6,8 @@ import Edit from "@/components/icons/Edit";
 import {coursePIDContext} from "@/context/coursePIDContext";
 
 const CourseInfo = () => {
+    const [edit , setEdit]=useState(false);
+    const [editAccess , setEditAccess]=useState(false);
     const [selectedCourse , setSelectedCourse]=useContext(coursePIDContext);
     const [rate , setRate]=useState(4.2);
     const [courseInfo , setCourseInfo]=useState({courseName:'cfvghjk' , courseProfessor:'bmdfghjk' , vahed:'3' , info:'توضیحات :هدف این درس آشنا نمودن دانشجویان با مفاهیم و اصول روشهای تحلیل هوشمند داده ها و روش های هوشمند حل مسایل مهندسی با استفاده از رویکرد های فازی ، تکاملی و شبکه های عصبی میباشد. درتحقق این هدف دانشجویان با ابزارهای نرمافزاری لازم برای استفاده از این روش ها اشنا میشوند.'})
@@ -31,6 +33,11 @@ const CourseInfo = () => {
 
         fetchData();
     }, []);
+    const editClick = (e) => {
+      e.preventDefault();
+      if (editAccess===true)
+        setEdit(true);
+    }
     return(
       <div className={'w-full h-full bg-[#E2F4FC] shadow-[0_0_60px_-15px_rgba(0,0,0,0.3)] flex flex-col p-5 gap-5'}>
           <div className={'w-full h-[24rem] flex flex-row gap-10'}>
@@ -49,7 +56,7 @@ const CourseInfo = () => {
                       <p className={'text-center text-darkBlue text-2xl whitespace-pre font-bold'}>مشخصات درس</p>
                       <div className={'h-0.5 w-full bg-darkBlue'}></div>
                   </div>
-                  <ShowCourseInfo courseName={courseInfo.courseName} rate={courseInfo.rate} courseProfessor={courseInfo.instructorCourseFirstname +' '+ courseInfo.instructorCourseLastname} vahed={courseInfo.unit} info={courseInfo.description}/>
+                  <ShowCourseInfo editButton={edit} courseName={courseInfo.courseName} rate={courseInfo.rate} courseProfessor={courseInfo.instructorCourseFirstname +' '+ courseInfo.instructorCourseLastname} vahed={courseInfo.unit} info={courseInfo.description}/>
                   <div className={'h-0.5 w-full bg-darkBlue '}></div>
                   <div id={'rating'}>
                         <p className={'text-lg text-black'}>امتیاز خودرا به این درس بدهید</p>
@@ -58,9 +65,15 @@ const CourseInfo = () => {
           </div>
           <div id={'edit'} className={'flex flex-row justify-between items-center'}>
               <p className={'text-xs text-gray-600'}> Last Update: {courseInfo.lastUpdate}</p>
-              <button>
-                  <Edit/>
-              </button>
+              <div className={'flex gap-2'}>
+                  <button onClick={editClick} className={'hover:scale-105'}>
+                      <Edit/>
+                  </button>
+                  { edit && <p>
+
+                  </p>}
+              </div>
+
           </div>
       </div>
   )
