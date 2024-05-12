@@ -42,7 +42,7 @@ const Header = () => {
     },[])
 
     return(
-      <div className={'flex flex-row h-24 w-full bg-white'}>
+      <div className={'flex flex-row h-24 w-full bg-white'} dir={'ltr'}>
           <div className={'flex flex-col h-full w-1/12 justify-center items-center gap-2'}
           onClick={()=>{
               setUserSetting({logIO: !userSetting.logIO})
