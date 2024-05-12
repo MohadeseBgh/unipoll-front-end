@@ -61,7 +61,7 @@ const CommentForm = (props) => {
         }
     }
     return (
-        <div className="w-[60%] m-auto" >
+        <div className="w-[60%] m-auto mb-10" >
             <form className="flex flex-col text-black justify-between " dir='rtl' onSubmit={formSubmitHandler}>
                 <div className='flex flex-row my-8 '>
                     <div className='basis-3/4'>
