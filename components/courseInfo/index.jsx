@@ -53,11 +53,7 @@ const CourseInfo = () => {
         };
 
         fetchData();
-    }, [courseInfo.rate ]);
-    const handleRatingChange = (currentRating) => {
-        setRating({ "rate": currentRating });
-        handleRating().then(r => { });
-    };
+    }, [courseInfo.rate]);
     const editClick = (e) => {
       e.preventDefault();
       if (editAccess===true)
@@ -88,6 +84,35 @@ const CourseInfo = () => {
             console.error('Error uploading file:', error);
         }
     }
+    // useEffect( () => {
+    //     const fetchData = async () => {
+    //         console.log(rating);
+    //     const jwtToken = localStorage.getItem('jwtToken');
+    //
+    //     try {
+    //         const response = await fetch(`http://localhost:8090/unipoll/v1/rate/${selectedCourse.publicId}`, {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Authorization': jwtToken,
+    //                 "Content-Type": "application/json",
+    //             },
+    //             body: JSON.stringify(rating),
+    //         });
+    //         if (response.ok) {
+    //             const data = await response.json();
+    //             console.log('ok');
+    //             console.log(data);
+    //
+    //         } else {
+    //             console.log("Not ok");
+    //         }
+    //     } catch (error) {
+    //         console.error('Error uploading file:', error);
+    //     }
+    //         }
+    //     fetchData();
+    //
+    // }, [rating]);
     return(
       <div className={'w-full h-full bg-[#E2F4FC] shadow-[0_0_60px_-15px_rgba(0,0,0,0.3)] flex flex-col p-5 gap-5'}>
           <div className={'w-full h-[24rem] flex flex-row gap-10'}>
@@ -119,7 +144,13 @@ const CourseInfo = () => {
                                                type="radio"
                                                name="rating"
                                                value={currentRating}
-                                               onClick={() => handleRatingChange(currentRating)}
+                                               onChange={() => {
+                                                   setRating((prevRating) => {
+                                                       return { ...prevRating, rate: currentRating };
+                                                   });
+                                                   handleRating().then(r => {});
+                                               }}
+                                               checked={currentRating === rating.rate}
                                         />
                                         <span
                                             className={`p-5 cursor-pointer text-3xl ${currentRating <= (hover || rating.rate) ? "text-[#ffc107]" : "text-white "}`}
