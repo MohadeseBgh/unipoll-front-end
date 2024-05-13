@@ -1,11 +1,15 @@
 import Comment from "@/components/comment";
 import {useContext, useEffect, useState} from "react";
 import {coursePIDContext} from "@/context/coursePIDContext";
+import Close from "@/components/icons/Close";
+import Close2 from "@/components/icons/Close2";
 
 const Comments = () => {
     const [comments, setComments] = useState([]);
     const [totalComments, setTotalComments] = useState([]);
     const [selectedCourse , setSelectedCourse]=useContext(coursePIDContext);
+    const [filterList, setFilterList] = useState([]);
+    const [filter, setFilter] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -100,6 +104,26 @@ const Comments = () => {
         fetchData();
 
     }
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch("http://localhost:8090/unipoll/v1/term");
+
+                if (response.ok) {
+                    const data = await response.json();
+                    setFilterList(data.result);
+                    console.log("term ok")
+
+                } else {
+                    console.log("Network response was not ok");
+                }
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+    }, []);
     const lessHandler = async (e) => {
         e.preventDefault();
         const fetchData = async () => {
@@ -132,6 +156,25 @@ const Comments = () => {
     }
     return (
         <div className="relative bg-white p-6 flex flex-col  mx-60 gap-12 my-20">
+            <div className={"flex flex-row justify-between "}>
+                <div className='flex flex-col base-3/4 items-end text-black'>
+                    <select
+                        data-twe-select-placeholder="فیلتر بر اساس سر ترم"
+                        className='appearance-none  w-60 h-12 pr-4 bg-[#DFE8EF]  focus:border-0 shadow-inner rounded-lg focus:outline-0 placeholder:text-yellow-300  peer-active:text-yellow-600'>
+                        <option value="" hidden selected
+                                className="checked:text-[#8B8C8D] peer-checked:text-yellow-300 text-2xl">فیلتر بر اساس  ترم
+                        </option>
+                        {filterList.map(
+                            (p, index) => <option key={index} value={p.publicId} className="bg-white">{p.name}</option>
+                        )}
+                    </select>
+                </div>
+                <div className='flex flex-col basis-1/4 items-end'>
+                    <button type="submit"
+                            className=" flex flex-row  items-center text-center px-4 bg-darkBlue text-white font-extralight rounded-xl w-40 h-12 text-xl   hover:drop-shadow-xl hover:shadow-teal-950 pr-8 "><Close2/><p className={"mr-2"}>حذف فیلتر</p>
+                    </button>
+                </div>
+            </div>
             {comments.map(
                 (p, index) => <Comment key={index} name={p.writerName}
                                        text={p.text}
@@ -146,7 +189,7 @@ const Comments = () => {
                  className="hidden">
                 <button onClick={lessHandler}><p className={"text-darkBlue  text-xl font-bold"}> نمایش کمتر</p></button>
             </div>
-            <p id={"noComment"}className={"hidden"}> نظری برای این درس ثبت نشده است</p>
+            <p id={"noComment"} className={"hidden"}> نظری برای این درس ثبت نشده است</p>
         </div>
     );
 
