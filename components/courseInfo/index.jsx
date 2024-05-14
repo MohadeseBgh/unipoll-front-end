@@ -14,7 +14,7 @@ const CourseInfo = () => {
     const [editAccess , setEditAccess]=useState(false);
     const [selectedCourse , setSelectedCourse]=useContext(coursePIDContext);
     const [rate , setRate]=useState(4.2);
-    const [courseInfo , setCourseInfo]=useState({courseName:'cfvghjk' , courseProfessor:'bmdfghjk' , vahed:'3' , info:'توضیحات :هدف این درس آشنا نمودن دانشجویان با مفاهیم و اصول روشهای تحلیل هوشمند داده ها و روش های هوشمند حل مسایل مهندسی با استفاده از رویکرد های فازی ، تکاملی و شبکه های عصبی میباشد. درتحقق این هدف دانشجویان با ابزارهای نرمافزاری لازم برای استفاده از این روش ها اشنا میشوند.'})
+    const [courseInfo , setCourseInfo]=useState({courseName:'cfvghjk' , courseProfessor:'bmdfghjk' ,rate_num:0, vahed:'3' , info:'توضیحات :هدف این درس آشنا نمودن دانشجویان با مفاهیم و اصول روشهای تحلیل هوشمند داده ها و روش های هوشمند حل مسایل مهندسی با استفاده از رویکرد های فازی ، تکاملی و شبکه های عصبی میباشد. درتحقق این هدف دانشجویان با ابزارهای نرمافزاری لازم برای استفاده از این روش ها اشنا میشوند.'})
     useEffect(() => {
         const fetchData = async () => {
             console.log('publicId:')
@@ -59,7 +59,7 @@ const CourseInfo = () => {
       if (editAccess===true)
         setEdit(true);
     }
-    const handleRating = async () => {
+    const handleRating = async (rating) => {
         console.log(rating);
         const jwtToken=localStorage.getItem('jwtToken');
 
@@ -70,7 +70,7 @@ const CourseInfo = () => {
                     'Authorization': jwtToken,
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(rating),
+                body: JSON.stringify({rate:rating}),
             });
             if (response.ok) {
                 const data = await response.json();
@@ -125,7 +125,7 @@ const CourseInfo = () => {
                       {rate >= 4 ? <YellowStar/> : <Star/>}
                       {rate >= 5 ? <YellowStar/> : <Star/>}
                       <p className={'text-xs px-2'}>({rate})</p>
-                      <p className={'text-xs'}>3 reviws</p>
+                      <p className={'text-xs'}>{courseInfo.rate_num} reviws</p>
                   </div>
                   <div className={'w-full flex flex-row gap-5 items-center'}>
                       <p className={'text-center text-darkBlue text-2xl whitespace-pre font-bold'}>مشخصات درس</p>
@@ -148,7 +148,7 @@ const CourseInfo = () => {
                                                    setRating((prevRating) => {
                                                        return { ...prevRating, rate: currentRating };
                                                    });
-                                                   handleRating().then(r => {});
+                                                   handleRating(currentRating).then(r => {});
                                                }}
                                                checked={currentRating === rating.rate}
                                         />
