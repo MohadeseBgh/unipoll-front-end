@@ -11,7 +11,7 @@ const ContactUs = () => {
     e.preventDefault();
     console.log(formValue)
     try {
-      const response = await fetch("http://localhost:8090/unipoll/v1/comment", {
+      const response = await fetch("http://Localhost:8090/unipoll/v1/contact", {
         method: "POST",
         body: JSON.stringify(formValue), headers: {"Content-Type": "application/json"}
       });
