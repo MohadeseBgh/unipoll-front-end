@@ -21,7 +21,7 @@ const BookletInfo = () => {
     const [bookletInfo , setBookletInfo]=useState({writerName:'جعفر کریمی' , courseProfessor:'رضا رمضانی' , course:'مبانی برنامه نویسی',term:"ترم پاییز 1400" , info:'توضیحات :هدف این درس آشنا نمودن دانشجویان با مفاهیم و اصول روشهای تحلیل هوشمند داده ها و روش های هوشمند حل مسایل مهندسی با استفاده از رویکرد های فازی ، تکاملی و شبکه های عصبی میباشد. درتحقق این هدف دانشجویان با ابزارهای نرمافزاری لازم برای استفاده از این روش ها اشنا میشوند.'})
     return(
       <div className={'w-full h-full bg-[#E2F4FC] shadow-[0_0_60px_-15px_rgba(0,0,0,0.3)] flex flex-col p-5 gap-5 text-black'}>
-          <div className={'w-full h-[24rem] flex flex-row gap-10'}>
+          <div className={'w-full h-[27rem] flex flex-row gap-10'}>
               <img src={'images/bookletImgInfo.png'} className={'h-auto w-auto rounded-2xl'} alt={'booklet'}/>
               <div className={'flex flex-col w-full gap-2 h-full items-start justify-evenly '}>
                   <div id={'icons'} className={'w-full flex flex-row-reverse justify-start'}>
@@ -42,7 +42,7 @@ const BookletInfo = () => {
                                    courseProfessor={bookletInfo.courseProfessor} writerName={bookletInfo.writerName}
                                    info={bookletInfo.info}/>
                   <div className={'h-0.5 w-full bg-darkBlue '}></div>
-                  <div className={"flex flex-row justify-between"}>
+                  <div className={"flex flex-row items-center justify-items-start j"}>
                       <div className="flex flex-row ">
                           <button
                               className='flex flex-row justify-center items-center'
@@ -54,7 +54,7 @@ const BookletInfo = () => {
                           </button>
                           <p className="mr-2 text-black ">4</p>
                       </div>
-                      <div className="flex">
+                      <div className="flex flex-row justify-self-end">
                           <button
                                   className=" flex flex-row  items-center text-center px-4 bg-darkBlue text-white font-normal rounded-xl w-34 h-8 text-sm   hover:drop-shadow-xl hover:shadow-teal-950 pr-8 ">
                               <p className={"ml-2"}>دانلود جزوه</p><Donlowd/>
