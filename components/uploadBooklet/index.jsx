@@ -9,39 +9,41 @@ const UploadBooklet = () => {
 
     const sendFile = async (e) => {
         e.preventDefault()
-        const formData = new FormData();
-        formData.append('file', selectedFile);
-        const jwtToken=localStorage.getItem('jwtToken');
-         console.log(jwtToken)
-        const bookletRequest = {
-            text: 'tgyhjkl',
-            termPublicId: '712ad8c2-5946-4459-82f5-2b528aa804db',
-            instCoursePublicId: '104ddb5b-e611-44ae-ab0a-a0435bb0fccc'
-        };
-
-        formData.append('bookletRequest', JSON.stringify(bookletRequest));
-
-        try {
-            const response = await fetch('http://localhost:8090/unipoll/v1/booklet/file', {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                    'Authorization': jwtToken
-                },
-                body: formData,
-            });
-            if (response.ok) {
-                const data = await response.json();
-                console.log('ok');
-                console.log(data);
-
-            } else {
-                console.log("Not ok");
-            }
-        }
-        catch (error) {
-            console.error('Error uploading file:', error);
-        }
+        // const formData = new FormData();
+        // formData.append('file', selectedFile);
+        // const jwtToken=localStorage.getItem('jwtToken');
+        //  console.log(jwtToken)
+        // // const bookletRequest = {
+        // //     text: formValue.text,
+        // //     termPublicId: formValue.termPublicId,
+        // //     instCoursePublicId: selectedCourse.publicId
+        // // };
+        // //
+        // // formData.append('bookletRequest', JSON.stringify(bookletRequest));
+        //
+        // try {
+        //     const response = await fetch('http://localhost:8090/unipoll/v1/booklet/file', {
+        //         method: 'POST',
+        //         headers: {
+        //             "Content-Type": "multipart/form-data",
+        //             'Authorization':`${jwtToken}`
+        //
+        //         },
+        //         body: formData,
+        //     });
+        //     if (response.ok) {
+        //         const data = await response.json();
+        //         console.log('ok');
+        //         console.log(data);
+        //
+        //     } else {
+        //         console.log("Not ok");
+        //     }
+        // }
+        // catch (error) {
+        //     console.error('Error uploading file:', error);
+        // }
+        ////////
         // const formData = new FormData();
         // formData.append("file", selectedFile);
         // // formData.append("text", formValue.text);
@@ -67,8 +69,26 @@ const UploadBooklet = () => {
         //             }
         //         },
         // });
+        const myHeaders = new Headers();
+        myHeaders.append("Authorization", "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJVbmlQb2xsIiwic3ViIjoiandUb2tlbiIsInVzZXJuYW1lIjoiTS1CYWdoYmFuaSIsImF1dGhvcml0aWVzIjoiUk9MRV9TVFVERU5UIiwiaWF0IjoxNzE1NjMyNjgzLCJleHAiOjE3MTU2NjI2ODN9.Q2m8QYM4O9jPRd1vDuq5Omiq7aY82ooO10k0JfGTjUCiyXBVQIc1-1-vONyEReAMHYF5Zftj7mYKPZ0-zeXk8w");
 
+        const formdata = new FormData();
+        formdata.append("file", selectedFile, "/D:/UNI/06/بازی/present.pdf");
+        formdata.append("text", "hi");
+        formdata.append("termPublicId", "712ad8c2-5946-4459-82f5-2b528aa804db");
+        formdata.append("instCoursePublicId", "d1e55258-d437-4dc2-9b66-0e2641a7b3f4");
 
+        const requestOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body: formdata,
+            redirect: "follow"
+        };
+
+        fetch("http://localhost:8090/unipoll/v1/booklet/file", requestOptions)
+            .then((response) => response.text())
+            .then((result) => console.log(result))
+            .catch((error) => console.error(error));
 
     };
     const handleFileChange = (event) => {
@@ -78,7 +98,7 @@ const UploadBooklet = () => {
     };
   return(
       <div className={'flex justify-center items-center w-full'}>
-          <form className='flex flex-col gap-4 w-full justify-center items-center' dir={'rtl'}
+          <form className='flex flex-col gap-4 w-full justify-center items-center' dir={'rtl'} encType={"multipart/form-data"}
           onSubmit={sendFile}
           >
               <div className={'flex flex-row gap-3 justify-center items-center'}>
