@@ -7,15 +7,20 @@ import {coursePIDContext} from "@/context/coursePIDContext";
 import Bookmark_fill from "@/components/icons/Bookmark_fill";
 import Bookmark from "@/components/icons/Bookmark";
 import Report from "@/components/icons/Report";
+import ShowBookletInfo from "@/components/showBookletInfo";
+import Like from "@/components/icons/Like";
+import Like_fill from "@/components/icons/Like_fill";
+import Close2 from "@/components/icons/Close2";
+import Donlowd from "@/components/icons/Donlowd";
 
 const BookletInfo = () => {
     const [save , setSave]=useState(false);
     const [like , setLike]=useState(false);
     const [selectedCourse , setSelectedCourse]=useContext(coursePIDContext);
     const [rate , setRate]=useState(4.2);
-    const [bookletInfo , setBookletInfo]=useState({writerName:'cfvghjk' , courseProfessor:'bmdfghjk' , course:'مبانی برنامه نویسی',term:"ترم پاییز 1400" , info:'توضیحات :هدف این درس آشنا نمودن دانشجویان با مفاهیم و اصول روشهای تحلیل هوشمند داده ها و روش های هوشمند حل مسایل مهندسی با استفاده از رویکرد های فازی ، تکاملی و شبکه های عصبی میباشد. درتحقق این هدف دانشجویان با ابزارهای نرمافزاری لازم برای استفاده از این روش ها اشنا میشوند.'})
+    const [bookletInfo , setBookletInfo]=useState({writerName:'جعفر کریمی' , courseProfessor:'رضا رمضانی' , course:'مبانی برنامه نویسی',term:"ترم پاییز 1400" , info:'توضیحات :هدف این درس آشنا نمودن دانشجویان با مفاهیم و اصول روشهای تحلیل هوشمند داده ها و روش های هوشمند حل مسایل مهندسی با استفاده از رویکرد های فازی ، تکاملی و شبکه های عصبی میباشد. درتحقق این هدف دانشجویان با ابزارهای نرمافزاری لازم برای استفاده از این روش ها اشنا میشوند.'})
     return(
-      <div className={'w-full h-full bg-[#E2F4FC] shadow-[0_0_60px_-15px_rgba(0,0,0,0.3)] flex flex-col p-5 gap-5'}>
+      <div className={'w-full h-full bg-[#E2F4FC] shadow-[0_0_60px_-15px_rgba(0,0,0,0.3)] flex flex-col p-5 gap-5 text-black'}>
           <div className={'w-full h-[24rem] flex flex-row gap-10'}>
               <img src={'images/bookletImgInfo.png'} className={'h-auto w-auto rounded-2xl'} alt={'booklet'}/>
               <div className={'flex flex-col w-full gap-2 h-full items-start justify-evenly '}>
@@ -33,11 +38,33 @@ const BookletInfo = () => {
                       <p className={'text-center text-darkBlue text-2xl whitespace-pre font-bold'}>مشخصات جزوه</p>
                       <div className={'h-0.5 w-full bg-darkBlue'}></div>
                   </div>
-              <div className={'h-0.5 w-full bg-darkBlue '}></div>
+                  <ShowBookletInfo courseName={bookletInfo.course} term={bookletInfo.term}
+                                   courseProfessor={bookletInfo.courseProfessor} writerName={bookletInfo.writerName}
+                                   info={bookletInfo.info}/>
+                  <div className={'h-0.5 w-full bg-darkBlue '}></div>
+                  <div className={"flex flex-row justify-between"}>
+                      <div className="flex flex-row ">
+                          <button
+                              className='flex flex-row justify-center items-center'
+                              onClick={() => {
+                                  setLike(!like)
+                              }}>
+                              {!like && <Like/>}
+                              {like && <Like_fill/>}
+                          </button>
+                          <p className="mr-2 text-black ">4</p>
+                      </div>
+                      <div className="flex">
+                          <button
+                                  className=" flex flex-row  items-center text-center px-4 bg-darkBlue text-white font-normal rounded-xl w-34 h-8 text-sm   hover:drop-shadow-xl hover:shadow-teal-950 pr-8 ">
+                              <p className={"ml-2"}>دانلود جزوه</p><Donlowd/>
+                          </button>
+                      </div>
+                  </div>
 
               </div>
           </div>
       </div>
-  )
+    )
 }
 export default BookletInfo;
