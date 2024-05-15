@@ -159,7 +159,7 @@ const Comments = () => {
         setFilter({publicId: e.target.value});
         const fetchData = async () => {
             try {
-                const response3 = await fetch(`http://localhost:8090/unipoll/v1/comment-c/${selectedCourse.publicId}?filterTopFive=`+false+`&term=${filter.publicId}` ,{
+                const response3 = await fetch(`http://localhost:8090/unipoll/v1/comment-c/${selectedCourse.publicId}?filterTopFive=`+false+`&term=${e.target.value}` ,{
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json"
@@ -168,18 +168,57 @@ const Comments = () => {
                 if (response3.ok) {
                     console.log("filter OK");
                     const data3=await response3.json();
+                    console.log(data3)
                     const result3=data3.result;
                     const temp=result3;
-                    console.log(result3);
-                    setComments(result3);
-                    const temp2=comments;
-                    setComments(result3);
+                    setComments(temp);
                     document.getElementById("moreCourse").className = 'hidden';
                     document.getElementById("lessCourse").className = 'hidden';
                     document.getElementById("noComment").className = 'hidden';
                     document.getElementById("deleteFilter").className = 'flex flex-col basis-1/4 items-end';
                     if(result3.length===0){
                         document.getElementById("noComment").className = 'text-darkBlue  text-2xl font-bold text-center my-10';
+                    }
+                } else {
+                    console.log("not ok")
+                }
+
+            }catch (e) {
+                console.error("we are GETTING ERROR", e)
+            }
+        };
+        fetchData();
+
+    }
+    const deleteFilterHandler = async (e) => {
+        e.preventDefault();
+        document.getElementById("deleteFilter").className = 'hidden';
+        const fetchData = async () => {
+            try {
+                const response = await fetch(`http://localhost:8090/unipoll/v1/comment-c/${selectedCourse.publicId}?filterTopFive=`+true ,{
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                });
+                if (response.ok) {
+                    console.log("OK");
+                    const data=await response.json();
+                    const result=data.result;
+                    setComments(result)
+                    document.getElementById("moreCourse").className = 'flex absolute bottom-0 left-0 right-0 h-1/4 bg-gradient-to-b from-transparent to-white items-end justify-center';
+                    document.getElementById("lessCourse").className = 'hidden';
+                    document.getElementById("noComment").className = 'hidden';
+                    if(totalComments.length<6){
+                        console.log("6");
+                        document.getElementById("moreCourse").className = 'hidden';
+                        document.getElementById("lessCourse").className = 'hidden';
+                    }
+                    if(totalComments.length===0){
+                        console.log("0");
+                        document.getElementById("noComment").className = 'text-darkBlue  text-2xl font-bold text-center my-10';
+                        document.getElementById("lessCourse").className = 'hidden';
+                        document.getElementById("moreCourse").className = 'hidden';
                     }
                 } else {
                     console.log("not ok")
@@ -203,13 +242,13 @@ const Comments = () => {
                                 className="checked:text-[#8B8C8D] peer-checked:text-yellow-300 text-2xl">فیلتر بر اساس  ترم
                         </option>
                         {filterList.map(
-                            (p, index) => <option key={index} value={p.publicId} className="bg-white">{p.name}</option>
+                            (p, index) => <option key={index} value={p.publicId} name={p.name} className="bg-white">{p.name}</option>
                         )}
                     </select>
                 </div>
                 <div id={"deleteFilter"} className='hidden'>
-                    <button type="submit"
-                            className=" flex flex-row  items-center text-center px-4 bg-darkBlue text-white font-extralight rounded-xl w-40 h-12 text-xl   hover:drop-shadow-xl hover:shadow-teal-950 pr-8 "><Close2/><p className={"mr-2"}>حذف فیلتر</p>
+                    <button
+                            className=" flex flex-row  items-center text-center px-4 bg-darkBlue text-white font-extralight rounded-xl w-40 h-12 text-xl   hover:drop-shadow-xl hover:shadow-teal-950 pr-8 " onClick={deleteFilterHandler}><Close2/><p className={"mr-2"}>حذف فیلتر</p>
                     </button>
                 </div>
             </div>
