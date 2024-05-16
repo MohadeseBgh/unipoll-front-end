@@ -1,11 +1,12 @@
 import Comment from "@/components/comment";
-import {useContext, useEffect, useState} from "react";
+import {useContext, useEffect, useRef, useState} from "react";
 import {coursePIDContext} from "@/context/coursePIDContext";
 import Close from "@/components/icons/Close";
 import Close2 from "@/components/icons/Close2";
 
 const Comments = () => {
     const [comments, setComments] = useState([]);
+    const [ref, setRef] = useState([]);
     const [totalComments, setTotalComments] = useState([]);
     const [selectedCourse , setSelectedCourse]=useContext(coursePIDContext);
     const [filterList, setFilterList] = useState([]);
@@ -34,7 +35,7 @@ const Comments = () => {
         };
 
         fetchData();
-    }, []);
+    }, [ref]);
     useEffect(() => {
         const fetchData2 = async () => {
             try {
@@ -157,9 +158,10 @@ const Comments = () => {
     const filterHandler = async (e) => {
         e.preventDefault();
         setFilter({publicId: e.target.value});
+        const pId=e.target.value;
         const fetchData = async () => {
             try {
-                const response3 = await fetch(`http://localhost:8090/unipoll/v1/comment-c/${selectedCourse.publicId}?filterTopFive=`+false+`&term=${filter.publicId}` ,{
+                const response3 = await fetch(`http://localhost:8090/unipoll/v1/comment-c/${selectedCourse.publicId}?filterTopFive=`+false+`&term=${pId}` ,{
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json"
@@ -171,9 +173,10 @@ const Comments = () => {
                     const result3=data3.result;
                     const temp=result3;
                     console.log(result3);
-                    setComments(result3);
-                    const temp2=comments;
-                    setComments(result3);
+                    setComments(temp);
+                    setRef(temp);
+                    // const temp2=comments;
+                    // setComments(result3);
                     document.getElementById("moreCourse").className = 'hidden';
                     document.getElementById("lessCourse").className = 'hidden';
                     document.getElementById("noComment").className = 'hidden';
