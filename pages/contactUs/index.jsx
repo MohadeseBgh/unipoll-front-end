@@ -39,14 +39,12 @@ const ContactUs = () => {
   }
   return (
       <Layout>
-
-
       <div className={"h-screen w-screen flex flex-col bg-white gap-y-4 overflow-x-hidden items-center"}>
         <h1 className='z-0 text-5xl font-bold text-darkBlue mt-16'>راه های ارتباطی با ما</h1>
         <div className=" flex flex-col  gap-y-4  items-center my-32">
           <hr className=" laptop:w-full table:w-0 h-1.5 border-t-0 bg-darkBlue "/>
           <div id="contacUs"
-               className='w-screen text-black laptop:flex-row  mobile: flex flex-col items-center justify-items-center max-h-96'>
+               className='w-screen text-black laptop:flex-row-reverse  mobile: flex flex-col items-center justify-items-center max-h-96'>
             <div className='basis-1/2 flex laptop:pl-72 mobile:pl-0 items-center'>
               <div
                   className={"z-10 min-h-[34rem] rounded-3xl min-w-[40rem] shadow-md bg-[#E2F4FC] justify-items-center text-center px-6"}>
