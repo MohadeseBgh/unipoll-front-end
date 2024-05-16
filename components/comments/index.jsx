@@ -193,6 +193,7 @@ const Comments = () => {
     const deleteFilterHandler = async (e) => {
         e.preventDefault();
         document.getElementById("deleteFilter").className = 'hidden';
+
         const fetchData = async () => {
             try {
                 const response = await fetch(`http://localhost:8090/unipoll/v1/comment-c/${selectedCourse.publicId}?filterTopFive=`+true ,{
