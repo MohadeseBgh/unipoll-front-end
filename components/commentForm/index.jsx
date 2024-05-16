@@ -100,7 +100,7 @@ const CommentForm = (props) => {
                     </div>
                     <div className='flex flex-col basis-4/12 items-end'>
                         <button type="submit"
-                                className=" px-4 bg-darkBlue text-white font-extralight rounded-xl w-60 h-12 text-xl   hover:drop-shadow-xl hover:shadow-teal-950 ">ارسال
+                                className="transition hover:scale-105 px-4 bg-darkBlue text-white font-extralight rounded-xl w-60 h-12 text-xl   hover:drop-shadow-xl hover:shadow-teal-950 ">ارسال
                         </button>
                         <div id={"erorrAcsess"}
                              className=" transition duration-1000 ease-in-out opacity-0 hidden mt-5 bg-red-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-red-500 ">
