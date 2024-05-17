@@ -181,6 +181,7 @@ const Home = () => {
           <div className={`${search === true ? 'hidden' : ''}`}>
               <div id="whyUniPoll"
                    className=' w-screen text-black laptop:flex-row  mobile: flex flex-col items-center mb-24'>
+                  <div className='flex basis-1/2 justify-center'><img src='/images/why.jpg' alt={'why UniPoll ?'}/></div>
                   <div className='basis-1/2 flex flex-col laptop:pl-72 mobile:pl-0 ' dir='rtl'>
                       <h3 className='text-5xl font-bold text-darkBlue  mb-12'>چرا UniPoll ؟</h3>
                       <h3 className='text-3xl font-bold text-black '> امکان نظر دهی به اساتید</h3>
@@ -194,7 +195,6 @@ const Home = () => {
                       <p className='text-[1.75rem]  text-black mb-8'>شما به اسانی میتوانید جزوات درس مورد نظر
                           خود را پیدا کنید.</p>
                   </div>
-                  <div className='flex basis-1/2'><img src='/images/why.jpg' alt={'why UniPoll ?'}/></div>
               </div>
               <div id="topCourse" className="flex flex-col mb-24 w-screen bg-[#F2FBFF] justify-items-center" dir="rtl">
                   <div className="flex flex-row items-center justify-between pt-8">
