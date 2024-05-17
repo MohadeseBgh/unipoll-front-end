@@ -44,16 +44,18 @@ const CommentForm = (props) => {
             if (response.ok) {
                 console.log("comment OK");
                 document.getElementById('commentText').value="";
-                document.getElementById("okAlert").className = " transition duration-1000 ease-in-out flex mt-5 bg-green-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-green-500 ";
+                document.getElementById("erorrAcsess").className= ' transition duration-1000 ease-in-out opacity-0 hidden  mt-5 bg-red-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-red-500';
+                document.getElementById("okAlert").className = " transition duration-1000 ease-in-out opacity-100 flex flex-row mt-5 bg-green-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-green-500 ";
                 setTimeout(function(){
-                    document.getElementById("okAlert").className = ' hidden';
+                    document.getElementById("okAlert").className = '  transition duration-1000 ease-in-out opacity-0 flex flex-row mt-5 bg-green-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-green-500 ';
                 }, 4000);
 
             } else if (response.status===401) {
-                document.getElementById("erorrAcsess").className = ' mt-5 flex bg-red-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-red-500 ';
+                document.getElementById("okAlert").className = " transition duration-1000 ease-in-out opacity-0 hidden mt-5 bg-green-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-green-500 ";
+                document.getElementById("erorrAcsess").className= ' transition duration-1000 ease-in-out opacity-100 flex flex-row  mt-5 bg-red-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-red-500';
                 setTimeout(function(){
-                    document.getElementById("erorrAcsess").className = ' hidden';
-                }, 5000);
+                    document.getElementById("erorrAcsess").className = ' transition duration-1000 ease-in-out opacity-0 flex flex-row  mt-5 bg-red-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-red-500';
+                }, 3000);
                 console.log("not ok")
             }
         }catch (e) {
@@ -103,7 +105,7 @@ const CommentForm = (props) => {
                                 className="transition hover:scale-105 px-4 bg-darkBlue text-white font-extralight rounded-xl w-60 h-12 text-xl   hover:drop-shadow-xl hover:shadow-teal-950 ">ارسال
                         </button>
                         <div id={"erorrAcsess"}
-                             className=" transition duration-1000 ease-in-out opacity-0 hidden mt-5 bg-red-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-red-500 ">
+                             className=" transition duration-1000 ease-in-out opacity-0 flex flex-row mt-5 bg-red-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-red-500 ">
                             <ErorrIcon/>
                             <div className=" mr-3" dir='rtl'>
                                 <div className="font-bold text-lg text-right text-black ">محدودیت دسترسی</div>
@@ -113,7 +115,7 @@ const CommentForm = (props) => {
                             </div>
                         </div>
                         <div id={"okAlert"}
-                             className=" transition duration-1000 ease-in-out hidden mt-5 bg-green-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-green-500 ">
+                             className=" transition duration-1000 ease-in-out opacity-0 hidden mt-5 bg-green-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-green-500 ">
                              <OkIcon/>
                             <div className=" mr-3" dir='rtl'>
                                 <div className="font-bold  text-right text-lg text-black ">موفقیت آمیز</div>

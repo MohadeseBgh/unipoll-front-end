@@ -4,6 +4,8 @@ import {useContext, useEffect, useState} from "react";
 import ShowCourseInfo from "@/components/showCourseInfo";
 import Edit from "@/components/icons/Edit";
 import {coursePIDContext} from "@/context/coursePIDContext";
+import OkAlert from "@/components/okAlert";
+import ErrorAlert from "@/components/errorAlert";
 
 const CourseInfo = () => {
     //
@@ -11,6 +13,8 @@ const CourseInfo = () => {
     const [hover, setHover] = useState(null);
     //
     const [edit , setEdit]=useState(false);
+    const [okRate , setOkRate]=useState(false);
+    const [accessRate , setAccessRate]=useState(false);
     const [editAccess , setEditAccess]=useState(false);
     const [selectedCourse , setSelectedCourse]=useContext(coursePIDContext);
     const [rate , setRate]=useState(4.2);
@@ -72,12 +76,33 @@ const CourseInfo = () => {
                 },
                 body: JSON.stringify({rate:rating}),
             });
+            const response1 = await fetch(`http://localhost:8090/unipoll/v1/instructor-course/${selectedCourse.publicId}`);
+
+            if (response1.ok) {
+                const data = await response1.json();
+                console.log(data.result);
+                setCourseInfo(prevState => ({
+                    ...prevState,
+                    rate: data.result.rate,
+                    rate_num:data.result.rate_num
+                }));
+                setRate( courseInfo.rate);
+                console.log(data.result);
+            } else {
+                console.log("Network response was not ok");
+            }
             if (response.ok) {
                 const data = await response.json();
-                console.log('ok');
-                console.log(data);
+                setOkRate(true);
+                setTimeout(function(){
+                    setOkRate(false);
+                    }, 2000);
 
-            } else {
+            } else if(response.status===401){
+                setAccessRate(true);
+              setTimeout(function(){
+                   setAccessRate(false);
+                }, 3000);
                 console.log("Not ok");
             }
         } catch (error) {
@@ -114,7 +139,7 @@ const CourseInfo = () => {
     //
     // }, [rating]);
     return(
-      <div className={'w-full h-full bg-[#E2F4FC] shadow-[0_0_60px_-15px_rgba(0,0,0,0.3)] flex flex-col p-5 gap-5'}>
+      <div className={'w-full h-full bg-[#E2F4FC] shadow-[0_0_60px_-15px_rgba(0,0,0,0.3)] flex flex-col p-5 gap-5 text-black'}>
           <div className={'w-full h-[24rem] flex flex-row gap-10'}>
               <img src={'images/CE1.png'} className={'h-auto w-auto rounded-2xl'} alt={'course'}/>
               <div className={'flex flex-col w-full gap-2 h-full items-start justify-evenly '}>
@@ -135,33 +160,39 @@ const CourseInfo = () => {
                   <div className={'h-0.5 w-full bg-darkBlue '}></div>
                   <div id={'rating'} className={'flex flex-row justify-between items-center w-full'}>
                       <p className={'text-lg text-black'}>امتیاز خودرا به این درس بدهید</p>
-                        <div dir={'ltr'}>
-                            {[...Array(5)].map((star, index) => {
-                                const currentRating = index + 1;
-                                return (
-                                    <label key={index} >
-                                        <input className={'hidden '}
-                                               type="radio"
-                                               name="rating"
-                                               value={currentRating}
-                                               onChange={() => {
-                                                   setRating((prevRating) => {
-                                                       return { ...prevRating, rate: currentRating };
-                                                   });
-                                                   handleRating(currentRating).then(r => {});
-                                               }}
-                                               checked={currentRating === rating.rate}
-                                        />
-                                        <span
-                                            className={`p-5 cursor-pointer text-3xl ${currentRating <= (hover || rating.rate) ? "text-[#ffc107]" : "text-white "}`}
-                                            onMouseEnter={() => setHover(currentRating)}
-                                            onMouseLeave={() => setHover(null)}
-                                        >&#9733;
+                      <div className={"flex flex-col"}>
+                          <div dir={'ltr'}>
+                              {[...Array(5)].map((star, index) => {
+                                  const currentRating = index + 1;
+                                  return (
+                                      <label key={index}>
+                                          <input className={'hidden '}
+                                                 type="radio"
+                                                 name="rating"
+                                                 value={currentRating}
+                                                 onChange={() => {
+                                                     setRating((prevRating) => {
+                                                         return {...prevRating, rate: currentRating};
+                                                     });
+                                                     handleRating(currentRating).then(r => {
+                                                     });
+                                                 }}
+                                                 checked={currentRating === rating.rate}
+                                          />
+                                          <span
+                                              className={`p-3 cursor-pointer text-3xl ${currentRating <= (hover || rating.rate) ? "text-[#ffc107]" : "text-gray-400 "}`}
+                                              onMouseEnter={() => setHover(currentRating)}
+                                              onMouseLeave={() => setHover(null)}
+                                          >&#9733;
                                   </span>
-                                    </label>
-                                );
-                            })}
-                        </div>
+                                      </label>
+                                  );
+                              })}
+                          </div>
+                          {okRate && <div className={"w-full"}><OkAlert text={"نظر شما با موفقیت ثبت شد."}/></div>}
+                          { accessRate && <div  className={"w-full"}><ErrorAlert text={"محدودیت دسترسی:به اکانت خود وارد شوید."}/></div>}
+                      </div>
+
 
                       {/*<div id={'show_rate'} className={'flex flex-row-reverse items-center'}>*/}
                       {/*    <div onClick={handleRating} >*/}
@@ -189,13 +220,13 @@ const CourseInfo = () => {
                   <button onClick={editClick} className={'hover:scale-105'}>
                       <Edit/>
                   </button>
-                  { edit && <p>
+                  {edit && <p>
 
                   </p>}
               </div>
 
           </div>
       </div>
-  )
+    )
 }
 export default CourseInfo;
