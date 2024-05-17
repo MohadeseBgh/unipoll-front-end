@@ -53,18 +53,19 @@ const UploadBooklet = () => {
             .then((response) =>{
                 response.text();
                 if(response.ok){
-                    document.getElementById('bookletText').value="";
-                    document.getElementById("okAlert").className = " transition duration-1000 ease-in-out flex mt-5 bg-green-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-green-500 ";
+                    console.log("upload OK");
+                    document.getElementById("erorrAcsess").className= ' transition duration-1000 ease-in-out opacity-0 hidden  mt-5 bg-red-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-red-500';
+                    document.getElementById("okAlert").className = " transition duration-1000 ease-in-out opacity-100 flex flex-row mt-5 bg-green-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-green-500 ";
                     setTimeout(function(){
-                        document.getElementById("okAlert").className = ' hidden';
-                        setSelectedFile();
-                    }, 3000);
+                        document.getElementById("okAlert").className = '  transition duration-1000 ease-in-out opacity-0 flex flex-row mt-5 bg-green-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-green-500 ';
+                    }, 4000);
 
                 } else if (response.status===401) {
-                    document.getElementById("erorrAcsess").className = ' mt-5 flex bg-red-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-red-500 ';
+                    document.getElementById("okAlert").className = " transition duration-1000 ease-in-out opacity-0 hidden mt-5 bg-green-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-green-500 ";
+                    document.getElementById("erorrAcsess").className= ' transition duration-1000 ease-in-out opacity-100 flex flex-row  mt-5 bg-red-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-red-500';
                     setTimeout(function(){
-                        document.getElementById("erorrAcsess").className = ' hidden';
-                    }, 5000);
+                        document.getElementById("erorrAcsess").className = ' transition duration-1000 ease-in-out opacity-0 flex flex-row  mt-5 bg-red-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-red-500';
+                    }, 3000);
                     console.log("not ok")
                 }
             } )
@@ -102,7 +103,7 @@ const UploadBooklet = () => {
 
     };
   return(
-      <div className={'flex justify-center items-center w-full text-black mb-28'}>
+      <div className={'flex justify-center items-center w-full text-black '}>
           <form className='flex flex-col gap-4 w-full justify-center items-center' dir={'rtl'} encType={"multipart/form-data"}
           onSubmit={sendFile}
           >
@@ -127,7 +128,7 @@ const UploadBooklet = () => {
                           ارسال
                       </button>
                       <div id={"erorrAcsess"}
-                           className=" transition duration-1000 ease-in-out opacity-0 hidden mt-5 bg-red-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-red-500 ">
+                           className=" transition duration-1000 ease-in-out opacity-0 flex flex-row mt-5 bg-red-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-red-500 ">
                           <ErorrIcon/>
                           <div className=" mr-3" dir='rtl'>
                               <div className="font-bold text-lg text-right text-black ">محدودیت دسترسی</div>
@@ -137,7 +138,7 @@ const UploadBooklet = () => {
                           </div>
                       </div>
                       <div id={"okAlert"}
-                           className=" transition duration-1000 ease-in-out hidden mt-5 bg-green-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-green-500 ">
+                           className="transition duration-1000 ease-in-out opacity-0 hidden mt-5 bg-green-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-green-500 ">
                           <OkIcon/>
                           <div className=" mr-3" dir='rtl'>
                               <div className="font-bold  text-right text-lg text-black ">موفقیت آمیز</div>
