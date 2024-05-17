@@ -102,7 +102,7 @@ const CourseInfo = () => {
                 setAccessRate(true);
               setTimeout(function(){
                    setAccessRate(false);
-                }, 3000);
+                }, 2000);
                 console.log("Not ok");
             }
         } catch (error) {
