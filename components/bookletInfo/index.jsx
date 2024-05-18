@@ -60,8 +60,8 @@ const BookletInfo = () => {
                       </div>
                       <div className="flex flex-row  items-center">
                           <button
-                              className=" flex flex-row  items-center text-center  bg-darkBlue text-white font-normal rounded-xl  h-8 text-sm   hover:drop-shadow-xl hover:shadow-teal-950 px-4 ">
-                              <p className={"ml-2"}>دانلود جزوه</p><Donlowd/>
+                              className=" flex flex-row   items-center text-center  bg-darkBlue text-white font-normal rounded-xl  h-8 text-sm   hover:drop-shadow-xl hover:shadow-teal-950 px-4 ">
+                              <p className={"ml-2"}>دانلود جزوه</p><Donlowd color={"white"}/>
                           </button>
                       </div>
                   </div>
