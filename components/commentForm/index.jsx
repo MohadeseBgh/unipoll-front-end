@@ -4,8 +4,10 @@ import CarouselCourse from "@/components/carouselCourse";
 import Error from "next/error";
 import ErorrIcon from "@/components/icons/ErorrIcon";
 import OkIcon from "@/components/icons/okIcon";
+import {commentCContext} from "@/context/commentCContext";
 
 const CommentForm = (props) => {
+    const [comments, setComments] = useContext(commentCContext);
     const [selectedCourse , setSelectedCourse]=useContext(coursePIDContext);
     const [filter, setFilter] = useState([]);
     const [formValue, setFormValue] = useState({text:"",icPublicId:"",termPublicId:"",unknown:false});
@@ -43,6 +45,20 @@ const CommentForm = (props) => {
             console.log(formValue)
             if (response.ok) {
                 console.log("comment OK");
+                const response2 = await fetch(`http://localhost:8090/unipoll/v1/comment-c/${selectedCourse.publicId}?filterTopFive=`+false ,{
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                });
+                if (response2.ok) {
+                    console.log("OK");
+                    const data2=await response2.json();
+                    console.log(data2.result);
+                    const result2=data2.result;
+                    console.log(result2);
+                    setComments(result2);
+                }
                 document.getElementById('commentText').value="";
                 document.getElementById("erorrAcsess").className= ' transition duration-1000 ease-in-out opacity-0 hidden  mt-5 bg-red-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-red-500';
                 document.getElementById("okAlert").className = " transition duration-1000 ease-in-out opacity-100 flex flex-row mt-5 bg-green-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-green-500 ";

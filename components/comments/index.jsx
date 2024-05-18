@@ -3,8 +3,11 @@ import {useContext, useEffect, useState} from "react";
 import {coursePIDContext} from "@/context/coursePIDContext";
 import Close from "@/components/icons/Close";
 import Close2 from "@/components/icons/Close2";
+import {commentCContext} from "@/context/commentCContext";
+
+
 const Comments = () => {
-    const [comments, setComments] = useState([]);
+    const [comments, setComments] = useContext(commentCContext);
     const [totalComments, setTotalComments] = useState([]);
     const [selectedCourse , setSelectedCourse]=useContext(coursePIDContext);
     const [filterList, setFilterList] = useState([]);
