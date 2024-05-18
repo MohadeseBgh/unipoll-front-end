@@ -4,9 +4,10 @@ import {coursePIDContext} from "@/context/coursePIDContext";
 import Close from "@/components/icons/Close";
 import Close2 from "@/components/icons/Close2";
 import BookletOfCourse from "@/components/bookletOfCourse";
+import {bookletOfCourseContext} from "@/context/bookletOfCourseContext";
 
 const BookletsOfCourse = () => {
-    const [booklets, setBooklets] = useState([]);
+    const [booklets, setBooklets] = useContext(bookletOfCourseContext);
     const [ref, setRef] = useState([]);
     const [totalComments, setTotalComments] = useState([]);
     const [selectedCourse , setSelectedCourse]=useContext(coursePIDContext);
@@ -44,7 +45,7 @@ const BookletsOfCourse = () => {
             {booklets.map(
                 (p, index) => <BookletOfCourse key={index} courseName={p.courseName}
                                        text={p.text}
-                                               lessonPr={[p.instructorFirstname," ",p.instructorLastname]} term={p.term} writer={[p.uploaderFirstname," ",p.uploaderLastname]} like={p.likeNumber}/>
+                                               lessonPr={[p.instructorFirstname," ",p.instructorLastname]} term={p.term} writer={[p.uploaderFirstname," ",p.uploaderLastname]} like={p.likeNumber} publicId={p.publicId}/>
             )}
         </div>
     );

@@ -3,9 +3,11 @@ import {useContext, useEffect, useState} from "react";
 import {coursePIDContext} from "@/context/coursePIDContext";
 import ErorrIcon from "@/components/icons/ErorrIcon";
 import OkIcon from "@/components/icons/okIcon";
+import {bookletOfCourseContext} from "@/context/bookletOfCourseContext";
 
 const UploadBooklet = () => {
     const [selectedFile, setSelectedFile] = useState(null);
+    const [booklets, setBooklets] = useContext(bookletOfCourseContext);
     const [bookletRequest, setBookletRequest] = useState({file:"",text:"",termPublicId:"",instCoursePublicId:""});
     const [formValue, setFormValue] = useState({file:"",bookletRequest:""});
     const [selectedCourse , setSelectedCourse]=useContext(coursePIDContext);
@@ -54,11 +56,25 @@ const UploadBooklet = () => {
                 response.text();
                 if(response.ok){
                     console.log("upload OK");
+                    const myHeaders2 = new Headers();
+                    myHeaders.append("Content-Type", "application/json");
+
+                    const requestOptions2 = {
+                        method: "GET",
+                        headers: myHeaders,
+                    };
+                    fetch(`http://localhost:8090/unipoll/v1/instructor-course/booklets/${selectedCourse.publicId}`, requestOptions2)
+                        .then( response => response.json())
+                        .then((result) =>{
+                            setBooklets(result.result)
+                        })
+                        .catch((error) => console.error(error));
                     document.getElementById("erorrAcsess").className= ' transition duration-1000 ease-in-out opacity-0 hidden  mt-5 bg-red-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-red-500';
                     document.getElementById("okAlert").className = " transition duration-1000 ease-in-out opacity-100 flex flex-row mt-5 bg-green-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-green-500 ";
                     setTimeout(function(){
                         document.getElementById("okAlert").className = '  transition duration-1000 ease-in-out opacity-0 flex flex-row mt-5 bg-green-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-green-500 ';
-                    }, 4000);
+                        setSelectedFile(null);
+                        }, 4000);
 
                 } else if (response.status===401) {
                     document.getElementById("okAlert").className = " transition duration-1000 ease-in-out opacity-0 hidden mt-5 bg-green-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-green-500 ";

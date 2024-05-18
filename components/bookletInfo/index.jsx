@@ -1,25 +1,48 @@
-import YellowStar from "@/components/icons/YellowStar";
-import Star from "@/components/icons/Star";
 import {useContext, useEffect, useState} from "react";
-import ShowCourseInfo from "@/components/showCourseInfo";
-import Edit from "@/components/icons/Edit";
-import {coursePIDContext} from "@/context/coursePIDContext";
 import Bookmark_fill from "@/components/icons/Bookmark_fill";
 import Bookmark from "@/components/icons/Bookmark";
 import Report from "@/components/icons/Report";
 import ShowBookletInfo from "@/components/showBookletInfo";
 import Like from "@/components/icons/Like";
 import Like_fill from "@/components/icons/Like_fill";
-import Close2 from "@/components/icons/Close2";
 import Donlowd from "@/components/icons/Donlowd";
+import {bookletPIDContext} from "@/context/bookletPIDContext";
 
 const BookletInfo = () => {
     const [save , setSave]=useState(false);
     const [like , setLike]=useState(false);
     const [professorLike , setProfessorLike]=useState(true);
-    const [selectedCourse , setSelectedCourse]=useContext(coursePIDContext);
+    const [selectedBooklet , setSelectedBooklet]=useContext(bookletPIDContext);
     const [rate , setRate]=useState(4.2);
     const [bookletInfo , setBookletInfo]=useState({writerName:'جعفر کریمی' , courseProfessor:'رضا رمضانی' , course:'مبانی برنامه نویسی',term:"ترم پاییز 1400" , info:'توضیحات :هدف این درس آشنا نمودن دانشجویان با مفاهیم و اصول روشهای تحلیل هوشمند داده ها و روش های هوشمند حل مسایل مهندسی با استفاده از رویکرد های فازی ، تکاملی و شبکه های عصبی میباشد. درتحقق این هدف دانشجویان با ابزارهای نرمافزاری لازم برای استفاده از این روش ها اشنا میشوند.'})
+    useEffect(() => {
+        const fetchData = async () => {
+            const jwtToken=localStorage.getItem('jwtToken');
+            try {
+                const response1 = await fetch(`http://localhost:8090/unipoll/v1/booklet/${selectedBooklet.publicId}`,{
+                    method: 'GET',
+                    headers: {
+                        "Content-Type": "application/json",
+                        'Authorization': jwtToken
+                    },
+                });
+
+                if (response1.ok) {
+                    console.log("booklet info")
+                    const data = await response1.json();
+                    setBookletInfo(data.result);
+                    console.log(data.result);
+
+                } else {
+                    console.log("Network response was not ok");
+                }
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+    }, []);
     return(
       <div className={'w-full h-full bg-[#E2F4FC] shadow-[0_0_60px_-15px_rgba(0,0,0,0.3)] flex flex-col p-5 gap-5 text-black'}>
           <div className={'w-full h-[27rem] flex flex-row gap-10'}>
@@ -39,9 +62,9 @@ const BookletInfo = () => {
                       <p className={'text-center text-darkBlue text-2xl whitespace-pre font-bold'}>مشخصات جزوه</p>
                       <div className={'h-0.5 w-full bg-darkBlue'}></div>
                   </div>
-                  <ShowBookletInfo courseName={bookletInfo.course} term={bookletInfo.term}
-                                   courseProfessor={bookletInfo.courseProfessor} writerName={bookletInfo.writerName}
-                                   info={bookletInfo.info}/>
+                  <ShowBookletInfo courseName={bookletInfo.courseName} term={bookletInfo.term}
+                                   courseProfessor={[bookletInfo.instructorFirstname," ",bookletInfo.instructorLastname]} writerName={[bookletInfo.uploaderFirstname," ",bookletInfo.uploaderLastname]}
+                                   info={bookletInfo.description}/>
                   <div className={'h-0.5 w-full bg-darkBlue '}></div>
                   <div className={"flex flex-row w-full items-center justify-between justify-items-stretch"}>
                       <div className="flex flex-col ">
