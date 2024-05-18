@@ -29,32 +29,32 @@ const AboutUs = () => {
                           <div className={' basis-2/12 px-4 mb-12 m-1 shadow-xl rounded-3xl text-center justify-center pb-4' }>
                               <img src={'images/kimm.png'} className={' rounded-full size-32 mx-auto'} />
                               <p className={'font-bold text-black mt-4 text-xl'}>Kimia Arjmand</p>
-                              <a href={'# '}> Linkdin </a>
+                              <a href={'# '}> Linkedin </a>
                           </div>
                           <div className={' basis-2/12 mb-12 shadow-xl m-1 px-4 rounded-3xl text-center'}>
                               <img src={'images/mary1.png'} className={' rounded-full size-32  mx-auto '} />
                               <p className={'font-bold text-black mt-4  text-xl'}>Maryam Hosseinpoor</p>
-                              <a href={'#'}> Linkdin </a>
+                              <a href={'#'}> Linkedin </a>
                           </div>
                           <div className={' basis-2/12 mb-12 shadow-xl m-1 px-4 rounded-3xl text-center'}>
                               <img src={'images/nas1.png'} className={' rounded-full size-32  mx-auto '} />
                               <p className={'font-bold text-black mt-4  text-xl'}>Nastaran Sarkhosh</p>
-                              <a href={'#'}> Linkdin </a>
+                              <a href={'#'}> Linkedin </a>
                           </div>
                           <div className={' basis-2/12 mb-12 shadow-xl m-1 px-4 rounded-3xl text-center'}>
                               <img src={'images/mo.png'} className={'rounded-full size-32 mx-auto'} />
                               <p className={'font-bold text-black mt-4 text-xl'}>Mohadeseh Baghbani</p>
-                              <a href={'#'}> Linkdin </a>
+                              <a href={'#'}> Linkedin </a>
                           </div>
                           <div className={' basis-2/12 mb-12  shadow-xl m-1 px-4 rounded-3xl text-center'}>
                               <img src={'images/hos.jpg'} className={'rounded-full size-32 mx-auto'} />
                               <p className={'font-bold text-black mt-4 text-xl'}>Hossein Aghaii</p>
-                              <a href={'#'}> Linkdin </a>
+                              <a href={'#'}> Linkedin </a>
                           </div>
                           <div className={' basis-2/12 mb-12 shadow-xl m-1 px-4 rounded-3xl text-center '}>
                               <img src={'images/image (10).png'} className={'rounded-full size-32 mx-auto'} />
                               <p className={'font-bold text-black mt-4 text-xl'}>Saeed Ranjbar Bafqi</p>
-                              <a href={'#'}> Linkdin </a>
+                              <a href={'#'}> Linkedin </a>
                           </div>
                       </div>
                   </div>
