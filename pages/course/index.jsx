@@ -5,6 +5,9 @@ import UploadBooklet from "@/components/uploadBooklet";
 import CommentForm from "@/components/commentForm";
 import {useState} from "react";
 import Comments from "@/components/comments";
+import BookletOfCourse from "@/components/bookletOfCourse";
+import BookletsOfCourse from "@/components/bookletsOfCourse";
+
 
 const Course = () => {
    return(
@@ -14,8 +17,13 @@ const Course = () => {
                   <div id={'course information'} className={'w-full  pb-10'}>
                       <CourseInfo/>
                   </div>
-                  <div id={'booklets'} className={'w-full bg-darkBlue'}>
-                      booklet
+                  <div id={'booklets'} className={'w-full '}>
+                      <div className="flex flex-row items-center justify-between">
+                          <hr className="w-4/12 h-1 bg-darkBlue "/>
+                          <h3 className='desktop:text-3xl text-2xl font-bold text-black'>جزوات</h3>
+                          <hr className="w-4/12 h-1 bg-darkBlue "/>
+                      </div>
+                      <BookletsOfCourse/>
                   </div>
                   <div id={'send booklet'} className={'w-full my-10 flex flex-col justify-center items-center gap-4'}>
                       <p className={'text-darkBlue text-2xl '}>
