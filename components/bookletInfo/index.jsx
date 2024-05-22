@@ -31,6 +31,7 @@ const BookletInfo = () => {
                     console.log("booklet info")
                     const data = await response1.json();
                     setBookletInfo(data.result);
+                    setProfessorLike(data.result.teacherLike)
                     console.log(data.result);
 
                 } else {
@@ -77,7 +78,7 @@ const BookletInfo = () => {
                                   {!like && <Like/>}
                                   {like && <Like_fill/>}
                               </button>
-                              <p className="mr-2 text-black ">4</p>
+                              <p className="mr-2 text-black ">{bookletInfo.likeNumber}</p>
                           </div>
                           {professorLike && <p className={"text-sm font-bold"}>لایک شده توسط استاد</p>}
                       </div>

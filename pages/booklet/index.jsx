@@ -4,6 +4,8 @@ import CommentForm from "@/components/commentForm";
 import {useState} from "react";
 import Comments from "@/components/comments";
 import BookletInfo from "@/components/bookletInfo";
+import BookletCommentForm from "@/components/bookletCommentForm";
+import BookletComments from "@/components/bookletComments";
 
 const Booklet = () => {
    return(
@@ -19,8 +21,8 @@ const Booklet = () => {
                           <h3 className='desktop:text-3xl text-2xl font-bold text-black'>نظرات</h3>
                           <hr className="w-4/12 h-1 bg-darkBlue "/>
                       </div>
-                      <Comments/>
-                      <CommentForm/>
+                      <BookletComments/>
+                      <BookletCommentForm/>
                   </div>
                   <Footer/>
               </div>
