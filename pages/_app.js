@@ -10,6 +10,7 @@ import BookletPIDContext from "@/context/bookletPIDContext";
 import CommentC from "@/context/commentCContext";
 import CommentCProvider from "@/context/commentCContext";
 import BookletOfCourseProvider from "@/context/bookletOfCourseContext";
+import CommentBProvider from "@/context/commentBContext";
 
 
 export default function App({ Component, pageProps }) {
@@ -25,7 +26,9 @@ export default function App({ Component, pageProps }) {
                                     <BookletPIDContext>
                                         <CommentCProvider>
                                             <BookletOfCourseProvider>
-                                                <Component {...pageProps} />
+                                                <CommentBProvider>
+                                                    <Component {...pageProps} />
+                                                </CommentBProvider>
                                             </BookletOfCourseProvider>
                                         </CommentCProvider>
 

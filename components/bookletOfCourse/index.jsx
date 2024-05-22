@@ -26,7 +26,7 @@ const BookletOfCourse = (props) => {
                      src={'./images/bookletImgInfo.png'}
                      alt={'booklet'} />
             </div>
-            <div className="w-8/12 flex flex-row h-full ">
+            <div className="w-8/12 flex flex-row h-full items-center">
                 <div className="flex flex-col gap-8 w-4/12">
                     <div className={'flex flex-row gap-2'}>
                         <p className="font-bold  text-lg laptop:text-lg   text-black ">منتشر کننده:  </p>
@@ -53,10 +53,10 @@ const BookletOfCourse = (props) => {
             </div>
 
             <div className="w-3/12  py-6 ">
-                <div className='flex flex-row scale-105 gap-2 ml-0 '>
+                <div className='flex flex-row  gap-2 justify-end ml-4'>
 
 
-                <button className='flex flex-row pl-8 '
+                <button className='flex flex-row pl-4 '
                         onClick={()=>{
                             setSave(!save)
                         }}>
@@ -72,7 +72,7 @@ const BookletOfCourse = (props) => {
                         {!like && <Like/>}
                         {like && <Like_fill/>}
                     </button>
-                    <button className='flex flex-row pr-8'>
+                    <button className='flex flex-row pr-4'>
                         <Donlowd color={"#102C51"}/>
                     </button>
                 </div>
