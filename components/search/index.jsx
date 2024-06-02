@@ -20,7 +20,7 @@ const Search = (props) => {
                   props.result.map((p, index) =>
                       <LessonSearch key={index} lessonName={p.courseName}
                                     professorName={[p.instructorCourseFirstname, " ", p.instructorCourseLastname]}
-                                    description={p.description} rate={p.rate}/>)}
+                                    description={p.description} rate={p.rate} publicId={p.publicId}/>)}
           </div>
           <div
               className={`${props.result.length > 0 ? 'hidden' : ''} justify-items-center items-center  justify-center justify-self-center text-center my-20`}

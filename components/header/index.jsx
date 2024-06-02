@@ -49,7 +49,7 @@ const Header = () => {
           }}
           >
               <User/>
-              <p className='text-xs text-darkBlue'>{[user.firstname+' '+user.lastname]}</p>
+              <p className='text-xs text-darkBlue' id={"name"}>{[user.firstname+' '+user.lastname]}</p>
               { userSetting.logIO && <div
                                    className="z-10 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-20
                             absolute translate-y-20">
@@ -65,7 +65,10 @@ const Header = () => {
                           <div
                              className="block px-2 py-2 hover:bg-blue1 rounded-b-lg"
                             onClick={()=>{
-                                localStorage.setItem('jwtToken','');}}
+                                localStorage.setItem('jwtToken','');
+                                document.getElementById("name").innerHTML = "";
+                            }
+                          }
                           >
                               Log Out
                           </div>

@@ -19,13 +19,24 @@ const BookletInfo = () => {
         const fetchData = async () => {
             const jwtToken=localStorage.getItem('jwtToken');
             try {
-                const response1 = await fetch(`http://localhost:8090/unipoll/v1/booklet/${selectedBooklet.publicId}`,{
-                    method: 'GET',
-                    headers: {
-                        "Content-Type": "application/json",
-                        'Authorization': jwtToken
-                    },
-                });
+                let response1;
+                if(jwtToken===null){
+                     response1 = await fetch(`http://localhost:8090/unipoll/v1/booklet/${selectedBooklet.publicId}`,{
+                        method: 'GET',
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    });
+
+                }else{
+                     response1 = await fetch(`http://localhost:8090/unipoll/v1/booklet/${selectedBooklet.publicId}`,{
+                        method: 'GET',
+                        headers: {
+                            "Content-Type": "application/json",
+                            'Authorization': jwtToken
+                        },
+                    });
+                }
 
                 if (response1.ok) {
                     console.log("booklet info")
