@@ -14,7 +14,7 @@ const CarouselCourse = (props) => {
         router.push('/course').then(r => {});
     }
     return (
-        <div className={`flex flex-col rounded-[2rem] min-w-64 shadow-lg bg-[#D9D9D9] `}
+        <div className={`flex flex-col rounded-[2rem] min-w-64 shadow-lg bg-[#D9D9D9] transition duration-200 ease-in-out hover:scale-105 cursor-pointer`}
         onClick={handleSelectedCourse}>
             <img src='/images/course.png' alt={'top course'} className={'h-2/4 w-full'}/>
             <div className='flex flex-col basis-2/4 justify-center items-center p-3'>

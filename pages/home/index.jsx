@@ -15,14 +15,7 @@ const Home = () => {
     const [formValue, setFormValue] = useState({text: "", filter: ""});
     const [resultSearch, setResultSearch] = useState([]);
     const [filter, setFilter] = useState(false);
-    const [topBooklet, setTopBooklet] = useState([{courseName:"مبانی برنامه نویسی" ,instructorLastname:"رمضانی" ,instructorFirstname:"رضا",term:"پاییز 1400" ,likeNumber:120},
-        {courseName:"مبانی برنامه نویسی" ,instructorLastname:"فاطمی" ,instructorFirstname:"افسانه",term:"پاییز 1401" ,likeNumber:120},
-        {courseName:"مبانی برنامه نویسی" ,instructorLastname:"ماهوش" ,instructorFirstname:"حسین",term:"پاییز 1399" ,likeNumber:50},
-        {courseName:"مبانی برنامه نویسی" ,instructorLastname:"زجاجی" ,instructorFirstname:"زهرا",term:"پاییز 1400" ,likeNumber:20},
-        {courseName:"مبانی برنامه نویسی" ,instructorLastname:"رمضانی" ,instructorFirstname:"رضا",term:"پاییز 1400" ,likeNumber:20},
-        {courseName:"مبانی برنامه نویسی" ,instructorLastname:"ادیبی" ,instructorFirstname:"پیمان",term:"پاییز 1398" ,likeNumber:20},
-        {courseName:"مبانی برنامه نویسی" ,instructorLastname:"رمضانی" ,instructorFirstname:"رضا",term:"پاییز 1400" ,likeNumber:20},
-        {courseName:"مبانی برنامه نویسی" ,instructorLastname:"رمضانی" ,instructorFirstname:"رضا",term:"پاییز 1400" ,likeNumber:20},]);
+    const [topBooklet, setTopBooklet] = useState([{courseName:"" ,instructorLastname:"" ,instructorFirstname:"",term:"" ,likeNumber:0}]);
     const [topCourse, setTopCourse] = useState([ {courseName:" " ,instructorCourseFirstname:" " ,instructorCourseLastname:'',rate:5.0}]);
     const [search , setSearch]=useState(false);
     const [educationalGroups , setEducationalGroups]=useState([{publicId:'',name:'',description:''},{publicId:'',name:'',description:''},{publicId:'',name:'',description:''},{publicId:'',name:'',description:''}])
@@ -47,8 +40,9 @@ const Home = () => {
                 const response2 = await fetch("http://localhost:8090/unipoll/v1/booklet");
                 if (response2.ok) {
                     const data = await response2.json();
-                    //setTopBooklet(data.result);
-                    //console.log(educationalGroups)
+                    setTopBooklet(data.result);
+                    console.log(topBooklet)
+
                 }else {
                     console.log("Network response was not ok");
                 }
