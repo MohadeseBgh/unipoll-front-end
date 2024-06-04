@@ -11,7 +11,7 @@ const ProfessorSearch = (props) => {
         await router.push('/professor');
     }
     return (
-        <div className="w-75% h-44 shadow-2xl bg-opacity-15 bg-[#1FAAEA] max-h-60 rounded-3xl flex flex-row m-12 drop-shadow-2xl p-5" dir="rtl"
+        <div className="w-75% h-44 shadow-2xl bg-opacity-15 bg-[#1FAAEA] max-h-60 rounded-3xl flex flex-row m-12 drop-shadow-2xl p-5 transition duration-500 ease-in-out hover:scale-105 cursor-pointer" dir="rtl"
         onClick={handleClick}
         >
             <div className="basis-1/12 border h-full shadow shadow-xl rounded-3xl">
