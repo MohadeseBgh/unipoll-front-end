@@ -19,14 +19,44 @@ const BookletOfCourse = (props) => {
         setSelectedBooklet({publicId: props.publicId});
         router.push('/booklet').then(r => {});
     }
+    const handleDownload= async (e) => {
+        const jwtToken=localStorage.getItem('jwtToken');
+        try {
+            const response = await fetch(`http://localhost:8090/unipoll/v1/booklet/file/${props.publicId}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': jwtToken,
+                    "Content-Type": "application/json",
+                },
+            });
+            if (response.ok) {
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'booklet.pdf';
+                a.click();
+                window.URL.revokeObjectURL(url);
+            }else if(response.status===401){
+                setDownload(true)
+                setTimeout(function(){
+                    setDownload(false);
+                }, 2000);
+            }
+
+        } catch (error) {
+            console.error('Error uploading file:', error);
+        }
+    }
+
     return (
-        <div className="w-75% h-44 shadow-xl bg-opacity-15 bg-[#1FAAEAbg-opacity-15 bg-[#1FAAEA] max-h-60 rounded-3xl flex flex-row  mx-12 drop-shadow-lg p-5 " dir="rtl" onClick={handleSelectedBooklet}>
-            <div className="w-2/12 border-t-0 drop-shadow-xl ">
+        <div className="w-75% h-44 shadow-xl bg-opacity-15 bg-[#1FAAEAbg-opacity-15 bg-[#1FAAEA] max-h-60 rounded-3xl flex flex-row  mx-12 drop-shadow-lg p-5 transition duration-500 ease-in-out hover:scale-105 cursor-pointer " dir="rtl" >
+            <div onClick={handleSelectedBooklet} className="w-2/12 border-t-0 drop-shadow-xl ">
                 <img className={' h-full rounded-3xl ' }
                      src={'./images/bookletImgInfo.png'}
                      alt={'booklet'} />
             </div>
-            <div className="w-8/12 flex flex-row h-full items-center">
+            <div  onClick={handleSelectedBooklet} className="w-8/12 flex flex-row h-full items-center">
                 <div className="flex flex-col gap-8 w-4/12">
                     <div className={'flex flex-row gap-2'}>
                         <p className="font-bold  text-lg laptop:text-lg   text-black ">منتشر کننده:  </p>
@@ -72,7 +102,7 @@ const BookletOfCourse = (props) => {
                         {!like && <Like/>}
                         {like && <Like_fill/>}
                     </button>
-                    <button className='flex flex-row pr-4'>
+                    <button className='flex flex-row pr-4' onClick={handleDownload}>
                         <Donlowd color={"#102C51"}/>
                     </button>
                 </div>

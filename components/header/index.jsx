@@ -164,7 +164,7 @@ const Header = () => {
                       `}
                               onClick={()=>{
                                   setChosen({home: false, educational_groups: false, forums: true, aboutUs: false ,contactUs: false});
-                                  // router.push('/contactUs').then(r => {});
+                                 router.push('/groups').then(r => {});
                               }}
                       >
                           انجمن ها
