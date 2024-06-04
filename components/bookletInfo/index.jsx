@@ -12,10 +12,10 @@ import ErrorAlert from "@/components/errorAlert";
 const BookletInfo = () => {
     const [save , setSave]=useState(false);
     const [like , setLike]=useState(false);
+    const [likeNumber , setLikeNumber]=useState(false);
     const [download , setDownload]=useState(false);
     const [professorLike , setProfessorLike]=useState(true);
     const [selectedBooklet , setSelectedBooklet]=useContext(bookletPIDContext);
-    const [rate , setRate]=useState(4.2);
     const [bookletInfo , setBookletInfo]=useState({writerName:'جعفر کریمی' , courseProfessor:'رضا رمضانی' , course:'مبانی برنامه نویسی',term:"ترم پاییز 1400" , info:'توضیحات :هدف این درس آشنا نمودن دانشجویان با مفاهیم و اصول روشهای تحلیل هوشمند داده ها و روش های هوشمند حل مسایل مهندسی با استفاده از رویکرد های فازی ، تکاملی و شبکه های عصبی میباشد. درتحقق این هدف دانشجویان با ابزارهای نرمافزاری لازم برای استفاده از این روش ها اشنا میشوند.'})
     useEffect(() => {
         const fetchData = async () => {
@@ -34,6 +34,8 @@ const BookletInfo = () => {
                         console.log("booklet info")
                         const data = await response1.json();
                         setBookletInfo(data.result);
+                        setLike(data.result.isLiked)
+                        setLikeNumber(data.result.likeNumber)
                         setProfessorLike(data.result.teacherLike)
                         console.log(data.result);
 
@@ -54,6 +56,7 @@ const BookletInfo = () => {
                     const data = await response2.json();
                     setBookletInfo(data.result);
                     setProfessorLike(data.result.teacherLike)
+                    setLikeNumber(data.result.likeNumber)
                     console.log(data.result);
 
                 } else {
@@ -96,7 +99,77 @@ const BookletInfo = () => {
             console.error('Error uploading file:', error);
         }
     }
+    const handleLike = async (event) => {
+        console.log(event);
+        const jwtToken=localStorage.getItem('jwtToken');
+        try {
+           if(like===false){
+               const response = await fetch(`http://localhost:8090/unipoll/v1/booklet/like/${selectedBooklet.publicId}`, {
+                   method: 'POST',
+                   headers: {
+                       'Authorization': jwtToken,
+                       "Content-Type": "application/json",
+                   },
+                   body: JSON.stringify({like:!like}),
+               });
+               if (response.ok) {
+                   const response1 = await fetch(`http://localhost:8090/unipoll/v1/booklet/${selectedBooklet.publicId}`,{
+                       method: 'GET',
+                       headers: {
+                           "Content-Type": "application/json",
+                           'Authorization': jwtToken
+                       },
+                   });
+                   if (response1.ok) {
+                       console.log("booklet info")
+                       const data = await response1.json();
+                       setLike(data.result.isLiked)
+                       setLikeNumber(data.result.likeNumber)
+                       setProfessorLike(data.result.teacherLike)
+                       console.log(data.result);
 
+                   } else {
+                       console.log("Network response was not ok");
+                   }
+               } else if(response.status===401){
+                   console.log("like Not ok 401");
+               }
+           }else{
+               const response = await fetch(`http://localhost:8090/unipoll/v1/booklet/dislike/${selectedBooklet.publicId}`, {
+                   method: 'DELETE',
+                   headers: {
+                       'Authorization': jwtToken,
+                       "Content-Type": "application/json",
+                   },
+                   body: JSON.stringify({like:!like}),
+               });
+               if (response.ok) {
+                   const response1 = await fetch(`http://localhost:8090/unipoll/v1/booklet/${selectedBooklet.publicId}`,{
+                       method: 'GET',
+                       headers: {
+                           "Content-Type": "application/json",
+                           'Authorization': jwtToken
+                       },
+                   });
+                   if (response1.ok) {
+                       console.log("booklet info")
+                       const data = await response1.json();
+                       setLike(data.result.isLiked)
+                       setLikeNumber(data.result.likeNumber)
+                       setProfessorLike(data.result.teacherLike)
+                       console.log(data.result);
+
+                   } else {
+                       console.log("Network response was not ok");
+                   }
+               } else if(response.status===401){
+                   console.log("like Not ok 401");
+               }
+           }
+        } catch (error) {
+            console.error('Error like file:', error);
+        }
+    }
     return(
      <div> <div className={'w-full h-full bg-[#E2F4FC] shadow-[0_0_60px_-15px_rgba(0,0,0,0.3)] flex flex-col p-5 gap-5 text-black'}>
          <div className={'w-full h-[27rem] flex flex-row gap-10'}>
@@ -125,13 +198,11 @@ const BookletInfo = () => {
                          <div className="flex flex-row ">
                              <button
                                  className='flex flex-row justify-center items-center'
-                                 onClick={() => {
-                                     setLike(!like)
-                                 }}>
+                                 onClick={handleLike}>
                                  {!like && <Like/>}
                                  {like && <Like_fill/>}
                              </button>
-                             <p className="mr-2 text-black ">{bookletInfo.likeNumber}</p>
+                             <p className="mr-2 text-black ">{likeNumber}</p>
                          </div>
                          {professorLike && <p className={"text-sm font-bold"}>لایک شده توسط استاد</p>}
                      </div>

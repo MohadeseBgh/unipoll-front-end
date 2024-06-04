@@ -41,7 +41,7 @@ const Home = () => {
                 if (response2.ok) {
                     const data = await response2.json();
                     setTopBooklet(data.result);
-                    console.log(topBooklet)
+
 
                 }else {
                     console.log("Network response was not ok");

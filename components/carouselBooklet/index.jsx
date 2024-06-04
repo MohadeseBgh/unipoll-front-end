@@ -15,8 +15,6 @@ const CarouselBooklet = (props) => {
     useEffect(() => {
         setLikeNum(props.like)
         if(props.isLiked===null){
-            console.log("hi")
-            console.log(props)
             setLike(props.isLiked);
         }
     }, []);
