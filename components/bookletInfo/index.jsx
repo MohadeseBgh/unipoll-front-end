@@ -35,6 +35,7 @@ const BookletInfo = () => {
                         const data = await response1.json();
                         setBookletInfo(data.result);
                         setLike(data.result.isLiked)
+                        setSave(data.result.isSaved)
                         setLikeNumber(data.result.likeNumber)
                         setProfessorLike(data.result.teacherLike)
                         console.log(data.result);
@@ -100,7 +101,6 @@ const BookletInfo = () => {
         }
     }
     const handleLike = async (event) => {
-        console.log(event);
         const jwtToken=localStorage.getItem('jwtToken');
         try {
            if(like===false){
@@ -170,6 +170,42 @@ const BookletInfo = () => {
             console.error('Error like file:', error);
         }
     }
+    const handleSave = async (event) => {;
+        const jwtToken=localStorage.getItem('jwtToken');
+        try {
+            if(save===false){
+                const response = await fetch(`http://localhost:8090/unipoll/v1/booklet/save/${selectedBooklet.publicId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': jwtToken,
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({save:!save}),
+                });
+                if (response.ok) {
+                    setSave(true)
+                } else if(response.status===401){
+                    console.log("like Not ok 401");
+                }
+            }else{
+                const response = await fetch(`http://localhost:8090/unipoll/v1/booklet/dissave/${selectedBooklet.publicId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': jwtToken,
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({like:!like}),
+                });
+                if (response.ok) {
+                    setSave(false)
+                } else if(response.status===401){
+                    console.log("like Not ok 401");
+                }
+            }
+        } catch (error) {
+            console.error('Error like file:', error);
+        }
+    }
     return(
      <div> <div className={'w-full h-full bg-[#E2F4FC] shadow-[0_0_60px_-15px_rgba(0,0,0,0.3)] flex flex-col p-5 gap-5 text-black'}>
          <div className={'w-full h-[27rem] flex flex-row gap-10'}>
@@ -178,9 +214,7 @@ const BookletInfo = () => {
                  <div id={'icons'} className={'w-full flex flex-row-reverse justify-start'}>
                      <button><Report/></button>
                      <button className='flex flex-row justify-center items-center'
-                             onClick={() => {
-                                 setSave(!save)
-                             }}>
+                             onClick={handleSave}>
                          {save && <Bookmark_fill/>}
                          {!save && <Bookmark/>}
                      </button>

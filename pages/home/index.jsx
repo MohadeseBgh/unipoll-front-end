@@ -1,7 +1,7 @@
 import Index from "../../components/educationalGroupsHome";
 import SearchIcon from "@/components/icons/SearchIcon";
 
-import {useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import TopBooklet from "@/components/topBooklet";
 import EducationalGroupsHome from "../../components/educationalGroupsHome";
 import Header from "@/components/header";
@@ -11,16 +11,19 @@ import Search from "@/components/search";
 import Layout from "@/layouts/layout";
 import Footer from "@/components/footer";
 import Close from "@/components/icons/Close";
+import {topbooklt} from "@/context/topbooklet";
 const Home = () => {
     const [formValue, setFormValue] = useState({text: "", filter: ""});
     const [resultSearch, setResultSearch] = useState([]);
     const [filter, setFilter] = useState(false);
-    const [topBooklet, setTopBooklet] = useState([{courseName:"" ,instructorLastname:"" ,instructorFirstname:"",term:"" ,likeNumber:0}]);
     const [topCourse, setTopCourse] = useState([ {courseName:" " ,instructorCourseFirstname:" " ,instructorCourseLastname:'',rate:5.0}]);
     const [search , setSearch]=useState(false);
+    const [topBooklt , setTopBooklt]=useContext(topbooklt);
     const [educationalGroups , setEducationalGroups]=useState([{publicId:'',name:'',description:''},{publicId:'',name:'',description:''},{publicId:'',name:'',description:''},{publicId:'',name:'',description:''}])
     useEffect(() => {
         const fetchData = async () => {
+            let jwtToken=localStorage.getItem('jwtToken');
+
             try {
                 const response = await fetch("http://localhost:8090/unipoll/v1/instructor-course");
                 if (response.ok) {
@@ -37,14 +40,30 @@ const Home = () => {
                 }else {
                     console.log("Network response was not ok");
                 }
-                const response2 = await fetch("http://localhost:8090/unipoll/v1/booklet");
-                if (response2.ok) {
-                    const data = await response2.json();
-                    setTopBooklet(data.result);
+                if(jwtToken.length>5){
+                    const response2 = await fetch("http://localhost:8090/unipoll/v1/booklet",{
+                        method: 'GET',
+                        headers: {
+                            "Content-Type": "application/json",
+                            'Authorization': jwtToken
+                        },
+                    });
+                    if (response2.ok) {
+                        const data = await response2.json();
+                        setTopBooklt(data.result);
+                    }
+                }else{
+                        const response2 = await fetch("http://localhost:8090/unipoll/v1/booklet",{
+                            method: 'GET',
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                        });
+                        if (response2.ok) {
+                            const data = await response2.json();
+                            setTopBooklt(data.result);
+                    }
 
-
-                }else {
-                    console.log("Network response was not ok");
                 }
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -223,7 +242,7 @@ const Home = () => {
                           <h3 className='desktop:text-3xl text-2xl font-bold text-black'>جزوه های برتر</h3>
                           <hr className="w-4/12 h-1 bg-darkBlue "/>
                       </div>
-                      <TopBooklet booklets={topBooklet}/>
+                      <TopBooklet booklets={topBooklt}/>
                   </div>
               </div>
 

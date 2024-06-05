@@ -5,6 +5,8 @@ import Bookmark from "@/components/icons/Bookmark";
 import Like_fill from "@/components/icons/Like_fill";
 import {bookletPIDContext} from "@/context/bookletPIDContext";
 import {useRouter} from "next/router";
+import {faveritebooklt} from "@/context/faveritebooklet";
+import {topbooklt} from "@/context/topbooklet";
 
 const CarouselBooklet = (props) => {
         const [save , setSave]=useState(false);
@@ -12,10 +14,13 @@ const CarouselBooklet = (props) => {
     const [likeNum , setLikeNum]=useState(0);
     const [selectedBooklet , setSelectedBooklet]=useContext(bookletPIDContext);
     const router = useRouter();
+    const [feveriteBooklt , setFeveriteBooklt]=useContext(faveritebooklt);
+    const [topBooklt , setTopBooklt]=useContext(topbooklt);
     useEffect(() => {
         setLikeNum(props.like)
-        if(props.isLiked===null){
+        if(props.isLiked!==null){
             setLike(props.isLiked);
+            setSave(props.isSaved)
         }
     }, []);
     const handleSelectedBooklet = () => {
@@ -23,36 +28,136 @@ const CarouselBooklet = (props) => {
         router.push('/booklet').then(r => {});
     }
     const handleLike = async (event) => {
-        console.log(event);
         const jwtToken=localStorage.getItem('jwtToken');
-
         try {
-            const response = await fetch(`http://localhost:8090/unipoll/v1/booklet/like/${props.publicId}`, {
-                method: 'POST',
-                headers: {
-                    'Authorization': jwtToken,
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({like:!like}),
-            });
-            if (response.ok) {
-                setLike(!like);
-                const response1 = await fetch(`http://localhost:8090/unipoll/v1/booklet/${props.publicId}`);
+            if(like===false){
+                const response = await fetch(`http://localhost:8090/unipoll/v1/booklet/like/${props.publicId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': jwtToken,
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({like:!like}),
+                });
+                if (response.ok) {
+                    const response1 = await fetch(`http://localhost:8090/unipoll/v1/booklet/${props.publicId}`,{
+                        method: 'GET',
+                        headers: {
+                            "Content-Type": "application/json",
+                            'Authorization': jwtToken
+                        },
+                    });
+                    if (response1.ok) {
+                        console.log("booklet info")
+                        const data = await response1.json();
+                        setLike(data.result.isLiked)
+                        setLikeNum(data.result.likeNumber)
+                        console.log(data.result);
 
-                if (response1.ok) {
-                    const data = await response1.json();
-                    console.log(data.result);
-                    setLikeNum(data.result.likeNumber);
-                } else {
-                    console.log("Network response was not ok");
+                    } else {
+                        console.log("Network response was not ok");
+                    }
+                } else if(response.status===401){
+                    console.log("like Not ok 401");
                 }
+            }else{
+                const response = await fetch(`http://localhost:8090/unipoll/v1/booklet/dislike/${props.publicId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': jwtToken,
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({like:!like}),
+                });
+                if (response.ok) {
+                    const response1 = await fetch(`http://localhost:8090/unipoll/v1/booklet/${props.publicId}`,{
+                        method: 'GET',
+                        headers: {
+                            "Content-Type": "application/json",
+                            'Authorization': jwtToken
+                        },
+                    });
+                    if (response1.ok) {
+                        let jwtToken=localStorage.getItem('jwtToken');
+                        if(props.top===true){
+                            const response2 = await fetch("http://localhost:8090/unipoll/v1/booklet",{
+                                method: 'GET',
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    'Authorization': jwtToken
+                                },
+                            });
+                            if (response2.ok) {
+                                const data = await response2.json();
+                                setTopBooklt([]);
+                                setTopBooklt(data.result)
+                                setLike(data.result.isLiked)
+                                setLikeNum(data.result.likeNumber)
+                                console.log(data.result);
+                            }
+                        }
 
-            } else if(response.status===401){
-
-                console.log("Not ok");
+                    } else {
+                        console.log("Network response was not ok");
+                    }
+                } else if(response.status===401){
+                    console.log("like Not ok 401");
+                }
             }
         } catch (error) {
-            console.error('Error uploading file:', error);
+            console.error('Error like file:', error);
+        }
+    }
+    const handleSave = async (event) => {
+        const jwtToken=localStorage.getItem('jwtToken');
+        try {
+            if(save===false){
+                const response = await fetch(`http://localhost:8090/unipoll/v1/booklet/save/${props.publicId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': jwtToken,
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({save:!save}),
+                });
+                if (response.ok) {
+                    setSave(true)
+                } else if(response.status===401){
+                    console.log("like Not ok 401");
+                }
+            }else{
+                const response = await fetch(`http://localhost:8090/unipoll/v1/booklet/dissave/${props.publicId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': jwtToken,
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({like:!like}),
+                });
+                if (response.ok) {
+                    let jwtToken=localStorage.getItem('jwtToken');
+                        const response2 = await fetch("http://localhost:8090/unipoll/v1/booklet/favorite",{
+                            method: 'GET',
+                            headers: {
+                                "Content-Type": "application/json",
+                                'Authorization': jwtToken
+                            },
+                        });
+                        if (response2.ok) {
+                            const data = await response2.json();
+                            setFeveriteBooklt(data.result);
+                        }else {
+                            console.log("Network response was not ok");
+                        }
+
+
+
+                } else if(response.status===401){
+                    console.log("like Not ok 401");
+                }
+            }
+        } catch (error) {
+            console.error('Error like file:', error);
         }
     }
     return (
@@ -74,9 +179,7 @@ const CarouselBooklet = (props) => {
                 </button>
             </div>
             <button className='flex flex-row justify-center items-center'
-                onClick={()=>{
-                setSave(!save)
-            }}>
+                onClick={handleSave}>
                 {save && <Bookmark_fill/>}
                 {!save && <Bookmark/>}
             </button>

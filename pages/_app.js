@@ -11,6 +11,8 @@ import CommentC from "@/context/commentCContext";
 import CommentCProvider from "@/context/commentCContext";
 import BookletOfCourseProvider from "@/context/bookletOfCourseContext";
 import CommentBProvider from "@/context/commentBContext";
+import FaveritebookltProvider from "@/context/faveritebooklet";
+import Topbooklet from "@/context/topbooklet";
 
 
 export default function App({ Component, pageProps }) {
@@ -27,7 +29,11 @@ export default function App({ Component, pageProps }) {
                                         <CommentCProvider>
                                             <BookletOfCourseProvider>
                                                 <CommentBProvider>
-                                                    <Component {...pageProps} />
+                                                    <FaveritebookltProvider>
+                                                        <Topbooklet>
+                                                            <Component {...pageProps} />
+                                                        </Topbooklet>
+                                                    </FaveritebookltProvider>
                                                 </CommentBProvider>
                                             </BookletOfCourseProvider>
                                         </CommentCProvider>

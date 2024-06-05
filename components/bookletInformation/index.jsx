@@ -43,25 +43,7 @@ const BookletInformation = (props) => {
         </div>
         <div className={"flex flex-col h-2/12 "}>
             <div className={'h-1 w-11/12  bg-darkBlue mt-6 mr-3 '} dir={'ltr'}></div>
-            <div className='flex flex-col gap-1 pr-9 pt-2'>
-                <div className={"flex flex-row "}>
-                   <button
-                        className='flex flex-row  justify-start items-center px-2 '
-                        onClick={()=>{
-                            setLike(!like)
-                        }}>
-                        {!like && <Like/>}
-                        {like && <Like_fill/>}
-                    </button>
-                    <p className="text-sm text-black justify-start  "  dir="ltr"> {props.like } </p>  /* like number*/
-                </div>
 
-
-                    <p className={" text-black"}>
-                        لایک شده توسط استاد
-                    </p>
-
-            </div>
 
         </div>
     </div>
