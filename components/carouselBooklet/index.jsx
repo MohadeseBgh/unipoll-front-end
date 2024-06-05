@@ -40,23 +40,38 @@ const CarouselBooklet = (props) => {
                     body: JSON.stringify({like:!like}),
                 });
                 if (response.ok) {
-                    const response1 = await fetch(`http://localhost:8090/unipoll/v1/booklet/${props.publicId}`,{
-                        method: 'GET',
-                        headers: {
-                            "Content-Type": "application/json",
-                            'Authorization': jwtToken
-                        },
-                    });
-                    if (response1.ok) {
-                        console.log("booklet info")
-                        const data = await response1.json();
-                        setLike(data.result.isLiked)
-                        setLikeNum(data.result.likeNumber)
-                        console.log(data.result);
+                        if(props.top===true){
+                            const response2 = await fetch("http://localhost:8090/unipoll/v1/booklet",{
+                                method: 'GET',
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    'Authorization': jwtToken
+                                },
+                            });
+                            if (response2.ok) {
+                                const data = await response2.json();
+                                setTopBooklt([]);
+                                setTimeout(function(){
+                                    setTopBooklt(data.result);
+                                }, 1);
+                            }
+                        }else{
+                            const response2 = await fetch("http://localhost:8090/unipoll/v1/booklet/favorite",{
+                                method: 'GET',
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    'Authorization': jwtToken
+                                },
+                            });
+                            if (response2.ok) {
+                                const data = await response2.json();
+                                setFeveriteBooklt([]);
+                                setTimeout(function(){
+                                    setFeveriteBooklt(data.result);
+                                }, 1);
+                            }
+                        }
 
-                    } else {
-                        console.log("Network response was not ok");
-                    }
                 } else if(response.status===401){
                     console.log("like Not ok 401");
                 }
@@ -70,15 +85,6 @@ const CarouselBooklet = (props) => {
                     body: JSON.stringify({like:!like}),
                 });
                 if (response.ok) {
-                    const response1 = await fetch(`http://localhost:8090/unipoll/v1/booklet/${props.publicId}`,{
-                        method: 'GET',
-                        headers: {
-                            "Content-Type": "application/json",
-                            'Authorization': jwtToken
-                        },
-                    });
-                    if (response1.ok) {
-                        let jwtToken=localStorage.getItem('jwtToken');
                         if(props.top===true){
                             const response2 = await fetch("http://localhost:8090/unipoll/v1/booklet",{
                                 method: 'GET',
@@ -90,16 +96,28 @@ const CarouselBooklet = (props) => {
                             if (response2.ok) {
                                 const data = await response2.json();
                                 setTopBooklt([]);
-                                setTopBooklt(data.result)
-                                setLike(data.result.isLiked)
-                                setLikeNum(data.result.likeNumber)
-                                console.log(data.result);
+                                setTimeout(function(){
+                                    setTopBooklt(data.result);
+                                }, 1);
+
+                            }
+                        }else{
+                            const response2 = await fetch("http://localhost:8090/unipoll/v1/booklet/favorite",{
+                                method: 'GET',
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    'Authorization': jwtToken
+                                },
+                            });
+                            if (response2.ok) {
+                                const data = await response2.json();
+                                setFeveriteBooklt([]);
+                                setTimeout(function(){
+                                    setFeveriteBooklt(data.result);
+                                }, 1);
                             }
                         }
 
-                    } else {
-                        console.log("Network response was not ok");
-                    }
                 } else if(response.status===401){
                     console.log("like Not ok 401");
                 }
@@ -121,7 +139,23 @@ const CarouselBooklet = (props) => {
                     body: JSON.stringify({save:!save}),
                 });
                 if (response.ok) {
-                    setSave(true)
+                    if(props.top===true){
+                        const response2 = await fetch("http://localhost:8090/unipoll/v1/booklet",{
+                            method: 'GET',
+                            headers: {
+                                "Content-Type": "application/json",
+                                'Authorization': jwtToken
+                            },
+                        });
+                        if (response2.ok) {
+                            const data = await response2.json();
+                            setTopBooklt([]);
+                            setTimeout(function(){
+                                setTopBooklt(data.result);
+                            }, 1);
+
+                        }
+                    }
                 } else if(response.status===401){
                     console.log("like Not ok 401");
                 }
@@ -136,6 +170,23 @@ const CarouselBooklet = (props) => {
                 });
                 if (response.ok) {
                     let jwtToken=localStorage.getItem('jwtToken');
+                    if(props.top===true){
+                        const response2 = await fetch("http://localhost:8090/unipoll/v1/booklet",{
+                            method: 'GET',
+                            headers: {
+                                "Content-Type": "application/json",
+                                'Authorization': jwtToken
+                            },
+                        });
+                        if (response2.ok) {
+                            const data = await response2.json();
+                            setTopBooklt([]);
+                            setTimeout(function(){
+                                setTopBooklt(data.result);
+                            }, 1);
+
+                        }
+                    }else{
                         const response2 = await fetch("http://localhost:8090/unipoll/v1/booklet/favorite",{
                             method: 'GET',
                             headers: {
@@ -145,11 +196,12 @@ const CarouselBooklet = (props) => {
                         });
                         if (response2.ok) {
                             const data = await response2.json();
-                            setFeveriteBooklt(data.result);
-                        }else {
-                            console.log("Network response was not ok");
+                            setFeveriteBooklt([]);
+                            setTimeout(function(){
+                                setFeveriteBooklt(data.result);
+                            }, 1);
                         }
-
+                    }
 
 
                 } else if(response.status===401){

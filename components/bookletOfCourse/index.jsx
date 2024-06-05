@@ -4,10 +4,13 @@ import Like_fill from "@/components/icons/Like_fill";
 import like from "@/components/icons/Like";
 import Bookmark_fill from "@/components/icons/Bookmark_fill";
 import Bookmark from "@/components/icons/Bookmark";
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import Donlowd from "@/components/icons/Donlowd";
 import {useRouter} from "next/router";
 import {bookletPIDContext} from "@/context/bookletPIDContext";
+import {faveritebooklt} from "@/context/faveritebooklet";
+import {topbooklt} from "@/context/topbooklet";
+import {bookletOfCourseContext} from "@/context/bookletOfCourseContext";
 
 
 const BookletOfCourse = (props) => {
@@ -15,9 +18,145 @@ const BookletOfCourse = (props) => {
     const [like , setLike]=useState(false);
     const [selectedBooklet , setSelectedBooklet]=useContext(bookletPIDContext);
     const router = useRouter();
+    const [likeNum , setLikeNum]=useState(0);
+    const [booklets, setBooklets] = useContext(bookletOfCourseContext);
+
+    useEffect(() => {
+        setLikeNum(props.like)
+        if(props.isLiked!==null){
+            setLike(props.isLiked);
+            setSave(props.isSaved)
+        }
+    }, []);
+
+
     const handleSelectedBooklet = () => {
         setSelectedBooklet({publicId: props.publicId});
         router.push('/booklet').then(r => {});
+    }
+    const handleLike = async (event) => {
+        const jwtToken=localStorage.getItem('jwtToken');
+        try {
+            if(like===false){
+                const response = await fetch(`http://localhost:8090/unipoll/v1/booklet/like/${props.publicId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': jwtToken,
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({like:!like}),
+                });
+                if (response.ok) {
+                    const response2 = await fetch(`http://localhost:8090/unipoll/v1/instructor-course/booklets/${props.publicIdCourse}`,{
+                        method: 'GET',
+                        headers: {
+                            "Content-Type": "application/json",
+                            'Authorization': jwtToken
+                        },
+                    });
+                    if (response2.ok) {
+                        const data = await response2.json();
+                        setBooklets([]);
+                        setTimeout(function(){
+                            setBooklets(data.result);
+                        }, 1);
+                    }
+                } else if(response.status===401){
+                    console.log("like Not ok 401");
+                }
+            }else{
+                const response = await fetch(`http://localhost:8090/unipoll/v1/booklet/dislike/${props.publicId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': jwtToken,
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({like:!like}),
+                });
+                if (response.ok) {
+                    const response2 = await fetch(`http://localhost:8090/unipoll/v1/instructor-course/booklets/${props.publicIdCourse}`,{
+                        method: 'GET',
+                        headers: {
+                            "Content-Type": "application/json",
+                            'Authorization': jwtToken
+                        },
+                    });
+                    if (response2.ok) {
+                        const data = await response2.json();
+                        setBooklets([]);
+                        setTimeout(function(){
+                            setBooklets(data.result);
+                        }, 1);
+                    }
+                } else if(response.status===401){
+                    console.log("like Not ok 401");
+                }
+            }
+        } catch (error) {
+            console.error('Error like file:', error);
+        }
+    }
+    const handleSave = async (event) => {;
+        const jwtToken=localStorage.getItem('jwtToken');
+        try {
+            if(save===false){
+                const response = await fetch(`http://localhost:8090/unipoll/v1/booklet/save/${props.publicId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': jwtToken,
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({save:!save}),
+                });
+                if (response.ok) {
+                    const response2 = await fetch(`http://localhost:8090/unipoll/v1/instructor-course/booklets/${props.publicIdCourse}`,{
+                        method: 'GET',
+                        headers: {
+                            "Content-Type": "application/json",
+                            'Authorization': jwtToken
+                        },
+                    });
+                    if (response2.ok) {
+                        const data = await response2.json();
+                        setBooklets([]);
+                        setTimeout(function(){
+                            setBooklets(data.result);
+                        }, 1);
+                    }
+                } else if(response.status===401){
+                    console.log("like Not ok 401");
+                }
+            }else{
+                const response = await fetch(`http://localhost:8090/unipoll/v1/booklet/dissave/${props.publicId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': jwtToken,
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({like:!like}),
+                });
+                if (response.ok) {
+                    const response2 = await fetch(`http://localhost:8090/unipoll/v1/instructor-course/booklets/${props.publicIdCourse}`,{
+                    method: 'GET',
+                    headers: {
+                        "Content-Type": "application/json",
+                        'Authorization': jwtToken
+                    },
+                });
+                    if (response2.ok) {
+                        const data = await response2.json();
+                        setBooklets([]);
+                        setTimeout(function(){
+                            setBooklets(data.result);
+                        }, 1);
+                    }
+                } else if(response.status===401){
+                    console.log("like Not ok 401");
+                }
+            }
+        } catch (error) {
+            console.error('Error like file:', error);
+        }
     }
     const handleDownload= async (e) => {
         const jwtToken=localStorage.getItem('jwtToken');
@@ -87,18 +226,14 @@ const BookletOfCourse = (props) => {
 
 
                 <button className='flex flex-row pl-4 '
-                        onClick={()=>{
-                            setSave(!save)
-                        }}>
+                        onClick={handleSave}>
                     {save && <Bookmark_fill/>}
                     {!save && <Bookmark/>}
                 </button>
                     <p className="text-sm text-black ">{props.like}</p>
                     <button
                         className='flex flex-row '
-                        onClick={()=>{
-                            setLike(!like)
-                        }}>
+                        onClick={handleLike}>
                         {!like && <Like/>}
                         {like && <Like_fill/>}
                     </button>

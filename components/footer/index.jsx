@@ -30,13 +30,13 @@ const Footer = () => {
                           <div className={'pl-2 pt-2'}>
                               <Polygon/>
                           </div>
-                          <a href={'#'} className={'pd-3 text-white block text-lg '}>خانه</a>
+                          <a href={'/home'} className={'pd-3 text-white block text-lg '}>خانه</a>
                       </div>
                       <div className={'flex flex-row '}>
                           <div className={'pl-2 pt-2'}>
                               <Polygon/>
                           </div>
-                          <a href={'#'} className={' block text-white text-lg '}>گروه آموزشی</a>
+                          <a href={'/home'} className={' block text-white text-lg '}>گروه آموزشی</a>
                       </div>
                       <div className={'flex flex-row items-center '}>
                           <div className={'pl-2 pt-2'}>
@@ -44,13 +44,13 @@ const Footer = () => {
                           </div>
 
 
-                          <a href={'#'} className={' block text-white text-lg '}>جزوه های من</a>
+                          <a href={'/myBooklet'} className={' block text-white text-lg '}>جزوه های من</a>
                       </div>
                       <div className={'flex flex-row '}>
                           <div className={'pl-2 pt-2'}>
                               <Polygon/>
                           </div>
-                          <a href={'#'} className={'text-white  block text-lg '}>انجمن ها</a>
+                          <a href={'/groups'} className={'text-white  block text-lg '} >انجمن ها</a>
                       </div>
                   </div>
               </div>

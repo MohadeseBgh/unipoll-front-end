@@ -57,16 +57,21 @@ const UploadBooklet = () => {
                 if(response.ok){
                     console.log("upload OK");
                     const myHeaders2 = new Headers();
-                    myHeaders.append("Content-Type", "application/json");
+                    myHeaders2.append("Content-Type", "application/json");
+                    myHeaders2.append("Authorization", jwtToken);
 
                     const requestOptions2 = {
                         method: "GET",
-                        headers: myHeaders,
+                        headers: myHeaders2,
                     };
                     fetch(`http://localhost:8090/unipoll/v1/instructor-course/booklets/${selectedCourse.publicId}`, requestOptions2)
                         .then( response => response.json())
                         .then((result) =>{
                             setBooklets(result.result)
+                            setBooklets([]);
+                                setTimeout(function(){
+                                    setBooklets(result.result);
+                                }, 1);
                         })
                         .catch((error) => console.error(error));
                     document.getElementById("erorrAcsess").className= ' transition duration-1000 ease-in-out opacity-0 hidden  mt-5 bg-red-100 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-red-500';
