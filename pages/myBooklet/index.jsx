@@ -8,20 +8,37 @@ import CarouselBooklet from "@/components/carouselBooklet";
 import TopBooklet from "@/components/topBooklet";
 import topBooklet from "@/components/topBooklet";
 import Layout from "@/layouts/layout";
-import {useState} from "react";
-
-
+import {useContext, useEffect, useState} from "react";
+import {faveritebooklt} from "@/context/faveritebooklet";
 
 const MyBooklet = (props) => {
-    const [topBooklet, setTopBooklet] = useState([{courseName:"مبانی برنامه نویسی" ,instructorLastname:"رمضانی" ,instructorFirstname:"رضا",term:"پاییز 1400" ,likeNumber:120},
-        {courseName:"مبانی برنامه نویسی" ,instructorLastname:"فاطمی" ,instructorFirstname:"افسانه",term:"پاییز 1401" ,likeNumber:120},
-        {courseName:"مبانی برنامه نویسی" ,instructorLastname:"ماهوش" ,instructorFirstname:"حسین",term:"پاییز 1399" ,likeNumber:50},
-        {courseName:"مبانی برنامه نویسی" ,instructorLastname:"زجاجی" ,instructorFirstname:"زهرا",term:"پاییز 1400" ,likeNumber:20},
-        {courseName:"مبانی برنامه نویسی" ,instructorLastname:"رمضانی" ,instructorFirstname:"رضا",term:"پاییز 1400" ,likeNumber:20},
-        {courseName:"مبانی برنامه نویسی" ,instructorLastname:"ادیبی" ,instructorFirstname:"پیمان",term:"پاییز 1398" ,likeNumber:20},
-        {courseName:"مبانی برنامه نویسی" ,instructorLastname:"رمضانی" ,instructorFirstname:"رضا",term:"پاییز 1400" ,likeNumber:20},
-        {courseName:"مبانی برنامه نویسی" ,instructorLastname:"رمضانی" ,instructorFirstname:"رضا",term:"پاییز 1400" ,likeNumber:20},]);
+    const [feveriteBooklt , setFeveriteBooklt]=useContext(faveritebooklt);
     let save;
+    useEffect(() => {
+        const fetchData = async () => {
+            let jwtToken=localStorage.getItem('jwtToken');
+            try {
+                    const response2 = await fetch("http://localhost:8090/unipoll/v1/booklet/favorite",{
+                            method: 'GET',
+                            headers: {
+                                "Content-Type": "application/json",
+                                'Authorization': jwtToken
+                            },
+                        });
+                if (response2.ok) {
+                    const data = await response2.json();
+                    setFeveriteBooklt(data.result);
+
+                }else {
+                    console.log("Network response was not ok");
+                }
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+        fetchData();
+    }, []);
+
     return (<>
         <Layout>
         <div className={"h-screen w-screen  bg-white text-black  overflow-x-hidden"}>
@@ -40,7 +57,7 @@ const MyBooklet = (props) => {
                 <BookletInformation/>
                 <BookletInformation/><BookletInformation/>
                 <BookletInformation/>
-                <BookletInformation/> /* این آزمایشی برای تست نمایش است. یکی از آنها مفایت میکند  /*
+                <BookletInformation/>
                 </div>
             </div>
             <div className={'flex flex-row w-full mt-40 gap-12 justify-center items-center bg-white '}>
@@ -53,11 +70,11 @@ const MyBooklet = (props) => {
             <div id="topBooklet" className="flex flex-row justify-center justify-items-center items-center text-center  bg-white " dir="rtl">
                 <div
                     className="flex flex-wrap gap-20  justify-start  p-16">
-                    {topBooklet.map(
+                    {feveriteBooklt.map(
                     (p, index) => <CarouselBooklet key={index} course={p.courseName}
                                                    professor={[p.instructorFirstname, " ", p.instructorLastname]}
                                                    semester={p.term} like={p.likeNumber} publicId={p.publicId}
-                                                   isLiked={p.isLiked}/>
+                                                   isLiked={p.isLiked} isSaved={p.isSaved} top={false}/>
                 )}
                 </div>
             </div>
