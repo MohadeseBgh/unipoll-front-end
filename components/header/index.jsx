@@ -78,10 +78,13 @@ const Header = () => {
               </div>}
           </div>
           <div className={'h-full w-1/12 flex items-center justify-start'}>
-              <button className=' border border-blue2 text-blue2 xl:text-xs text-[0.65rem] rounded-3xl xl:px-4 py-3 px-2
+              <button className=' border border-blue2 text-blue2 xl:text-lg text-[0.72rem] rounded-3xl xl:px-4 py-3 px-2
                font-bold hover:bg-blue2 hover:opacity-60 hover:text-white
                       transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 duration-300
-                      '>
+                      '   onClick={()=>{
+                  setChosen({home: false, educational_groups: false, forums: true, aboutUs: false ,contactUs: false});
+                  router.push('/myBooklet').then(r => {});
+              }}>
                   جزوه های من
               </button>
           </div>

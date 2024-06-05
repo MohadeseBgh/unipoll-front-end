@@ -15,27 +15,47 @@ const BookletsOfCourse = () => {
     const [filter, setFilter] = useState({publicId:""});
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                const jwtToken=localStorage.getItem('jwtToken');
-                const response = await fetch(`http://localhost:8090/unipoll/v1/instructor-course/booklets/${selectedCourse.publicId}` ,{
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                });
-                if (response.ok) {
-                    console.log("OK booklet");
-                    const data=await response.json();
-                    const result=data.result;
-                    setBooklets(result)
-                    console.log(result)
-                } else {
-                    console.log("not ok booklet")
+                let jwtToken=localStorage.getItem('jwtToken');
+                try {
+                    if (jwtToken.length > 3) {
+                        const response1 = await fetch(`http://localhost:8090/unipoll/v1/instructor-course/booklets/${selectedCourse.publicId}`,{
+                            method: 'GET',
+                            headers: {
+                                "Content-Type": "application/json",
+                                'Authorization': jwtToken
+                            },
+                        });
+
+                        if (response1.ok) {
+                            console.log("booklet info")
+                            const data = await response1.json();
+                            setBooklets(data.result);
+
+                        } else {
+                            console.log("Network response was not ok");
+                        }
+                    } else {
+                        const response2 = await fetch(`http://localhost:8090/unipoll/v1/instructor-course/booklets/${selectedCourse.publicId}`, {
+                            method: 'GET',
+                            headers: {
+                                "Content-Type": "application/json",
+
+                            },
+                        });
+
+                        if (response2.ok) {
+                            console.log("booklet info")
+                            const data = await response2.json();
+                            setBooklets(data.result);
+                        } else {
+                            console.log("Network response was not ok");
+                        }
+                    }
+                } catch (error) {
+                    console.error("Error fetching data:", error);
                 }
 
-            }catch (e) {
-                console.error("we are GETTING ERROR", e)
-            }
+
         };
 
         fetchData();
@@ -45,7 +65,8 @@ const BookletsOfCourse = () => {
             {booklets.map(
                 (p, index) => <BookletOfCourse key={index} courseName={p.courseName}
                                        text={p.text}
-                                               lessonPr={[p.instructorFirstname," ",p.instructorLastname]} term={p.term} writer={[p.uploaderFirstname," ",p.uploaderLastname]} like={p.likeNumber} publicId={p.publicId}/>
+                                               lessonPr={[p.instructorFirstname," ",p.instructorLastname]} term={p.term} writer={[p.uploaderFirstname," ",p.uploaderLastname]}  like={p.likeNumber} publicId={p.publicId}
+                                               isLiked={p.isLiked} isSaved={p.isSaved} publicIdCourse={selectedCourse.publicId}/>
             )}
         </div>
     );
