@@ -51,13 +51,12 @@ const MyBooklet = (props) => {
             </div>
 
             <div className={"flex flex-row  overflow-y-hidden overflow-x-auto gap-24 overscroll-auto scrollbar scrollbar-thumb-darkBlue scrollbar-track-[#D9EDFD]"}>
-                <div className={"flex flex-row  h-full gap-x-56"}>
-
-                    <BookletInformation/>
-                <BookletInformation/>
-                <BookletInformation/><BookletInformation/>
-                <BookletInformation/>
-                <BookletInformation/>
+                <div className={"flex flex-row  h-full px-16 gap-x-56"}>
+                    {feveriteBooklt.map(
+                        (p, index) => <BookletInformation key={index} course={p.courseName}
+                                                       professor={[p.instructorFirstname, " ", p.instructorLastname]}
+                                                       semester={p.term} like={p.likeNumber} publicId={p.publicId} publisher={[p.instructorFirstname, " ", p.instructorLastname]}
+                                                          writerName={[p.uploaderFirstname," ",p.uploaderLastname]} info={p.description}/>)}
                 </div>
             </div>
             <div className={'flex flex-row w-full mt-40 gap-12 justify-center items-center bg-white '}>
