@@ -1,11 +1,11 @@
 import YellowStar from "@/components/icons/YellowStar";
 import Star from "@/components/icons/Star";
 import {useContext, useEffect, useState} from "react";
-import ShowCourseInfo from "@/components/showCourseInfo";
 import Edit from "@/components/icons/Edit";
 import {coursePIDContext} from "@/context/coursePIDContext";
 import OkAlert from "@/components/okAlert";
 import ErrorAlert from "@/components/errorAlert";
+import Close from "@/components/icons/Close";
 
 const CourseInfo = () => {
     //
@@ -15,7 +15,10 @@ const CourseInfo = () => {
     const [edit , setEdit]=useState(false);
     const [okRate , setOkRate]=useState(false);
     const [accessRate , setAccessRate]=useState(false);
+    const [okEdite , setOkEdit]=useState(false);
+    const [accessEdit , setAccessEdit]=useState(false);
     const [editAccess , setEditAccess]=useState(false);
+    const [textEdit , setTextEdit]=useState("");
     const [selectedCourse , setSelectedCourse]=useContext(coursePIDContext);
     const [rate , setRate]=useState(4.2);
     const [courseInfo , setCourseInfo]=useState({courseName:'cfvghjk' , courseProfessor:'bmdfghjk' ,rate_num:0, vahed:'3' , info:'توضیحات :هدف این درس آشنا نمودن دانشجویان با مفاهیم و اصول روشهای تحلیل هوشمند داده ها و روش های هوشمند حل مسایل مهندسی با استفاده از رویکرد های فازی ، تکاملی و شبکه های عصبی میباشد. درتحقق این هدف دانشجویان با ابزارهای نرمافزاری لازم برای استفاده از این روش ها اشنا میشوند.'})
@@ -32,6 +35,7 @@ const CourseInfo = () => {
                     const data = await response.json();
                     setCourseInfo(data.result);
                     setRate( courseInfo.rate);
+                    setTextEdit(data.result.description)
                     console.log(data.result);
                 } else {
                     console.log("Network response was not ok");
@@ -51,6 +55,19 @@ const CourseInfo = () => {
                 } else {
                     console.log("Network response was not ok");
                 }
+                const response2 = await fetch(`http://localhost:8090/unipoll/v1/instructor-course/enable-to-edit/${selectedCourse.publicId}`,{
+                    method: 'GET',
+                    headers: {
+                        'Authorization': jwtToken,
+                        "Content-Type": "application/json"
+                    },
+                });
+
+                if (response2.ok) {
+                    setEditAccess(true)
+                } else {
+                   setEditAccess(false)
+                }
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
@@ -58,10 +75,50 @@ const CourseInfo = () => {
 
         fetchData();
     }, [courseInfo.rate]);
+    const editFinishClick = async (e) => {
+        e.preventDefault();
+        const jwtToken = localStorage.getItem('jwtToken');
+        if (editAccess === true) {
+            try {
+                const response = await fetch(`http://Localhost:8090/unipoll/v1/instructor-course/edit-description/${selectedCourse.publicId}`, {
+                    method: "PUT",
+                    body: textEdit, headers: {"Content-Type": "application/json", 'Authorization': jwtToken}
+                });
+                if (response.ok) {
+                    setEdit(false)
+                    const response2 = await fetch(`http://localhost:8090/unipoll/v1/instructor-course/${selectedCourse.publicId}`);
+
+                    if (response2.ok) {
+                        const data = await response2.json();
+                        setCourseInfo(data.result);
+                        setOkEdit(true);
+                        setTimeout(function(){
+                            setOkEdit(false);
+                        }, 2000);
+                    } else {
+                        console.log("Network response was not ok");
+                    }
+
+                } else {
+                    console.log("Network response was not ok");
+                }
+            } catch (e) {
+                console.error("we are GETTING ERROR", e)
+            }
+        }
+
+    }
     const editClick = (e) => {
-      e.preventDefault();
-      if (editAccess===true)
-        setEdit(true);
+        e.preventDefault();
+        if (editAccess===true){
+            setEdit(true);
+        }else {
+            setAccessEdit(true);
+            setTimeout(function(){
+                setAccessEdit(false);
+            }, 2000);
+        }
+
     }
     const handleRating = async (rating) => {
         console.log(rating);
@@ -109,35 +166,7 @@ const CourseInfo = () => {
             console.error('Error uploading file:', error);
         }
     }
-    // useEffect( () => {
-    //     const fetchData = async () => {
-    //         console.log(rating);
-    //     const jwtToken = localStorage.getItem('jwtToken');
-    //
-    //     try {
-    //         const response = await fetch(`http://localhost:8090/unipoll/v1/rate/${selectedCourse.publicId}`, {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Authorization': jwtToken,
-    //                 "Content-Type": "application/json",
-    //             },
-    //             body: JSON.stringify(rating),
-    //         });
-    //         if (response.ok) {
-    //             const data = await response.json();
-    //             console.log('ok');
-    //             console.log(data);
-    //
-    //         } else {
-    //             console.log("Not ok");
-    //         }
-    //     } catch (error) {
-    //         console.error('Error uploading file:', error);
-    //     }
-    //         }
-    //     fetchData();
-    //
-    // }, [rating]);
+
     return(
       <div className={'w-full h-full bg-[#E2F4FC] shadow-[0_0_60px_-15px_rgba(0,0,0,0.3)] flex flex-col p-5 gap-5 text-black'}>
           <div className={'w-full h-[24rem] flex flex-row gap-10'}>
@@ -156,7 +185,31 @@ const CourseInfo = () => {
                       <p className={'text-center text-darkBlue text-2xl whitespace-pre font-bold'}>مشخصات درس</p>
                       <div className={'h-0.5 w-full bg-darkBlue'}></div>
                   </div>
-                  <ShowCourseInfo editButton={edit} courseName={courseInfo.courseName} rate={courseInfo.rate} courseProfessor={courseInfo.instructorCourseFirstname +' '+ courseInfo.instructorCourseLastname} vahed={courseInfo.unit} info={courseInfo.description}/>
+                  <div className={'flex flex-col gap-4 p-3 w-full'}>
+                      <div className={'flex flex-row gap-1 items-center'}>
+                          <p className={'text-lg font-bold text-black'}>نام درس:</p>
+                          <p className={'text-lg text-black'}>{courseInfo.courseName}</p>
+                      </div>
+                      <div className={'flex flex-row gap-1 items-center'}>
+                          <p className={'text-lg font-bold text-black'}>استاد درس:</p>
+                          <p className={'text-lg text-black'}>{courseInfo.instructorCourseFirstname + ' ' + courseInfo.instructorCourseLastname}</p>
+                      </div>
+                      <div className={'flex flex-row gap-1 items-center'}>
+                          <p className={'text-lg font-bold text-black'}>تعداد واحد:</p>
+                          <p className={'text-lg text-black'}>{courseInfo.unit}</p>
+                      </div>
+                      <div className={'flex flex-row gap-1 w-full'}>
+                          <p className={'text-lg font-bold text-black'}>توضیحات:</p>
+                          {!edit && <p className={'text-lg text-black'}>{courseInfo.description}</p>}
+                          {edit && <form onSubmit={editFinishClick} className={"w-full flex flex-row gap-3"}> <textarea id="infoText"
+                            maxLength='500' className="block h-[6rem] w-full p-4  ps-10  text-black rounded-xl  bg-[#DFE8EF] text-lg placeholder:text-[#8B8C8D]
+                             focus:outline-none  focus:ring-0 shadow-inner text-start"
+                             placeholder="توضیحات برای این درس :"
+                             required  onChange={(event) => {
+                              setTextEdit(event.target.value)}
+                          }>{courseInfo.description}</textarea><button type={"submit"}> <Close/></button></form>}
+                      </div>
+                  </div>
                   <div className={'h-0.5 w-full bg-darkBlue '}></div>
                   <div id={'rating'} className={'flex flex-row justify-between items-center w-full'}>
                       <p className={'text-lg text-black'}>امتیاز خودرا به این درس بدهید</p>
@@ -190,27 +243,14 @@ const CourseInfo = () => {
                               })}
                           </div>
                           {okRate && <div className={"w-full"}><OkAlert text={"نظر شما با موفقیت ثبت شد."}/></div>}
-                          { accessRate && <div  className={"w-full"}><ErrorAlert text={"محدودیت دسترسی:به اکانت خود وارد شوید."}/></div>}
+                          {accessRate &&
+                              <div className={"w-full"}><ErrorAlert text={"محدودیت دسترسی:به اکانت خود وارد شوید."}/>
+                              </div>}
+                          {okEdite && <div className={"w-full"}><OkAlert text={" ویرایش توضیحات با موفقیت ثبت شد."}/></div>}
+                          {accessEdit &&
+                              <div className={"w-full"}><ErrorAlert text={"محدودیت دسترسی:فقط استاد این درس اجازه ویرایش توضیحات را دارد"}/>
+                              </div>}
                       </div>
-
-
-                      {/*<div id={'show_rate'} className={'flex flex-row-reverse items-center'}>*/}
-                      {/*    <div onClick={handleRating} >*/}
-                      {/*        {rating >= 1 ? <YellowStar/> : <Star/>}*/}
-                      {/*    </div>*/}
-                      {/*    <div>*/}
-                      {/*        {rating >= 2 ? <YellowStar/> : <Star/>}*/}
-                      {/*    </div>*/}
-                      {/*    <div>*/}
-                      {/*        {rating >= 3 ? <YellowStar/> : <Star/>}*/}
-                      {/*    </div>*/}
-                      {/*    <div>*/}
-                      {/*        {rating >= 4 ? <YellowStar/> : <Star/>}*/}
-                      {/*    </div>*/}
-                      {/*    <div>*/}
-                      {/*        {rating >= 5 ? <YellowStar/> : <Star/>}*/}
-                      {/*    </div>*/}
-                      {/*</div>*/}
                   </div>
               </div>
           </div>
@@ -221,7 +261,6 @@ const CourseInfo = () => {
                       <Edit/>
                   </button>
                   {edit && <p>
-
                   </p>}
               </div>
 

@@ -25,6 +25,7 @@ const Home = () => {
             let jwtToken=localStorage.getItem('jwtToken');
 
             try {
+                console.log(jwtToken)
                 const response = await fetch("http://localhost:8090/unipoll/v1/instructor-course");
                 if (response.ok) {
                     const data = await response.json();
@@ -41,6 +42,7 @@ const Home = () => {
                     console.log("Network response was not ok");
                 }
                 if(jwtToken.length>5){
+                    console.log("hi")
                     const response2 = await fetch("http://localhost:8090/unipoll/v1/booklet",{
                         method: 'GET',
                         headers: {
@@ -53,6 +55,7 @@ const Home = () => {
                         setTopBooklt(data.result);
                     }
                 }else{
+                    console.log("jttt")
                         const response2 = await fetch("http://localhost:8090/unipoll/v1/booklet",{
                             method: 'GET',
                             headers: {
