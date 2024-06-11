@@ -77,7 +77,7 @@ const CarouselBooklet = (props) => {
                 }
             }else{
                 const response = await fetch(`http://localhost:8090/unipoll/v1/booklet/dislike/${props.publicId}`, {
-                    method: 'DELETE',
+                    method: 'PUT',
                     headers: {
                         'Authorization': jwtToken,
                         "Content-Type": "application/json",
@@ -161,7 +161,7 @@ const CarouselBooklet = (props) => {
                 }
             }else{
                 const response = await fetch(`http://localhost:8090/unipoll/v1/booklet/dissave/${props.publicId}`, {
-                    method: 'DELETE',
+                    method: 'PUT',
                     headers: {
                         'Authorization': jwtToken,
                         "Content-Type": "application/json",
