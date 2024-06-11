@@ -13,6 +13,7 @@ import BookletOfCourseProvider from "@/context/bookletOfCourseContext";
 import CommentBProvider from "@/context/commentBContext";
 import FaveritebookltProvider from "@/context/faveritebooklet";
 import Topbooklet from "@/context/topbooklet";
+import UploadedBooklet from "@/context/uploadedBooklet";
 
 
 export default function App({ Component, pageProps }) {
@@ -32,7 +33,10 @@ export default function App({ Component, pageProps }) {
                                                 <CommentBProvider>
                                                     <FaveritebookltProvider>
                                                         <Topbooklet>
-                                                            <Component {...pageProps} />
+                                                            <UploadedBooklet>
+                                                                <Component {...pageProps} />
+
+                                                            </UploadedBooklet>
                                                         </Topbooklet>
                                                     </FaveritebookltProvider>
                                                 </CommentBProvider>

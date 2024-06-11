@@ -136,7 +136,7 @@ const BookletInfo = () => {
                }
            }else{
                const response = await fetch(`http://localhost:8090/unipoll/v1/booklet/dislike/${selectedBooklet.publicId}`, {
-                   method: 'DELETE',
+                   method: 'PUT',
                    headers: {
                        'Authorization': jwtToken,
                        "Content-Type": "application/json",
@@ -189,7 +189,7 @@ const BookletInfo = () => {
                 }
             }else{
                 const response = await fetch(`http://localhost:8090/unipoll/v1/booklet/dissave/${selectedBooklet.publicId}`, {
-                    method: 'DELETE',
+                    method: 'PUT',
                     headers: {
                         'Authorization': jwtToken,
                         "Content-Type": "application/json",
