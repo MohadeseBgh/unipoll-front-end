@@ -2,7 +2,8 @@
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-figm link: https://www.figma.com/design/FyuGf0aUpkBWsZ004V4dd3/ProjectUI?node-id=0-1&p=f&t=ujCmHZ764uP6txdW-0
+Figma link: https://www.figma.com/design/FyuGf0aUpkBWsZ004V4dd3/ProjectUI?node-id=0-1&p=f&t=ujCmHZ764uP6txdW-0
+![Screenshot (1496)](https://github.com/user-attachments/assets/472f9aa0-bbf0-4325-a3fe-bf675746ea75)
 
 ## Getting Started
 
